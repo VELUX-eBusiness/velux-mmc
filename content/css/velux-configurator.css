@@ -1886,7 +1886,7 @@ p
 	#mmc__Selection.mmc__thin > .mmc__content > .mmc__window
 	{
 		margin: 0;
-		height: 220px;
+		height: 240px;
 	}
 		#mmc__Selection > .mmc__content > .mmc__window img
 		{
@@ -2166,6 +2166,7 @@ p
 			background-image: none;
 			border: 0;
 			padding: 12px 20px 12px 8px;
+			text-align: left;
 		}
 	.mmc__select.mmc__insect .chosen-drop .chosen-search
 	{
