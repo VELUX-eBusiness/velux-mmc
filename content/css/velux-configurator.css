@@ -2208,6 +2208,7 @@ p
 	.mmc__infoPopup h4
 	{
 		padding: 0 0 15px;
+		margin: 0;
 	}
 	.mmc__infoPopup .mmc__closePopup
 	{
@@ -2294,7 +2295,7 @@ p
 #sb-body-inner
 {
 }
-#sb-player.mmc__html
+#sb-player.html
 {
 	overflow: visible;
 }
