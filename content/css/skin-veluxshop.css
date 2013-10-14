@@ -202,11 +202,11 @@
 {
 	color: #000000;
 }		
-	.mmc__product .mmc__productRow.mmc__option span.mmc__type
+	.mmc__product .mmc__productRow.mmc__selection span.mmc__type
 	{
 		color: #ff0000;
 	}			
-		.mmc__product .mmc__productRow.mmc__option span.mmc__edit a:hover
+		.mmc__product .mmc__productRow.mmc__selection span.mmc__edit a:hover
 		{
 			color: #ff0000;
 		}
