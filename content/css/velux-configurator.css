@@ -1785,6 +1785,7 @@ p
 				vertical-align: middle;
 				width: 116px;
 				height: 116px;
+				text-align: middle !important;
 			}
 				.mmc__product.mmc__addon .mmc__productInfo table.mmc__productImage td img
 				{
