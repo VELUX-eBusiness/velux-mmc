@@ -359,20 +359,26 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 		}
 	}
 	
+	/* Set up each of the rules as functions */
 	$.each(behavior, function (name, set) {
 		$.each(set.range, function (index, rule) {
 			self['Rule' + rule] = behavior[name].run;
 		});
 	});
 	
-	/* Create a default rule is not part of the existing list */
+	/* Create a default rule if not part of the existing list */
 	this.RuleDefault = function (rule) {
 		behavior.normal.run(rule);
 	}
 
 	/* List of functions to process rules */
 	this.showRuleMessage = function (rule, message, messageType, messageIcon) {
-		var newMessage = mmc.dom.blocks.usermessage.clone();
+		var newMessage = mmc.dom.blocks.usermessage.clone(),
+			messageClass = [];
+			
+		$.each(messageType.split(' '), function (index, value) {
+			messageClass.push('mmc__' + value);
+		});
 		
 		/* Change the content of the user message */
 		newMessage.attr('data-rule', rule.RuleNo);
@@ -380,7 +386,7 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 		newMessage.find('.mmc__userMessageTitle').remove();
 		newMessage.find('.mmc__userMessageClose').remove();
 		newMessage.find('.mmc__userMessageText').html(message);
-		newMessage.addClass('mmc__' + messageType);
+		newMessage.addClass(messageClass.join(' '));
 		
 		/* When a type is supplied, make user message open a variant or production code */
 		if (messageType.match('variant') || messageType.match('production')) {
@@ -548,6 +554,7 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 				} else {
 					/* Trigger the correct function depending on: Variant or Production code check / MatchFound true or false. Hide the rule message that triggers the check */
 					if (obj.MatchFound == true) {
+					console.log(rules)
 						rules[triggerType].MatchFoundTrue(obj.MatchCompatibility.RuleNo);
 						
 						/* If a rule number is returned, show the related user message. When a rule number is not returned, hide the related user message, only for fourth question */

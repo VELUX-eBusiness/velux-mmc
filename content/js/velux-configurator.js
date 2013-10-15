@@ -1624,7 +1624,7 @@ jQuery.noConflict();
 			click: function (event) {
 				var type = $(event.target).closest('.mmc__userMessage').hasClass('mmc__variant') ? 'variant' : 'production',
 					rule = $(event.target).closest('.mmc__userMessage').data('rule'),
-					content = mmc.dom.variant.find('.mmc__codeCheck.' + type)[0].outerHTML;
+					content = mmc.dom.variant.find('.mmc__codeCheck.mmc__' + type)[0].outerHTML;
 				
 				Shadowbox.open({
 					content: '<div class="mmc__infoPopup">' + content + '<div class="mmc__closePopup"><span class="mmc__text mmc__shadowBoxClose">' + mmc.settings.closeText + ' x</span></div></div>',
