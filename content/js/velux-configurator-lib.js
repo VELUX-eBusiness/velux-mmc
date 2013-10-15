@@ -272,7 +272,8 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
 		var activeStep = mmc.dom.activeStep(),
 			nextStep = (newStep) ? newStep : $(activeStep.nextAll('.mmc__required')[0]);
 		
-		if (activeStep.hasClass('mmc__filled') || nextStep.hasClass('mmc__filled')) {
+		/* Allow moving to next step when the active step if filled, or when the next step if filled but is not window */
+		if (activeStep.hasClass('mmc__filled') || (nextStep.hasClass('mmc__filled') && !activeStep.hasClass('mmc__window'))) {
 			mmc.sliding = true;
 			activeStep.find('.mmc__content').slideUp(500, 'linear', function () { $(this).closest('.mmc__configStep').removeClass('mmc__active'); mmc.sliding = false; });
 			nextStep.find('.mmc__content').slideDown(500, 'linear', function () { $(this).closest('.mmc__configStep').addClass('mmc__active'); /* Trigger customer action: onAfterSwitchStep */ mmc.settings.onAfterSwitchStep(); });

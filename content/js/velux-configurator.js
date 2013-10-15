@@ -577,7 +577,7 @@ jQuery.noConflict();
 								try {
 									if (child.CategoryName == config[productIndex].category()) {
 										/* If the matched child has no match, clear the configurator options */
-										if (child.MatchFound == false && !mmc.vm.controls.showCombination) {
+										if (child.MatchFound == false/* && !mmc.vm.controls.showCombination*/) {
 											lib.resetSteps();
 											lib.checkFilledSteps(config[productIndex]);
 										}
@@ -1434,17 +1434,27 @@ jQuery.noConflict();
 		/* Handlers for available options */
 		mmc.dom.step.on({
 			click: function (event) {
-				if ((navigator.userAgent.match(/MSIE 7/gi) || navigator.userAgent.match(/MSIE 8/gi)) && ($(event.target)[0].nodeName == 'LABEL' || $(event.target)[0].nodeName == 'TD')) {
-					var inputVal = $(event.target).closest('.mmc__option').find('input').val(),
-						inputCategory = $(event.target).closest('.mmc__configStep').data('type');
-					
-					mmc.vm.config.product1[inputCategory](inputVal);
-					
-					/* When not clicking on the label, make sure to trigger the input click */
-					if ($(event.target)[0].nodeName == 'TD') {
-						$(event.target).closest('.mmc__option').find('input').click();
-					}
+				// if ((navigator.userAgent.match(/MSIE 7/gi) || navigator.userAgent.match(/MSIE 8/gi)) && ($(event.target)[0].nodeName == 'LABEL' || $(event.target)[0].nodeName == 'TD')) {
+				
+				if ($(event.target).closest('.mmc__option').hasClass('mmc__active')) {
+					return false;
 				}
+				
+				var inputVal = $(event.target).closest('.mmc__option').find('input').val(),
+					inputCategory = $(event.target).closest('.mmc__configStep').data('type');
+				
+				mmc.vm.config.product1[inputCategory](inputVal);
+				
+				/* When not clicking on the label, make sure to trigger the input click */
+				if ($(event.target)[0].nodeName == 'TD') {
+					$(event.target).closest('.mmc__option').find('input').click();
+				}
+				
+				$(event.target).closest('.mmc__option').find('input').change();
+				
+				return false;
+				
+				// }
 			},
 			mouseover: function (event) {
 				/* Break this function when: Hovering over the active tooltip, option is finishtype */
