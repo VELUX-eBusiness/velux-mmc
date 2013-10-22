@@ -103,79 +103,89 @@ function loadConfigurator(obj) {
 			var requestURL = '//' + obj.environment + '/?option=com_configurator',
 				requestData = '&baseurl=' + obj.directory + '&lang=' + obj.language + '&did=' + obj.did + '&cid=' + obj.cid + '&dealerurl=' + obj.dealerURL + '&dealertarget=' + obj.dealerTarget + '&shoptarget=' + obj.shopTarget + '&formmethod=' + obj.formMethod;
 			
-			/* Get the jQuery XDomainRequest JS to allow all browsers to request cross-domain content */
-			$.getScript(obj.directory + 'content/js/jQuery.XDomainRequest.js', function () {
+			if (navigator.userAgent.match(/MSIE/gi) && window.XDomainRequest) {
+				// Use Microsoft XDR
+				var xdr = new XDomainRequest();
+				xdr.open("POST", requestURL + requestData);
 				
-				$.support.cors = true;
-			
+				xdr.onload = function () {
+					processData(xdr.responseText);
+				};
+				
+				xdr.send();
+			} else {
+		
 				$.ajax({
 					dataType: 'html',
 					type: "POST",
 					url: requestURL + requestData,
 					success: function (data) {
-					
-						var siteLocation = obj.directory + 'content/',
-							scripts = [
-								'js/knockout-2.2.1.js',
-								'js/chosen/chosen.jquery.min.js',
-								'js/shadowbox/shadowbox.js'
-							],
-							scriptCount = 0,
-							attemptCount2 = 0,
-							temp = $('<div />');
-						
-						if (obj.min == false) {
-							scripts.push('js/velux-configurator-lib.js');
-							scripts.push('js/velux-configurator-rules.js');
-						}
-						
-						temp.append(data);
-						temp.find('#mmc__AddToBasket').attr('action', obj.returnURL);								
-						$(obj.target).append(temp.find('#mmc__Configurator'));
-						temp = null;
-						
-						loadSettings();
-						
-						includeFile(siteLocation + 'css', 'velux-configurator.css', 'screen');
-						includeFile(siteLocation + 'css', 'velux-configurator.print.css', 'print');
-						includeFile(siteLocation + 'css', 'skin-' + obj.skin + '.css', 'screen');
-						
-						/* Load all the scripts, before loading the final one that places the configurator */
-						$.each(scripts, function (index, value) {
-							$.getScript(siteLocation + value, function () {
-								scriptCount++;
-							});
-						});
-						
-						function checkScriptCounter() {
-							attemptCount2++;
-							
-							if (scriptCount == scripts.length) {
-								loadFinalScript();
-							} else {
-								if (attemptCount2 < 100) {
-									setTimeout(checkScriptCounter, 100);
-								} else {
-									showLoadingError();
-								}
-							}
-						}
-						checkScriptCounter();
-						
-						function loadFinalScript() {
-							if (obj.min == false) {
-								$.getScript(siteLocation + 'js/velux-configurator.js');
-							} else {
-								$.getScript(siteLocation + 'js/velux-configurator.min.js');
-							}
-						}
-	
-						/* Trigger customer action: onAfterLoad */
-						obj.onAfterLoad();
-						
+						processData(data);
 					}
 				});
-			});
+			}
+			
+			function processData(data) {
+					
+				var siteLocation = obj.directory + 'content/',
+					scripts = [
+						'js/knockout-2.2.1.js',
+						'js/chosen/chosen.jquery.min.js',
+						'js/shadowbox/shadowbox.js'
+					],
+					scriptCount = 0,
+					attemptCount2 = 0,
+					temp = $('<div />');
+				
+				if (obj.min == false) {
+					scripts.push('js/velux-configurator-lib.js');
+					scripts.push('js/velux-configurator-rules.js');
+				}
+				
+				temp.append(data);
+				temp.find('#mmc__AddToBasket').attr('action', obj.returnURL);								
+				$(obj.target).append(temp.find('#mmc__Configurator'));
+				temp = null;
+				
+				loadSettings();
+				
+				includeFile(siteLocation + 'css', 'velux-configurator.css', 'screen');
+				includeFile(siteLocation + 'css', 'velux-configurator.print.css', 'print');
+				includeFile(siteLocation + 'css', 'skin-' + obj.skin + '.css', 'screen');
+				
+				/* Load all the scripts, before loading the final one that places the configurator */
+				$.each(scripts, function (index, value) {
+					$.getScript(siteLocation + value, function () {
+						scriptCount++;
+					});
+				});
+				
+				function checkScriptCounter() {
+					attemptCount2++;
+					
+					if (scriptCount == scripts.length) {
+						loadFinalScript();
+					} else {
+						if (attemptCount2 < 100) {
+							setTimeout(checkScriptCounter, 100);
+						} else {
+							showLoadingError();
+						}
+					}
+				}
+				checkScriptCounter();
+				
+				function loadFinalScript() {
+					if (obj.min == false) {
+						$.getScript(siteLocation + 'js/velux-configurator.js');
+					} else {
+						$.getScript(siteLocation + 'js/velux-configurator.min.js');
+					}
+				}
+
+				/* Trigger customer action: onAfterLoad */
+				obj.onAfterLoad();
+			}
 		
 		})(window, document, jQuery);
 		
