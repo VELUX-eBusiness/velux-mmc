@@ -40,6 +40,21 @@ function loadConfigurator(obj) {
 	obj.formMethod = (obj.formMethod === undefined) ? 'POST' : obj.formMethod;
 	obj.returnFunc = (obj.returnFunc === undefined) ? null : obj.returnFunc;
 	
+	obj.percentDiscount = (obj.percentDiscount === undefined) ? null : obj.percentDiscount;
+	obj.percentDiscountAddOnPleated = (obj.percentDiscountAddOnPleated === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountAddOnPleated;
+	obj.percentDiscountAwning = (obj.percentDiscountAwning === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountAwning;
+	obj.percentDiscountBlackout = (obj.percentDiscountBlackout === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountBlackout;
+	obj.percentDiscountDuo = (obj.percentDiscountDuo === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountDuo;
+	obj.percentDiscountEnergy = (obj.percentDiscountEnergy === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountEnergy;
+	obj.percentDiscountFlatroofAwning = (obj.percentDiscountFlatroofAwning === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountFlatroofAwning;
+	obj.percentDiscountFlatroofEnergy = (obj.percentDiscountFlatroofEnergy === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountFlatroofEnergy;
+	obj.percentDiscountFlatroofPleated = (obj.percentDiscountFlatroofPleated === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountFlatroofPleated;
+	obj.percentDiscountInsectNet = (obj.percentDiscountInsectNet === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountInsectNet;
+	obj.percentDiscountPleated = (obj.percentDiscountPleated === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountPleated;
+	obj.percentDiscountRoller = (obj.percentDiscountRoller === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountRoller;
+	obj.percentDiscountShutters = (obj.percentDiscountShutters === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountShutters;
+	obj.percentDiscountVenetian = (obj.percentDiscountVenetian === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountVenetian;
+	
 	/* Functions that are trigger before of after default actions */
 	obj.onBeforeLoad = (obj.onBeforeLoad === undefined) ? function () { return; } : obj.onBeforeLoad;
 	obj.onAfterLoad = (obj.onAfterLoad === undefined) ? function () { return; } : obj.onAfterLoad;
