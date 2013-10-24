@@ -906,10 +906,16 @@ jQuery.noConflict();
 					
 					$.each(options, function (index, value) {
 						var product = (productIndex == 'product2') ? productIndex : 'product' + (index + 1),
-							productPrice = (!value.Price) ? value.PriceWithVAT : (value.Price.HasDiscount) ? value.Price.ProductPriceDiscounted.PriceWithVAT : value.Price.ProductPrice.PriceWithVAT;
+							productPrice = (!value.Price) ? value.PriceWithVAT : (value.Price.HasDiscount) ? value.Price.ProductPriceDiscounted.PriceWithVAT : value.Price.ProductPrice.PriceWithVAT,
+							productDiscount = mmc.settings['percentDiscount' + data[product].category()];
 						
-						if (!value.Price) {
-							// alert('No Price object returned');
+						if (productDiscount === undefined) {
+							productDiscount = mmc.settings.percentDiscount;
+						}
+						
+						/* Check to see if a discount is set by the customer and apply it */
+						if (productDiscount != null) {
+							productPrice = (parseFloat(productPrice) * ((100 - productDiscount) / 100)).toFixed(2);
 						}
 						
 						data[product].productPrice(productPrice);
