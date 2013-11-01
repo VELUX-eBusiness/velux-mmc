@@ -15,7 +15,6 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 			return;
 		}
 	
-		// console.log(ruleList);
 		$.each(ruleList, function (ruleNo, rule) {
 			mmc.settings.rules.variantUnknown = rule.VariantUnknown;
 			mmc.settings.rules.productionUnknown = rule.ProductionUnknown;
@@ -402,13 +401,6 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 			newMessage.insertBefore(mmc.dom.complete.find('.mmc__products')).show();
 		}
 		
-		// console.log(messageType);
-		// console.log(rule);
-		// console.log(rule.RuleNo);
-		// console.log(rule.RuleNo.charAt(0));
-		// console.log(rule.RuleNo.length);
-		// console.log(mmc.dom.activeStep().attr('class'));
-		
 		/* Hide the user message when the rule requires a variant code check */
 		if (rule.Product) {
 			// if (rule.Product.AskForTypeSignVariant && rule.Variant == 1) {
@@ -449,7 +441,6 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 			return;
 		}
 		
-		// console.log('hide ' + rule.RuleNo);
 		newMessage.hide();
 			
 		/* Add the new rule message to the correct view */
@@ -461,19 +452,12 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 			// newMessage.insertBefore(mmc.dom.complete.find('.mmc__products')).show();
 		// }
 		
-		// console.log(messageType);
-		// console.log(rule.RuleNo);
-		// console.log(rule.RuleNo.charAt(0));
-		// console.log(rule.RuleNo.length);
-		// console.log(mmc.dom.activeStep().attr('class'));
-		
 		// /* Hide the user message when the rule requires a variant code check */
 		// if ((rule.Variant == 1 || (rule.Variant != null && rule.Product)) && messageType != 'check' && messageType != 'error') {
 			// /* Exclude the hiding of the rule for custom rules (500-599) */
 			// if (rule.RuleNo.charAt(0) == 5 && rule.RuleNo.length == 3/* || (!rule.Product.AskForTypeSignVariant && (rule.Variant == 1 || rule.Variant == 2))*/) {
 				// return;
 			// }
-			// console.log('hide ' + rule.RuleNo);
 			// newMessage.hide();
 		// }
 	}
@@ -481,7 +465,9 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 	/* Function for showing the addon product related to the rule */
 	this.showAddonProduct = function (obj) {
 		var product = mmc.vm.addon,
-			addon = obj.Addon;
+			addon = obj.Addon,
+			productPrice = (!addon.Price) ? addon.PriceWithVAT : (addon.Price.HasDiscount) ? addon.Price.ProductPriceDiscounted.PriceWithVAT : addon.Price.ProductPrice.PriceWithVAT,
+			productDiscount = mmc.settings['percentDiscountAddon'];
 		
 		/* If the addon has no content, hide any currently active addon and return */
 		if (addon.ProductContent == null) {
@@ -494,12 +480,23 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 		product.Name(addon.ProductContent.name);
 		product.Desc(addon.ProductContent.desc_short);
 		product.ImageSrc(mmc.settings.directory + 'content/images/products/' + addon.VCE.replace(' ', '-').toLowerCase() + '.jpg');
-		product.Price(mmc.formatPrice(addon.PriceWithVAT));
+		product.Price(mmc.formatPrice(productPrice));
 		if (obj.AddonChecked == 1) {
 			product.Checked(true);
 		} else {
 			product.Checked(false);
 		}
+		
+		/* Set the Addon product price, include possible discounts */
+		if (productDiscount === undefined) {
+			productDiscount = mmc.settings.percentDiscount;
+		}
+		/* Check to see if a discount is set by the customer and apply it */
+		if (productDiscount != null) {
+			productPrice = (parseFloat(productPrice) * ((100 - productDiscount) / 100)).toFixed(2);
+		}
+		product.productPrice(productPrice);
+		product.serviceProductID(addon.ProductID);
 		
 		/* Display the addon product */
 		mmc.vm.controls.showAddon(true);
@@ -526,8 +523,6 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 			return;
 		}
 		
-		// console.log(mmc.buildRequest());
-		
 		mmc.trigger.target.addClass('mmc__loading');
 		
 		/* AJAX request to Variant / Production code Service */
@@ -540,8 +535,6 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 			
 				var obj = data,
 					rules = mmc.settings.rules;
-					
-				// console.log(obj);
 				
 				/* Always reset the previously matched rule */
 				mmc.dom.complete.find('.mmc__userMessage.mmc__matchfound').hide().removeClass('mmc__matchfound');
@@ -554,7 +547,6 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 				} else {
 					/* Trigger the correct function depending on: Variant or Production code check / MatchFound true or false. Hide the rule message that triggers the check */
 					if (obj.MatchFound == true) {
-					console.log(rules)
 						rules[triggerType].MatchFoundTrue(obj.MatchCompatibility.RuleNo);
 						
 						/* If a rule number is returned, show the related user message. When a rule number is not returned, hide the related user message, only for fourth question */
@@ -564,7 +556,6 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 							} else if (obj.MatchCompatibility.RuleNo == '103') {
 								mmc.dom.complete.find('.mmc__userMessage[data-rule="' + obj.MatchCompatibility.RuleNo + '"]').hide();
 							} else {
-								// console.log('Match found true: hide user message');
 								mmc.dom.complete.find('.mmc__userMessage.matchfound:not(.mmc__userMessage.mmc__codeCheck)').hide().removeClass('mmc__matchfound');
 							}
 						}
@@ -574,7 +565,6 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 						
 						/* Hide the related user message when no match found */
 						if (mmc.dom.activeStep().hasClass('mmc__variant')) {
-							// console.log('Match found false: hide user message');
 						}
 					}
 				}
@@ -584,7 +574,6 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 					
 				lib.checkFilledSteps(mmc.vm.config.product1);
 			}, error: function (err) {
-				// console.log('error');
 			}
 		});
 	}
