@@ -85,7 +85,26 @@ function loadConfigurator(obj) {
 	obj.onBeforeAddToBasket = (obj.onBeforeAddToBasket === undefined) ? function () { return; } : obj.onBeforeAddToBasket;
 	obj.onAfterAddToBasket = (obj.onAfterAddToBasket === undefined) ? function () { return; } : obj.onAfterAddToBasket;
 	
-	/* Functions that are triggers on each of the selects */
+	/* Functions that are triggered on user events */
+	obj.onSelectWindowType = (obj.onSelectWindowType === undefined) ? function () { return; } : obj.onSelectWindowType;
+	obj.onSelectWindowSize = (obj.onSelectWindowSize === undefined) ? function () { return; } : obj.onSelectWindowSize;
+	obj.onSelectCategory = (obj.onSelectCategory === undefined) ? function () { return; } : obj.onSelectCategory;
+	obj.onSelectOperation = (obj.onSelectOperation === undefined) ? function () { return; } : obj.onSelectOperation;
+	obj.onSelectColour = (obj.onSelectColour === undefined) ? function () { return; } : obj.onSelectColour;
+	obj.onSelectInsectNetType = (obj.onSelectInsectNetType === undefined) ? function () { return; } : obj.onSelectInsectNetType;
+	obj.onSelectInsectNet = (obj.onSelectInsectNet === undefined) ? function () { return; } : obj.onSelectInsectNet;
+	obj.onSelectOutersurface = (obj.onSelectOutersurface === undefined) ? function () { return; } : obj.onSelectOutersurface;
+	obj.onNextWindow = (obj.onNextWindow === undefined) ? function () { return; } : obj.onNextWindow;
+	obj.onNextCategory = (obj.onNextCategory === undefined) ? function () { return; } : obj.onNextCategory;
+	obj.onNextOperation = (obj.onNextOperation === undefined) ? function () { return; } : obj.onNextOperation;
+	obj.onNextColour = (obj.onNextColour === undefined) ? function () { return; } : obj.onNextColour;
+	obj.onNextInsectnet = (obj.onNextInsectnet === undefined) ? function () { return; } : obj.onNextInsectnet;
+	obj.onNextOuterSurface = (obj.onNextOuterSurface === undefined) ? function () { return; } : obj.onNextOuterSurface;
+	obj.onButtonWindowUnkown = (obj.onButtonWindowUnkown === undefined) ? function () { return; } : obj.onButtonWindowUnkown;
+	obj.onButtonDealer = (obj.onButtonDealer === undefined) ? function () { return; } : obj.onButtonDealer
+	obj.onButtonAddToBasket = (obj.onButtonAddToBasket === undefined) ? function () { return; } : obj.onButtonAddToBasket;
+	obj.onButtonPrint = (obj.onButtonPrint === undefined) ? function () { return; } : obj.onButtonPrint;
+	obj.onButtonEmail = (obj.onButtonEmail === undefined) ? function () { return; } : obj.onButtonEmail;
 	
 	/* Trigger customer action: onBeforeLoad */
 	obj.onBeforeLoad();
