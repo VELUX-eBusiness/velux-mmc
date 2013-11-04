@@ -306,6 +306,15 @@ p
 	min-height: 400px;
 	line-height: 15px;
 }
+#mmc__InsertConfigurator
+{
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	color: #333;
+	position: relative;
+	min-height: 400px;
+	line-height: 15px;
+}
 #mmc__LoadingConfigurator
 {
 	position: absolute;
@@ -497,6 +506,10 @@ p
 			width: 30px;
 			height: 30px;
 			margin: 14px 15px 0 0;
+		}
+		.mmc__active .mmc__titleBar .mmc__stepEdit .mmc__icon.mmc__circleArrow
+		{
+			background-position: -820px -30px;
 		}
 
 /*  ================================================================================================================
@@ -1590,6 +1603,7 @@ p
 		color: #ff0000;
 		font-size: 160%;
 		line-height: 1.5em;
+		padding-bottom: 4px;
 	}
 	.mmc__configStep.mmc__complete .mmc__contentIntro .mmc__contentSubTitle
 	{
@@ -1852,7 +1866,7 @@ p
 /   ============================================================================================================= */
 #mmc__Selection
 {
-	width: 255px;
+	width: 254px;
 	padding: 0 15px 0 15px;
 	float: left;
 }
@@ -1887,7 +1901,7 @@ p
 	#mmc__Selection.mmc__thin > .mmc__content > .mmc__window
 	{
 		margin: 0;
-		height: 240px;
+		height: 280px;
 	}
 		#mmc__Selection > .mmc__content > .mmc__window img
 		{

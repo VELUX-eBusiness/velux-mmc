@@ -74,7 +74,7 @@ jQuery.noConflict();
 			},
 			/* Object to store data used for AJAX calls */
 			request: {
-				href: '//' + generalSettings.environment + '/?option=com_configurator',
+				href: generalSettings.environment + '?option=com_configurator',
 				did: function() { return mmc.settings.did; },
 				cid: function() { return mmc.settings.cid; },
 				lang: function () { return mmc.settings.language; },
@@ -130,9 +130,13 @@ jQuery.noConflict();
 						configuratorType: function () { if (!mmc.isBasket()) return mmc.vm.config.product2.configureType(); }
 					},
 					3: {
-						productid: function () { if (mmc.isBasket()) return mmc.vm.config.product2.productID(); },
+						windowtype: function () { return mmc.vm.config.product1.windowtype(); },
+						/* If triggered by windowtype, don't return windowsize */
+						windowsize: function () { return (mmc.trigger.type == 'windowtype') ? '' : mmc.vm.config.product1.windowsize(); },
+						productid: function () { if (mmc.isBasket()) return mmc.vm.addon.serviceProductID(); },
 						// serviceproductid: function () { if (mmc.isBasket()) return mmc.vm.config.product2.serviceProductID(); },
-						productprice: function () { if (mmc.isBasket()) return mmc.vm.config.product2.productPrice(); }
+						productprice: function () { if (mmc.isBasket()) return mmc.vm.addon.productPrice(); },
+						description: function () { if (mmc.isBasket()) return mmc.vm.addon.Name(); },
 					}
 				}
 			},
@@ -236,6 +240,7 @@ jQuery.noConflict();
 								
 								var requestData = [],
 									requestName = (mmc.settings.basketType == 'veluxshop') ? 'product' + name : name;
+									
 								$.each(product, function (data, option) {
 									if (option()) {
 										requestData.push('"' + data + '":"' + option() + '"');
@@ -311,7 +316,11 @@ jQuery.noConflict();
 				},
 				ill: {
 					loc: function () {
-						return mmc.settings.directory + 'content/images/configurator/illustrations/';
+						if (mmc.settings.illustrationsDirectory) {
+							return mmc.settings.illustrationsDirectory;
+						} else {
+							return mmc.settings.directory + 'content/images/configurator/illustrations/';
+						}
 					}
 				}
 			},
@@ -334,11 +343,11 @@ jQuery.noConflict();
 					
 					if (mmcWidth < 914) {
 						mmc.dom.selection.addClass('mmc__hidden').removeClass('mmc__thin');
-					} else if (mmcWidth >= 914 && mmcWidth <= 984) {
+					} else if (mmcWidth >= 914 && mmcWidth < 984) {
 						mmc.dom.selection.removeClass('mmc__hidden').addClass('mmc__thin').width(selectionWidth);
 						mmc.dom.selection.find('.mmc__content').width(selectionWidth);
-					} else if (mmcWidth > 984) {
-						mmc.dom.selection.removeAttr('class').width('auto');
+					} else if (mmcWidth >= 984) {
+						mmc.dom.selection.removeAttr('class').width('');
 						mmc.dom.selection.find('.mmc__content').removeAttr('style');
 					}
 				}
@@ -418,8 +427,6 @@ jQuery.noConflict();
 					});
 				}
 				
-				// console.log(mmc.buildRequest());
-				
 				/* Trigger customer action: onBeforeUpdate */
 				mmc.settings.onBeforeUpdate();
 				
@@ -431,10 +438,8 @@ jQuery.noConflict();
 					url: mmc.buildRequest(),
 					success: function(data) {
 						t4 = new Date();
-						// console.log('Time for service response: ' + (t4 - t3) + ' ms');
 						
 						var obj = data;
-						// console.log(obj);
 						
 						/* Loop through each of the objects returned by the service */
 						$.each(obj, function (index, product) {
@@ -447,13 +452,14 @@ jQuery.noConflict();
 								});
 							});
 						});
-						
-						t5 = new Date();
-						// console.log('Processing request: ' + (t5 - t4) + ' ms');
-						// console.log('');
 				
 						/* Remove loading */
 						mmc.dom.base.removeClass('mmc__loading');
+						
+						/* Remove extra loading when added through configuration file */
+						if (mmc.settings.loadingTitle) {
+							$(mmc.settings.target).find('#mmc__LoadingConfigurator').remove();
+						}
 						
 						mmc.dom.activeStep().removeClass('mmc__updating');
 						mmc.dom.activeStep().find('.mmc__updatingOverlay').remove();
@@ -576,8 +582,8 @@ jQuery.noConflict();
 							$.each(category, function (index, child) {
 								try {
 									if (child.CategoryName == config[productIndex].category()) {
-										/* If the matched child has no match, clear the configurator options */
-										if (child.MatchFound == false/* && !mmc.vm.controls.showCombination*/) {
+										/* If the matched child has no match, clear the configurator options, but not for InsectNet (which is always false) */
+										if (child.MatchFound == false && child.CategoryName != 'InsectNet') {
 											lib.resetSteps();
 											lib.checkFilledSteps(config[productIndex]);
 										}
@@ -612,23 +618,6 @@ jQuery.noConflict();
 										/* If either window type IS flatroof and category IS flatroof or window type IS NOT flatroof and category IS NOT flatroof, add the category to the list */
 										if (($.inArray(mmc.vm.config.product1.windowtype(), mmc.settings.flatroofSizes) == -1 && !child.CategoryName.match(/flatroof/gi)) ||
 											($.inArray(mmc.vm.config.product1.windowtype(), mmc.settings.flatroofSizes) != -1 && child.CategoryName.match(/flatroof/gi))) {
-											
-											/* If parent category is Combinations, both blinds should be available */
-											// if (option.CategoryName == 'COMBINATION') {
-												// var categories = child.CategoryName.match(/[A-Z][a-z]+/g);
-												
-												// /* Set combination MatchFound to true */
-												// child.MatchFound = true;
-												
-												// console.log(category);
-												
-												// /* Check whether one of the combination products is not available, then set MatchFound to false */
-												// $.each(categories, function (index, value) {
-													// if (mmc.dom.category.find('.mmc__option' + value).hasClass('mmc__inactive') || mmc.vm.config.product1.windowtype() == 'GDL') {
-														// child.MatchFound = false;
-													// }
-												// });
-											// }
 											
 											if (child.MatchFound || (!child.MatchFound && mmc.settings.showInactive) || child.CategoryName == 'InsectNet') {
 												product.category.push({val: child.CategoryName, name: child.Name, desc: child.Description, parent: option.CategoryName, inactive: (child.MatchFound || child.CategoryName == 'InsectNet') ? '' : 'inactive'});
@@ -712,9 +701,6 @@ jQuery.noConflict();
 						/* Update the observable when array has been built */
 						product.operation.valueHasMutated();
 					});
-					
-					// console.log(data.product1.operation());
-					// alert(data.product1.operation())
 					
 					/* Loop through each of the options to see how many are valid. If only 1 valid, automatically set that one */
 					$.each(options, function (name, id) {
@@ -959,6 +945,9 @@ jQuery.noConflict();
 						product.windowsize('');
 					});
 					
+					/* Trigger custom function */
+					mmc.settings.onSelectWindowType( config.product1.windowtype() );
+					
 					/* Return true updates the configurator */
 					if (config.product1.windowtype() == null) {
 						return false;
@@ -980,6 +969,11 @@ jQuery.noConflict();
 						product.category.removeAll();
 					});
 					
+					/* Trigger custom function, add an exception to check if it's empty, because selecting a window type resets the window size */
+					if (config.product1.windowsize()) {
+						mmc.settings.onSelectWindowSize( config.product1.windowsize() );
+					}
+					
 					/* Return true updates the configurator */
 					if (config.product1.windowsize() == null) {
 						return false;
@@ -999,20 +993,38 @@ jQuery.noConflict();
 						mmc.vm.controls.showCombination(false);
 					}
 					
+					/* Trigger custom function */
+					mmc.settings.onSelectCategory( config.product1.category() );
+					
 					/* Reset required steps before updating the configurator */
 					lib.resetSteps();
 				},
 				operation: function () {
+					var data = mmc.vm.data,
+						config = mmc.vm.config;
+					
+					/* Trigger custom function */
+					mmc.settings.onSelectOperation( config.product1.operation() );
 					
 					/* Reset required steps before updating the configurator */
 					lib.resetSteps();
 				},
 				outersurface: function () {
+					var data = mmc.vm.data,
+						config = mmc.vm.config;
+					
+					/* Trigger custom function */
+					mmc.settings.onSelectOuterSurface( config.product1.outersurface() );
 					
 					/* Reset required steps before updating the configurator */
 					lib.resetSteps();
 				},
 				colour: function () {
+					var data = mmc.vm.data,
+						config = mmc.vm.config;
+					
+					/* Trigger custom function */
+					mmc.settings.onSelectColour( config.product1.colour() );
 					
 					/* Reset required steps before updating the configurator */
 					lib.resetSteps();
@@ -1118,16 +1130,25 @@ jQuery.noConflict();
 							config.product2.insectHeight(2400);
 							
 						}
+					
+						/* Trigger custom function */
+						mmc.settings.onSelectInsectNet( config.product1.insectWidth() + ' ' + config.product1.insectHeight() + ' ' + config.product2.insectHeight() );
 					} else {
 						if (mmc.settings.insect.shape() == 'bent') {
 							if (config.product2.insectHeight() == '') {
 								return false;
 							}
+					
+							/* Trigger custom function */
+							mmc.settings.onSelectInsectNet( config.product1.insectWidth() + ' ' + config.product1.insectHeight() );
 						} else {
 							config.product2.insectHeight('');
 							
 							mmc.vm.controls.showAddon(false);
 							mmc.vm.controls.showProduct2(false);
+					
+							/* Trigger custom function */
+							mmc.settings.onSelectInsectNet( config.product1.insectWidth() + ' ' + config.product1.insectHeight() );
 						}
 					}
 				},
@@ -1139,6 +1160,9 @@ jQuery.noConflict();
 						if (config.product1.insectHeight() == '') {
 							return false;
 						}
+					
+						/* Trigger custom function */
+						mmc.settings.onSelectInsectNet( config.product1.insectWidth() + ' ' + config.product1.insectHeight() + ' ' + config.product2.insectHeight() );
 					}
 				}
 			}
@@ -1220,6 +1244,18 @@ jQuery.noConflict();
 			
 			/* Catch switchStep */
 			self.switchStep = function () {
+			
+				/* Trigger the on next button function when current step is filled */
+				if (mmc.dom.activeStep().hasClass('mmc__filled')) {
+					var activeStep = mmc.dom.activeStep().attr('data-type'),
+						stepName = activeStep.charAt(0).toUpperCase() + activeStep.slice(1, activeStep.length);
+					
+					/* Trigger customer action */
+					try {
+						mmc.settings['onNext' + stepName](stepName);
+					} catch (err) {
+					}
+				}
 			
 				lib.switchStep();
 			};
@@ -1345,6 +1381,10 @@ jQuery.noConflict();
 			self.ImageSrc = ko.observable('');
 			self.Price = ko.observable('');
 			self.Checked = ko.observable(false);
+			
+			/* Properties to be sent to the basket */
+			self.productPrice = ko.observable('');
+			self.serviceProductID = ko.observable('');
 		}
 		
 		var dataViewModel = function () {
@@ -1384,10 +1424,6 @@ jQuery.noConflict();
 			}
 		}
 		ko.applyBindings(mmc.vm);
-		
-		t2 = new Date();
-		// console.log('Initial build of the page: ' + (t2 - t1) + ' ms');
-		// console.log('');
 		
 		/* Initiate the Configurator on page load */
 		mmc.init();
@@ -1533,6 +1569,9 @@ jQuery.noConflict();
 				if (mmc.vm.config.product1.insectWidth() != '') {
 					mmc.dom.insect.find('select[name="insectWidth"]').change();
 				}
+		
+				/* Trigger custom function */
+				mmc.settings.onSelectInsectNetType( mmc.settings.insect.shape() );
 			}
 		});
 		
@@ -1567,6 +1606,9 @@ jQuery.noConflict();
 			click: function (event) {
 				/* Trigger customer action: onBeforeAddToBasket */
 				mmc.settings.onBeforeAddToBasket();
+				
+				/* Trigger custom function */
+				mmc.settings.onButtonAddToBasket();
 				
 				mmc.trigger.target = $(event.target).closest('.mmc__button');
 				mmc.trigger.type = 'gotobasket';
@@ -1611,6 +1653,9 @@ jQuery.noConflict();
 		mmc.dom.windows.on({
 			click: function(event) {
 				var content = mmc.dom.blocks.windowtypesize[0].outerHTML;
+				
+				/* Trigger custom function */
+				mmc.settings.onButtonWindowUnknown();
 			
 				Shadowbox.open({
 					content: '<div class="mmc__infoPopup">' + content + '<div class="mmc__closePopup"><span class="mmc__text mmc__shadowBoxClose">' + mmc.settings.closeText + ' x</span></div></div>',
@@ -1698,9 +1743,30 @@ jQuery.noConflict();
 		/* Triggers for sending email with configuration */
 		mmc.dom.base.on({
 			submit: function (e) {
+				/* Trigger custom function */
+				mmc.settings.onButtonEmail();
+				
 				lib.submitSendProductsByMail(e);
 			}
 		}, '.mmc__mailerPopup form');
+		
+		/* Trigger for clicking on print button */
+		mmc.dom.complete.on({
+			click: function (e) {
+				/* Trigger custom function */
+				mmc.settings.onButtonPrint();
+				
+				window.print();
+			}
+		}, '.mmc__button.mmc__print a');
+		
+		/* Trigger for clicking on dealer button */
+		mmc.dom.complete.on({
+			click: function (e) {
+				/* Trigger custom function */
+				mmc.settings.onButtonDealer();
+			}
+		}, '.mmc__button.mmc__dealer a');
 	});
 
 })(window, document, jQuery);

@@ -23,6 +23,8 @@ function loadConfigurator(obj) {
 	/* Set object defaults when not entered */
 	obj.target = (obj.target === undefined) ? '#mmc__InsertConfigurator' : obj.target;
 	obj.directory = (obj.directory === undefined) ? '/' : obj.directory;
+	obj.illustrationsDirectory = (obj.illustrationsDirectory === undefined) ? null : obj.illustrationsDirectory;
+	obj.coloursDirectory = (obj.coloursDirectory === undefined) ? '/' : obj.coloursDirectory;
 	obj.skin = (obj.skin === undefined) ? 'veluxshop' : obj.skin;
 	obj.language = (obj.language === undefined) ? 'en' : obj.language;
 	obj.did = '//' + location.hostname + '/';
@@ -34,12 +36,28 @@ function loadConfigurator(obj) {
 	obj.dealerTarget = (obj.dealerTarget === undefined) ? '_blank' : obj.dealerTarget;
 	obj.shopTarget = (obj.shopTarget === undefined) ? '_self' : obj.shopTarget;
 	obj.basketType = (obj.basketType === undefined) ? 'veluxshop' : obj.basketType;
-	obj.environment = (obj.environment === undefined) ? 'configurator.veluxshop.com' : (obj.environment == 'production') ? 'configurator.veluxshop.com' : (obj.environment == 'localhost') ? 'localhost/mmc' : 'qaconfigurator.veluxshop.com';
+	
+	/* Set the environment properly depending on the value */
+	obj.environment = (obj.environment === undefined) ? '//configurator.veluxshop.com/' : obj.environment;
+	if (obj.environment == 'production') {
+		obj.environment = '//configurator.veluxshop.com/';
+	} else if (obj.environment == 'test') {
+		obj.environment = '//qaconfigurator.veluxshop.com/';
+	} else if (obj.environment == 'localhost') {
+		obj.environment = '//localhost/mmc/';
+	} else if (obj.environment == 'veluxshop') {
+		obj.environment = location.origin + location.pathname + '/';
+	}
+	
 	obj.min = (obj.min === undefined) ? true : obj.min;
 	obj.disableRules = (obj.disableRules === undefined) ? false : obj.disableRules;
 	obj.formMethod = (obj.formMethod === undefined) ? 'POST' : obj.formMethod;
 	obj.returnFunc = (obj.returnFunc === undefined) ? null : obj.returnFunc;
 	
+	obj.loadingTitle = (obj.loadingTitle === undefined) ? '' : obj.loadingTitle;
+	obj.loadingSubtitle = (obj.loadingSubtitle === undefined) ? '' : obj.loadingSubtitle;
+	
+	/* Allow the settings of discounts through the configuration, which will be calculated into the price */
 	obj.percentDiscount = (obj.percentDiscount === undefined) ? null : obj.percentDiscount;
 	obj.percentDiscountAddOnPleated = (obj.percentDiscountAddOnPleated === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountAddOnPleated;
 	obj.percentDiscountAwning = (obj.percentDiscountAwning === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountAwning;
@@ -55,7 +73,7 @@ function loadConfigurator(obj) {
 	obj.percentDiscountShutters = (obj.percentDiscountShutters === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountShutters;
 	obj.percentDiscountVenetian = (obj.percentDiscountVenetian === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountVenetian;
 	
-	/* Functions that are trigger before of after default actions */
+	/* Functions that are triggered before of after default actions */
 	obj.onBeforeLoad = (obj.onBeforeLoad === undefined) ? function () { return; } : obj.onBeforeLoad;
 	obj.onAfterLoad = (obj.onAfterLoad === undefined) ? function () { return; } : obj.onAfterLoad;
 	obj.onBeforeInit = (obj.onBeforeInit === undefined) ? function () { return; } : obj.onBeforeInit;
@@ -66,6 +84,27 @@ function loadConfigurator(obj) {
 	obj.onAfterSwitchStep = (obj.onAfterSwitchStep === undefined) ? function () { return; } : obj.onAfterSwitchStep;
 	obj.onBeforeAddToBasket = (obj.onBeforeAddToBasket === undefined) ? function () { return; } : obj.onBeforeAddToBasket;
 	obj.onAfterAddToBasket = (obj.onAfterAddToBasket === undefined) ? function () { return; } : obj.onAfterAddToBasket;
+	
+	/* Functions that are triggered on user events */
+	obj.onSelectWindowType = (obj.onSelectWindowType === undefined) ? function () { return; } : obj.onSelectWindowType;
+	obj.onSelectWindowSize = (obj.onSelectWindowSize === undefined) ? function () { return; } : obj.onSelectWindowSize;
+	obj.onSelectCategory = (obj.onSelectCategory === undefined) ? function () { return; } : obj.onSelectCategory;
+	obj.onSelectOperation = (obj.onSelectOperation === undefined) ? function () { return; } : obj.onSelectOperation;
+	obj.onSelectColour = (obj.onSelectColour === undefined) ? function () { return; } : obj.onSelectColour;
+	obj.onSelectInsectNetType = (obj.onSelectInsectNetType === undefined) ? function () { return; } : obj.onSelectInsectNetType;
+	obj.onSelectInsectNet = (obj.onSelectInsectNet === undefined) ? function () { return; } : obj.onSelectInsectNet;
+	obj.onSelectOutersurface = (obj.onSelectOutersurface === undefined) ? function () { return; } : obj.onSelectOutersurface;
+	obj.onNextWindow = (obj.onNextWindow === undefined) ? function () { return; } : obj.onNextWindow;
+	obj.onNextCategory = (obj.onNextCategory === undefined) ? function () { return; } : obj.onNextCategory;
+	obj.onNextOperation = (obj.onNextOperation === undefined) ? function () { return; } : obj.onNextOperation;
+	obj.onNextColour = (obj.onNextColour === undefined) ? function () { return; } : obj.onNextColour;
+	obj.onNextInsectnet = (obj.onNextInsectnet === undefined) ? function () { return; } : obj.onNextInsectnet;
+	obj.onNextOuterSurface = (obj.onNextOuterSurface === undefined) ? function () { return; } : obj.onNextOuterSurface;
+	obj.onButtonWindowUnkown = (obj.onButtonWindowUnkown === undefined) ? function () { return; } : obj.onButtonWindowUnkown;
+	obj.onButtonDealer = (obj.onButtonDealer === undefined) ? function () { return; } : obj.onButtonDealer
+	obj.onButtonAddToBasket = (obj.onButtonAddToBasket === undefined) ? function () { return; } : obj.onButtonAddToBasket;
+	obj.onButtonPrint = (obj.onButtonPrint === undefined) ? function () { return; } : obj.onButtonPrint;
+	obj.onButtonEmail = (obj.onButtonEmail === undefined) ? function () { return; } : obj.onButtonEmail;
 	
 	/* Trigger customer action: onBeforeLoad */
 	obj.onBeforeLoad();
@@ -115,8 +154,25 @@ function loadConfigurator(obj) {
 	
 		(function (window, document, $) {
 		
-			var requestURL = '//' + obj.environment + '/?option=com_configurator',
-				requestData = '&baseurl=' + obj.directory + '&lang=' + obj.language + '&did=' + obj.did + '&cid=' + obj.cid + '&dealerurl=' + obj.dealerURL + '&dealertarget=' + obj.dealerTarget + '&shoptarget=' + obj.shopTarget + '&formmethod=' + obj.formMethod;
+			var requestURL = obj.environment + '?option=com_configurator&view=blinds',
+				requestData = '&baseurl=' + obj.directory + '&imagesDirectory=' + obj.imagesDirectory + '&lang=' + obj.language + '&did=' + obj.did + '&cid=' + obj.cid + '&dealerurl=' + obj.dealerURL + '&dealertarget=' + obj.dealerTarget + '&shoptarget=' + obj.shopTarget + '&formmethod=' + obj.formMethod,
+				siteLocation = obj.directory + 'content/';
+			
+			/* Load the CSS files before displaying the loading configurator text */
+			includeFile(siteLocation + 'css', 'velux-configurator.css', 'screen');
+			includeFile(siteLocation + 'css', 'velux-configurator.print.css', 'print');
+			includeFile(siteLocation + 'css', 'skin-' + obj.skin + '.css', 'screen');
+			
+			/* Create and display the loading configurator text */
+			if (obj.loadingTitle) {
+				obj.loading = $('<div id="mmc__LoadingConfigurator"></div>')
+					.append('<div class="mmc__loadingTitle">' + obj.loadingTitle + '</div>')
+					.append('<div class="mmc__loadingSubTitle">' + obj.loadingSubtitle + '</div>')
+					.append('<div class="mmc__loadingIcon">&nbsp;</div>')
+					.show();
+				
+				$(obj.target).prepend(obj.loading);
+			}
 			
 			if (navigator.userAgent.match(/MSIE/gi) && window.XDomainRequest) {
 				// Use Microsoft XDR
@@ -142,8 +198,7 @@ function loadConfigurator(obj) {
 			
 			function processData(data) {
 					
-				var siteLocation = obj.directory + 'content/',
-					scripts = [
+				var scripts = [
 						'js/knockout-2.2.1.js',
 						'js/chosen/chosen.jquery.min.js',
 						'js/shadowbox/shadowbox.js'
@@ -158,15 +213,15 @@ function loadConfigurator(obj) {
 				}
 				
 				temp.append(data);
-				temp.find('#mmc__AddToBasket').attr('action', obj.returnURL);								
+				temp.find('#mmc__AddToBasket').attr('action', obj.returnURL);
 				$(obj.target).append(temp.find('#mmc__Configurator'));
 				temp = null;
 				
-				loadSettings();
+				if (obj.loadingTitle) {
+					$(obj.target).find('#mmc__Configurator #mmc__LoadingConfigurator').remove();
+				}
 				
-				includeFile(siteLocation + 'css', 'velux-configurator.css', 'screen');
-				includeFile(siteLocation + 'css', 'velux-configurator.print.css', 'print');
-				includeFile(siteLocation + 'css', 'skin-' + obj.skin + '.css', 'screen');
+				loadSettings();
 				
 				/* Load all the scripts, before loading the final one that places the configurator */
 				$.each(scripts, function (index, value) {
