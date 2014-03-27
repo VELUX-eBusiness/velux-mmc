@@ -93,7 +93,7 @@ function loadConfigurator(obj) {
 	obj.onSelectColour = (obj.onSelectColour === undefined) ? function () { return; } : obj.onSelectColour;
 	obj.onSelectInsectNetType = (obj.onSelectInsectNetType === undefined) ? function () { return; } : obj.onSelectInsectNetType;
 	obj.onSelectInsectNet = (obj.onSelectInsectNet === undefined) ? function () { return; } : obj.onSelectInsectNet;
-	obj.onSelectOutersurface = (obj.onSelectOutersurface === undefined) ? function () { return; } : obj.onSelectOutersurface;
+	obj.onSelectOuterSurface = (obj.onSelectOuterSurface === undefined) ? function () { return; } : obj.onSelectOuterSurface;
 	obj.onNextWindow = (obj.onNextWindow === undefined) ? function () { return; } : obj.onNextWindow;
 	obj.onNextCategory = (obj.onNextCategory === undefined) ? function () { return; } : obj.onNextCategory;
 	obj.onNextOperation = (obj.onNextOperation === undefined) ? function () { return; } : obj.onNextOperation;

@@ -12,8 +12,7 @@
 	background-image: url(images/veluxshop-colour-awning.png);
 	background-position: 0 0;
 }
-.mmc__option.mmc__colour div.mmc__fill.colour_5060,
-.mmc__option.mmc__colour div.mmc__fill.colour_1310
+.mmc__option.mmc__colour div.mmc__fill.colour_5060
 {
 	background-position: -0px -7px;
 }
@@ -29,9 +28,14 @@
 {
 	background-position: -225px -7px;
 }
+.mmc__option.mmc__colour div.mmc__fill.colour_1310
+{
+	background-position: -225px -7px;
+}
 
 .mmc__option.mmc__colour.Blackout div.mmc__fill,
 .mmc__option.mmc__colour.BlackoutDesign div.mmc__fill,
+.mmc__option.mmc__colour.BlackoutDisney div.mmc__fill,
 .mmc__option.mmc__colour.DOP div.mmc__fill,
 .mmc__option.mmc__colour.BlackoutAwningBlackout div.mmc__fill
 {
@@ -229,6 +233,54 @@
 .mmc__option.mmc__colour div.mmc__fill.colour_5265
 {
 	background-position: -525px -307px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4610
+{
+	background-position: -600px -307px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4611
+{
+	background-position: -675px -307px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4612
+{
+	background-position: -0px -382px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4613
+{
+	background-position: -75px -382px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4614
+{
+	background-position: -150px -382px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4615
+{
+	background-position: -225px -382px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4616
+{
+	background-position: -300px -382px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4617
+{
+	background-position: -375px -382px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4618
+{
+	background-position: -450px -382px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4619
+{
+	background-position: -525px -382px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4620
+{
+	background-position: -600px -382px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4621
+{
+	background-position: -675px -382px;
 }
 
 .mmc__option.mmc__colour.Duo div.mmc__fill
