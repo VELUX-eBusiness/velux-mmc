@@ -1318,6 +1318,19 @@ p
 			padding: 0 20px 15px 0;
 		}
 		
+.mmc__colour .mmc__option.BlackoutDisney .mmc__tooltip.mmc__alignLeft
+{
+	top: -170px;
+	left: 190px !important;
+}
+.mmc__colour .mmc__option.BlackoutDisney .mmc__tooltip .mmc__tooltipImage
+{
+	background: none;
+	height: 569px;
+	width: 276px;
+	top: -65%;
+}
+		
 
 /*  ================================================================================================================
 /   Configurator Info Tooltips

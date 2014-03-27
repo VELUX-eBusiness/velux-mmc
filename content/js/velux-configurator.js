@@ -96,7 +96,7 @@ jQuery.noConflict();
 					return task;
 				},
 				data: {
-					/* TODO: Concatinate 1 and 2 into a single function to set options */
+					/* TODO: Concatenate 1 and 2 into a single function to set options */
 					1: {
 						windowtype: function () { return mmc.vm.config.product1.windowtype(); },
 						/* If triggered by windowtype, don't return windowsize */
@@ -109,6 +109,7 @@ jQuery.noConflict();
 						openingwidth: function () { return (mmc.isBasket()) ? mmc.vm.config.product1.insectWidthText() : mmc.vm.config.product1.insectWidth(); },
 						openingheight: function () { return (mmc.isBasket()) ? mmc.vm.config.product1.insectHeightText() : mmc.vm.config.product1.insectHeight(); },
 						productid: function () { if (mmc.isBasket()) return mmc.vm.config.product1.serviceProductID(); },
+						categorynodeid: function () { if (mmc.isBasket() && mmc.vm.controls.showCombination()) return mmc.vm.config.product1.category(); },
 						// serviceproductid: function () { if (mmc.isBasket()) return mmc.vm.config.product1.serviceProductID(); },
 						productprice: function () { if (mmc.isBasket()) return mmc.vm.config.product1.productPrice(); },
 						configuratorType: function () { if (!mmc.isBasket()) return mmc.vm.config.product1.configureType(); }
@@ -125,6 +126,7 @@ jQuery.noConflict();
 						openingwidth: function () { return (mmc.isBasket()) ? mmc.vm.config.product1.insectWidthText() : mmc.vm.config.product2.insectWidth(); },
 						openingheight: function () { return (mmc.isBasket()) ? mmc.vm.config.product2.insectHeightText() : mmc.vm.config.product2.insectHeight(); },
 						productid: function () { if (mmc.isBasket()) return mmc.vm.config.product2.serviceProductID(); },
+						categorynodeid: function () { if (mmc.isBasket() && mmc.vm.controls.showCombination()) return mmc.vm.config.product2.category(); },
 						// serviceproductid: function () { if (mmc.isBasket()) return mmc.vm.config.product2.serviceProductID(); },
 						productprice: function () { if (mmc.isBasket()) return mmc.vm.config.product2.productPrice(); },
 						configuratorType: function () { if (!mmc.isBasket()) return mmc.vm.config.product2.configureType(); }
@@ -165,6 +167,8 @@ jQuery.noConflict();
 				if (priceRight) {
 					if (priceRight.length > 2) {
 						priceRight = priceRight.slice(0, 2);
+					} else if (priceRight.length == 1) {
+						priceRight = priceRight + '0';
 					}
 					priceRight = (mmc.settings.decimalNum == 0) ? '' : mmc.settings.sepD + priceRight.slice(0, priceRight.length - (2 - mmc.settings.decimalNum));
 				}
@@ -246,6 +250,7 @@ jQuery.noConflict();
 										requestData.push('"' + data + '":"' + option() + '"');
 									}
 								});
+								
 								requestProducts.push('"' + requestName + '":{' + requestData.join(',') + '}');
 							});
 						}
@@ -262,6 +267,7 @@ jQuery.noConflict();
 			},
 			/* Object with site settings */
 			settings: {
+				doNotHide: false, /* Set whether the mmc.update should hide the updating block when the AJAX call is finished */
 				defaultImg: 'product1',
 				sepT: '.',
 				sepD: ',',
@@ -322,7 +328,8 @@ jQuery.noConflict();
 							return mmc.settings.directory + 'content/images/configurator/illustrations/';
 						}
 					}
-				}
+				},
+				categoriesOrder: $('#mmc__Settings .mmc__categoriesOrder').text().split(',').slice(0, -1)
 			},
 			/* The MMC Knockout ViewModel */
 			vm: {},
@@ -461,11 +468,16 @@ jQuery.noConflict();
 							$(mmc.settings.target).find('#mmc__LoadingConfigurator').remove();
 						}
 						
-						mmc.dom.activeStep().removeClass('mmc__updating');
-						mmc.dom.activeStep().find('.mmc__updatingOverlay').remove();
+						if (mmc.settings.doNotHide == false) {
+							mmc.dom.activeStep().removeClass('mmc__updating');
+							mmc.dom.activeStep().find('.mmc__updatingOverlay').remove();
+						}
 	
 						/* Trigger customer action: onAfterUpdate */
 						mmc.settings.onAfterUpdate();
+						
+						/* Reset the doNotHide setting */
+						mmc.settings.doNotHide = false;
 						
 					}, error: function (err) {
 					}
@@ -620,11 +632,18 @@ jQuery.noConflict();
 											($.inArray(mmc.vm.config.product1.windowtype(), mmc.settings.flatroofSizes) != -1 && child.CategoryName.match(/flatroof/gi))) {
 											
 											if (child.MatchFound || (!child.MatchFound && mmc.settings.showInactive) || child.CategoryName == 'InsectNet') {
-												product.category.push({val: child.CategoryName, name: child.Name, desc: child.Description, parent: option.CategoryName, inactive: (child.MatchFound || child.CategoryName == 'InsectNet') ? '' : 'inactive'});
+												product.category.push({val: child.CategoryName, name: child.Name, desc: child.Description, parent: option.CategoryName, inactive: (child.MatchFound || child.CategoryName == 'InsectNet') ? '' : 'inactive', order: mmc.settings.categoriesOrder.indexOf(child.CategoryName)});
 											}
 											
 										}
 									});
+									
+									/* Order the categories by the sortorder of the product types */
+									if (mmc.settings.categoriesOrder) {
+										product.category.sort(function (l, r) {
+											return l.order > r.order;
+										});
+									}
 									
 									/* Update the observable when array has been built */
 									product.category.valueHasMutated();
@@ -798,6 +817,12 @@ jQuery.noConflict();
 						lib.checkFilledSteps(mmc.vm.config[productIndex]);
 					}
 					
+					/* Add an extra check to see if the required steps are filled. If so, then trigger the updateConfigurator again */
+					if (mmc.dom.base.find('.mmc__configStep.mmc__required.mmc__filled:not(.mmc__complete)').length == mmc.dom.base.find('.mmc__configStep.mmc__required:not(.mmc__complete)').length) {
+						mmc.settings.doNotHide = true;
+						mmc.update();
+					}
+					
 				},
 				Rules: function (productIndex, options) {
 					var data = mmc.vm.data;
@@ -846,15 +871,22 @@ jQuery.noConflict();
 					}
 					/* Loop through both of the products and set the options */
 					$.each(data, function (index, product) {
-						var obsIndex = 0;
+						var obsIndex = 0,
+							tempCategory = '';
 						
 						/* Loop through all the values and update the Observable */
 						$.each(options, function (name, id) {
 							if (id.IsValid || (!id.IsValid && mmc.settings.showInactive)) {
 								if (mmc.vm.controls.showCombination()) {
-									data[productIndex].colour()[obsIndex++] = {cat: mmc.vm.config[productIndex].category().match(/[A-Z][a-z]+/g)[productIndex.charAt(productIndex.length - 1) - 1], val: id.ColorID, name: id.ColorID, desc: id.ColorDescription, inactive: (id.IsValid) ? '' : 'inactive'};
+									/* Create a check for BlackoutDisney colours, in case they show up in the Blackout category */
+									tempCategory = (id.ColorID > 4609 && id.ColorID < 4622) ? 'BlackoutDisney' : mmc.vm.config[productIndex].category().match(/[A-Z][a-z]+/g)[productIndex.charAt(productIndex.length - 1) - 1];
+									
+									data[productIndex].colour()[obsIndex++] = {cat: tempCategory, val: id.ColorID, name: id.ColorID, desc: id.ColorDescription, inactive: (id.IsValid) ? '' : 'inactive'};
 								} else {
-									product.colour()[obsIndex++] = {cat: mmc.vm.config.product1.category(), val: id.ColorID, name: id.ColorID, desc: id.Name, inactive: (id.IsValid) ? '' : 'inactive'};
+									/* Create a check for BlackoutDisney colours, in case they show up in the Blackout category */
+									tempCategory = (id.ColorID > 4609 && id.ColorID < 4622) ? 'BlackoutDisney' : mmc.vm.config.product1.category();
+									
+									product.colour()[obsIndex++] = {cat: tempCategory, val: id.ColorID, name: id.ColorID, desc: id.Name, inactive: (id.IsValid) ? '' : 'inactive'};
 								}
 							}
 						});
@@ -873,6 +905,12 @@ jQuery.noConflict();
 					if (validCount == 1) {
 						mmc.vm.config[productIndex].colour(validOption);
 						lib.checkFilledSteps(mmc.vm.config[productIndex]);
+					}
+					
+					/* Add an extra check to see if the required steps are filled. If so, then trigger the updateConfigurator again */
+					if (mmc.dom.base.find('.mmc__configStep.mmc__required.mmc__filled:not(.mmc__complete)').length == mmc.dom.base.find('.mmc__configStep.mmc__required:not(.mmc__complete)').length) {
+						mmc.settings.doNotHide = true;
+						mmc.update();
 					}
 				},
 				AvailableProducts: function (productIndex, options) {
@@ -1483,9 +1521,10 @@ jQuery.noConflict();
 				}
 				
 				var inputVal = $(event.target).closest('.mmc__option').find('input').val(),
-					inputCategory = $(event.target).closest('.mmc__configStep').data('type');
+					inputCategory = $(event.target).closest('.mmc__configStep').data('type'),
+					productIndex = 'product' + $(event.target).closest('.mmc__options').data('product');
 				
-				mmc.vm.config.product1[inputCategory](inputVal);
+				mmc.vm.config[productIndex][inputCategory](inputVal);
 				
 				/* When not clicking on the label, make sure to trigger the input click */
 				if ($(event.target)[0].nodeName == 'TD') {
