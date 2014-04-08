@@ -190,7 +190,7 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
 			illustration[index] = {
 				category: (mmc.vm.controls.showCombination() == true) ? product.category().match(/[A-Z]*[^A-Z]+/g)[combiIndex] : product.category(),
 				operation: product.operation(),
-				colour: product.colour()
+				colour: (product.category() == 'Shutters') ? product.outersurface() : product.colour()
 			};
 		});
 		
@@ -198,6 +198,7 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
 		
 		mmc.dom.selection.find('.mmc__window .mmc__newImg').append(newIllustration);
 		
+		/* Set a mini timeout to make sure the observables are updated */
 		self.swapIllustrations();
 		
 	}

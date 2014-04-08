@@ -478,6 +478,9 @@ jQuery.noConflict();
 						
 						/* Reset the doNotHide setting */
 						mmc.settings.doNotHide = false;
+				
+						/* Update the illustration */
+						lib.updateIllustration(self);
 						
 					}, error: function (err) {
 					}
@@ -492,9 +495,6 @@ jQuery.noConflict();
 					/* Chosen needs to be updated to allow user to select height < 2400 when having configured height > 2400 */
 					mmc.dom.insect.find('select').trigger("chosen:updated");
 				}
-				
-				/* Update the illustration */
-				lib.updateIllustration(self);
 				
 				/* Check which steps are filled and sets a filled class */
 				lib.checkFilledSteps(self);
@@ -631,9 +631,12 @@ jQuery.noConflict();
 										if (($.inArray(mmc.vm.config.product1.windowtype(), mmc.settings.flatroofSizes) == -1 && !child.CategoryName.match(/flatroof/gi)) ||
 											($.inArray(mmc.vm.config.product1.windowtype(), mmc.settings.flatroofSizes) != -1 && child.CategoryName.match(/flatroof/gi))) {
 											
-											if (child.MatchFound || (!child.MatchFound && mmc.settings.showInactive) || child.CategoryName == 'InsectNet') {
-												product.category.push({val: child.CategoryName, name: child.Name, desc: child.Description, parent: option.CategoryName, inactive: (child.MatchFound || child.CategoryName == 'InsectNet') ? '' : 'inactive', order: mmc.settings.categoriesOrder.indexOf(child.CategoryName)});
-											}
+											/* Only add the product type to the list when it's set to selling, or when categories order does not exist */
+											// if ($.inArray(child.CategoryName, mmc.settings.categoriesOrder) != -1 || mmc.settings.categoriesOrder != '') {
+												if (child.MatchFound || (!child.MatchFound && mmc.settings.showInactive) || child.CategoryName == 'InsectNet') {
+													product.category.push({val: child.CategoryName, name: child.Name, desc: child.Description, parent: option.CategoryName, inactive: (child.MatchFound || child.CategoryName == 'InsectNet') ? '' : 'inactive', order: mmc.settings.categoriesOrder.indexOf(child.CategoryName)});
+												}
+											// }
 											
 										}
 									});
@@ -641,7 +644,7 @@ jQuery.noConflict();
 									/* Order the categories by the sortorder of the product types */
 									if (mmc.settings.categoriesOrder) {
 										product.category.sort(function (l, r) {
-											return l.order > r.order;
+											return l.order - r.order;
 										});
 									}
 									
