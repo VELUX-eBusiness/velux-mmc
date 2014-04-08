@@ -100,7 +100,7 @@ function loadConfigurator(obj) {
 	obj.onNextColour = (obj.onNextColour === undefined) ? function () { return; } : obj.onNextColour;
 	obj.onNextInsectnet = (obj.onNextInsectnet === undefined) ? function () { return; } : obj.onNextInsectnet;
 	obj.onNextOuterSurface = (obj.onNextOuterSurface === undefined) ? function () { return; } : obj.onNextOuterSurface;
-	obj.onButtonWindowUnkown = (obj.onButtonWindowUnkown === undefined) ? function () { return; } : obj.onButtonWindowUnkown;
+	obj.onButtonWindowUnknown = (obj.onButtonWindowUnknown === undefined) ? function () { return; } : obj.onButtonWindowUnknown;
 	obj.onButtonDealer = (obj.onButtonDealer === undefined) ? function () { return; } : obj.onButtonDealer
 	obj.onButtonAddToBasket = (obj.onButtonAddToBasket === undefined) ? function () { return; } : obj.onButtonAddToBasket;
 	obj.onButtonPrint = (obj.onButtonPrint === undefined) ? function () { return; } : obj.onButtonPrint;
