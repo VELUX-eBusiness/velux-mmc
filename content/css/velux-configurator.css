@@ -982,7 +982,8 @@ p
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#ff0000, endColorstr=#dc1420);
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#ff0000, endColorstr=#dc1420)";
 }
-.mmc__userMessage.mmc__note
+.mmc__userMessage.mmc__note,
+.mmc__userMessage.mmc__question
 {
 	background-color: #aacae3;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#aacae3), to(#98c2db));
@@ -1005,24 +1006,11 @@ p
 		top: 0;
 		height: 100%;
 		width: 80px;
-		
 		font-size: 200%;
 		color: #fff;
 		font-weight: bold;
 		text-align: center;
 		line-height: 260%;
-	}
-	.mmc__userMessage.mmc__error .mmc__userMessageIcon
-	{
-		background-position: -110px center;
-	}
-	.mmc__userMessage.mmc__note .mmc__userMessageIcon
-	{
-		background-position: -310px center;
-	}
-	.mmc__userMessage.mmc__check .mmc__userMessageIcon
-	{
-		background-position: -510px center;
 	}
 	.mmc__userMessage .mmc__userMessageDescription
 	{
@@ -1035,6 +1023,7 @@ p
 	}
 	.mmc__userMessage.mmc__error .mmc__userMessageDescription,
 	.mmc__userMessage.mmc__note .mmc__userMessageDescription,
+	.mmc__userMessage.mmc__question .mmc__userMessageDescription,
 	.mmc__userMessage.mmc__check .mmc__userMessageDescription
 	{
 		color: #ffffff;
@@ -1071,6 +1060,7 @@ p
 		}
 		.mmc__userMessage.mmc__error .mmc__userMessageDescription a,
 		.mmc__userMessage.mmc__note .mmc__userMessageDescription a,
+		.mmc__userMessage.mmc__question .mmc__userMessageDescription a,
 		.mmc__userMessage.mmc__check .mmc__userMessageDescription a
 		{
 			color: #ffffff;
@@ -1126,6 +1116,7 @@ p
 		}
 		.mmc__userMessage.mmc__error .mmc__userMessageClose span,
 		.mmc__userMessage.mmc__note .mmc__userMessageClose span,
+		.mmc__userMessage.mmc__question .mmc__userMessageClose span,
 		.mmc__userMessage.mmc__check .mmc__userMessageClose span
 		{
 			color: #ffffff;

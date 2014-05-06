@@ -391,7 +391,7 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
 				}
 				
 			} else {
-				message = mmc.dom.selection.find('.mmc__product:first .mmc__productRow.mmc__selection.' + type + ' span.mmc__type').text().trim();
+				message = mmc.dom.selection.find('.mmc__product:first .mmc__productRow.mmc__selection.mmc__' + type + ' span.mmc__type').text().trim();
 				if (message.charAt(message.length - 1) == ':') {
 					message = message.slice(0, -1);
 				}

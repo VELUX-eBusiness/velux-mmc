@@ -381,7 +381,7 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 		
 		/* Change the content of the user message */
 		newMessage.attr('data-rule', rule.RuleNo);
-		newMessage.find('.mmc__userMessageIcon').text(rule.RuleNo);
+		// newMessage.find('.mmc__userMessageIcon').text(rule.RuleNo);
 		newMessage.find('.mmc__userMessageTitle').remove();
 		newMessage.find('.mmc__userMessageClose').remove();
 		newMessage.find('.mmc__userMessageText').html(message);
