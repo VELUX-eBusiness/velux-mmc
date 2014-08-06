@@ -24,7 +24,7 @@ function loadConfigurator(obj) {
 	obj.target = (obj.target === undefined) ? '#mmc__InsertConfigurator' : obj.target;
 	obj.directory = (obj.directory === undefined) ? '/' : obj.directory;
 	obj.illustrationsDirectory = (obj.illustrationsDirectory === undefined) ? null : obj.illustrationsDirectory;
-	obj.coloursDirectory = (obj.coloursDirectory === undefined) ? '/' : obj.coloursDirectory;
+	obj.coloursDirectory = (obj.coloursDirectory === undefined) ? null : obj.coloursDirectory;
 	obj.skin = (obj.skin === undefined) ? 'veluxshop' : obj.skin;
 	obj.language = (obj.language === undefined) ? 'en' : obj.language;
 	obj.did = '//' + location.hostname + '/';
@@ -36,6 +36,9 @@ function loadConfigurator(obj) {
 	obj.dealerTarget = (obj.dealerTarget === undefined) ? '_blank' : obj.dealerTarget;
 	obj.shopTarget = (obj.shopTarget === undefined) ? '_self' : obj.shopTarget;
 	obj.basketType = (obj.basketType === undefined) ? 'veluxshop' : obj.basketType;
+	
+	/* Settings to show or hide certain steps */
+	obj.showCategoryStep = (obj.showCategoryStep === undefined) ? true : obj.showCategoryStep;
 	
 	/* Set the environment properly depending on the value */
 	obj.environment = (obj.environment === undefined) ? '//configurator.veluxshop.com/' : obj.environment;
@@ -49,6 +52,9 @@ function loadConfigurator(obj) {
 		obj.environment = location.origin + location.pathname + '/';
 	}
 	
+	/* Choose which HTML code the configurator should be rendered with, default to the shop renderer */
+	obj.renderer = (obj.renderer === undefined) ? 'blinds' : obj.renderer;
+	
 	obj.min = (obj.min === undefined) ? true : obj.min;
 	obj.disableRules = (obj.disableRules === undefined) ? false : obj.disableRules;
 	obj.formMethod = (obj.formMethod === undefined) ? 'POST' : obj.formMethod;
@@ -56,6 +62,14 @@ function loadConfigurator(obj) {
 	
 	obj.loadingTitle = (obj.loadingTitle === undefined) ? '' : obj.loadingTitle;
 	obj.loadingSubtitle = (obj.loadingSubtitle === undefined) ? '' : obj.loadingSubtitle;
+	
+	/* Allow pre-configuration of each step */
+	obj.windowType = (obj.windowType === undefined) ? null : obj.windowType;
+	obj.windowSize = (obj.windowSize === undefined) ? null : obj.windowSize;
+	obj.category = (obj.category === undefined) ? null : obj.category;
+	obj.operation = (obj.operation === undefined) ? null : obj.operation;
+	obj.colour = (obj.colour === undefined) ? null : obj.colour;
+	obj.outerSurface = (obj.outerSurface === undefined) ? null : obj.outerSurface;
 	
 	/* Allow the settings of discounts through the configuration, which will be calculated into the price */
 	obj.percentDiscount = (obj.percentDiscount === undefined) ? null : obj.percentDiscount;
@@ -154,8 +168,9 @@ function loadConfigurator(obj) {
 	
 		(function (window, document, $) {
 		
-			var requestURL = obj.environment + '?option=com_configurator&view=blinds',
+			var requestURL = obj.environment + '?option=com_configurator&view=' + obj.renderer,
 				requestData = '&baseurl=' + obj.directory + '&imagesDirectory=' + obj.imagesDirectory + '&lang=' + obj.language + '&did=' + obj.did + '&cid=' + obj.cid + '&dealerurl=' + obj.dealerURL + '&dealertarget=' + obj.dealerTarget + '&shoptarget=' + obj.shopTarget + '&formmethod=' + obj.formMethod,
+				preConfig = '&windowtype=' + obj.windowType + '&windowsize=' + obj.windowSize + '&category=' + obj.category + '&operation=' + obj.operation + '&colour=' + obj.colour + '&outersurface=' + obj.outerSurface;
 				siteLocation = obj.directory + 'content/';
 			
 			/* Load the CSS files before displaying the loading configurator text */
@@ -177,7 +192,7 @@ function loadConfigurator(obj) {
 			if (navigator.userAgent.match(/MSIE/gi) && window.XDomainRequest) {
 				// Use Microsoft XDR
 				var xdr = new XDomainRequest();
-				xdr.open("POST", requestURL + requestData);
+				xdr.open("POST", requestURL + requestData + preConfig);
 				
 				xdr.onload = function () {
 					processData(xdr.responseText);
@@ -189,7 +204,10 @@ function loadConfigurator(obj) {
 				$.ajax({
 					dataType: 'html',
 					type: "POST",
-					url: requestURL + requestData,
+					url: requestURL + requestData + preConfig,
+					beforeSend: function(xhr) {
+						xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+					},
 					success: function (data) {
 						processData(data);
 					}

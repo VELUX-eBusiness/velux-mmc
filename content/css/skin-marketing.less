@@ -1,0 +1,550 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+#mmc__Configurator,
+#mmc__LoadingConfigurator p,
+.mmc__titleBar table.mmc__stepIndex,
+.mmc__infotip,
+.mmc__illustrationZoom div.mmc__close,
+#sb-container
+{
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	font-weight: inherit;
+}
+
+#mmc__Configurator {
+	
+	.mmc__active{
+		background: none;
+	}
+	
+	* {
+		font-family: inherit;
+		font-size: inherit;
+		line-height: inherit;
+		font-weight: inherit;
+	}
+	b, strong {
+		font-family: 'VELUXGothicBlack', Arial, sans-serif;
+	}
+	
+	#mmc__LoadingConfigurator {
+		font-size: 2em;
+	}
+	#mmc__Options {
+		width: 100%;
+		
+		.mmc__configStep {
+			margin: 0 10px;
+			z-index: initial;
+		
+			.mmc__titleBar {
+				background: none;
+				width: auto;
+				height: auto;
+				padding: 0;
+				margin: 0;
+				cursor: default;
+				font-size: 20/15em;
+				
+				> * {
+					display: none;
+				}
+				.mmc__stepPreText {
+					display: inline-block;
+					float: left;
+				}
+				.mmc__stepIndex {
+					display: inline-block;
+					background: none;
+					color: #333;
+					padding: 0;
+					margin: 0;
+					width: auto;
+					height: auto;
+					float: left;
+					
+					tr {
+						background: none;
+						padding: 0;
+						margin: 0;
+						
+						td {
+							padding: 0;
+						}
+					}
+				}
+			}
+			.mmc__content {
+				width: 100%;
+				padding: 0;
+				display: block;
+				
+				.mmc__contentIntro {
+					border-bottom: 1px dotted black;
+					padding: 0 0 0.5em;
+					margin: 0 0 1em;
+					
+					.mmc__contentTitle {
+						font-family: 'VELUXGothicRegItalic', Arial, sans-serif;
+					}
+					.mmc__contentSubTitle {
+						display: none;
+					}
+				}
+				.mmc__sampleNameplate {
+					display: none;
+				}
+				.mmc__options {
+					width: 100%;
+				
+					.mmc__selectBoxes {
+						.mmc__select {
+							float: none;
+							width: auto;
+							margin: 0 0 1em;
+							
+							label {
+								padding: 0;
+							}
+							select {
+								display: block !important;
+								height: 2em;
+								width: 100%;
+								padding: 0;
+							}
+							.chosen-container {
+								display: none;
+								
+								.chosen-single {
+									background: none;
+									height: 2em;
+									line-height: 2em;
+									border: 1px solid #a9a9a9;
+									
+									div {
+										background-image: url(../images/icon-chevron-bottom.png);
+									}
+								}
+							}
+						}
+						.mmc__selectPlus {
+							display: none;
+						}
+					}
+					.mmc__button {
+						background: none;
+						margin: 0;
+						padding: 0;
+						float: none;
+						height: auto;
+						
+						.mmc__buttonIcon {
+							display: none;
+						}
+						a {
+							background: none;
+							color: #ff0000;
+							width: auto;
+							height: auto;
+							margin: 0;
+							padding: 0;
+							white-space: normal;
+							
+							&:hover {
+								color: #333;
+							}
+						}
+					}
+					.configurator-tip {
+						background-color: #aacae3;
+					}
+					.mmc__option {
+						background: none;
+						
+						.mmc__icon {
+							display: none;
+						}
+						label {
+							background: none;
+							margin: 0;
+							padding: 0 2em 1em 1.5em;
+							height: auto;
+							
+							input {
+								top: 4px;
+								left: 0;
+								
+								&.mmc__dummyRadio {
+									display: none;
+								}
+							}
+							table {
+								tr, td {
+									background: none;
+									padding: 0;
+								}
+							}
+						}
+						
+						&.mmc__active {
+						
+							&:before {
+								content: '';
+								background-image: url(images/veluxshop-sprite-default.png);
+								background-position: -584px -124px;
+								position: absolute;
+								width: 23px;
+								height: 23px;
+								top: 0;
+								right: 0;
+							}
+							label {
+								color: #333;
+								
+								input {
+									display: none;
+									
+									&.mmc__dummyRadio {
+										display: block;
+									}
+								}
+							}
+						}
+						&.mmc__colour {
+							height: auto;
+							font-size: 0;
+							line-height: 0;
+							cursor: pointer;
+						}
+					}
+				}
+				.mmc__buttonBar {
+					display: none;
+				}
+				.mmc__userMessage {
+					background: none;
+					background-color: #aacae3;
+					border: 0;
+					border-radius: 0;
+					box-shadow: none;
+					margin: 0 0 2em;
+					
+					.mmc__userMessageDescription {
+						padding: 1em;
+						
+						.mmc__userMessageText {
+							text-shadow: none;
+							color: #333;
+						}
+					}
+				}
+			}
+			&.mmc__window {
+				
+			}
+			&.mmc__category {
+				display: none;
+			}
+			&.mmc__operation {
+				.mmc__options {
+					.mmc__option {
+						width: auto;
+						height: auto;
+						float: none;
+						margin: 0;
+						
+						.mmc__icon {
+							display: none;
+						}
+						label {
+							margin: 0;
+							padding: 0 0 1em 1.5em;
+							height: auto;
+							
+							input {
+								top: 4px;
+								left: 0;
+							}
+							table {
+								tr, td {
+									padding: 0;
+								}
+							}
+						}
+					}
+				}
+			}
+			&.mmc__insectnet {
+				
+			}
+			&.mmc__outersurface {
+				
+			}
+			&.mmc__colour {
+				
+				.mmc__options {
+					.mmc__option {
+					
+						&.mmc__active {
+						
+							&:before {
+								content: '';
+								background-image: url(images/veluxshop-sprite-default.png);
+								background-position: -584px -124px;
+								position: absolute;
+								width: 23px;
+								height: 23px;
+								left: 50%;
+								top: 50%;
+								margin-top: -12px;
+								margin-left: -11px;
+							}
+						}
+						label {
+							input {
+								top: -10000px;
+							}
+						}
+					}
+				}
+			}
+			&.mmc__variant {
+				
+			}
+			&.mmc__complete {
+				display: none;
+				margin-left: 0;
+				
+				&.mmc__show {
+					display: block;
+					clear: left;
+					margin-top: 3em;
+					
+					.mmc__content {
+					
+						.mmc__products {
+							width: 100%;
+							padding: 0;
+						
+							.mmc__product {
+								width: 100%;
+								position: relative;
+								margin: 1em 0;
+								box-sizing: border-box;
+								
+								.mmc__productImage {
+									text-align: center;
+									margin: 0 0 1em;
+								}
+								.mmc__productDetails {
+									padding: 0 0 1em;
+								
+									.mmc__productDetailsName {
+										font-size: 4/3em;
+									}
+									.mmc__productDetailsTitle {
+										font-family: 'VELUXGothicRegItalic', Arial, sans-serif;
+									}
+								}
+								.mmc__productRow {
+									display: table;
+									border: 0;
+									width: 100%;
+									padding: 0;
+									
+									* {
+										color: #333;
+									}
+								
+									.mmc__type, .mmc__value {
+										display: table-cell;
+										width: 50%;
+									}
+									.mmc__icon, .mmc__edit {
+										display: none;
+									}
+									
+									&.mmc__price {
+										margin: 2em 0 0;
+										font-family: 'VELUXGothicRegItalic', Arial, sans-serif;
+										text-align: right;
+									
+										.mmc__label {
+											display: block;
+										}
+										.mmc__amount {
+											display: block;
+											font-size: 1.6em;
+											margin: 0 0 0 10px;
+											
+											.mmc__currency {
+												padding: 0;
+											}
+										}
+									}
+								}
+							}
+						}
+					
+						.mmc__contentIntro {
+							.mmc__contentTitle {
+								display: none;
+							}
+							.mmc__contentSubTitle {
+								display: block;
+								font-size: 26/15em;
+							}
+						}
+					}
+				}
+			}
+		}
+		#mmc__AddToBasket {
+		
+			.mmc__buttonBar {
+				display: block;
+				
+				.mmc__button {
+					background: none;
+					height: auto;
+					margin-left: 0;
+					
+					a, button, input[type="button"] {
+						background: none;
+						height: auto;
+						margin: 0;
+					}
+					.mmc__buttonIcon {
+						display: none;
+					}
+				}
+				.mmc__shareButtons {
+					position: static;
+				}
+			}
+		}
+	}
+	
+	#mmc__Selection {
+		display: none;
+	}
+}
+
+
+
+/*  ================================================================================================================
+/   Shadowbox
+/   ============================================================================================================= */
+#sb-container {
+	font-size: 14/16em;
+	line-height: 22/14em;
+
+	#sb-overlay {
+	}
+	#sb-wrapper {
+		
+		#sb-wrapper-inner {
+			border-radius: 0;
+			box-shadow: none;
+			background-color: #fff;
+			
+			#sb-body {
+				background: none;
+				
+				.mmc__infoPopup {
+					background: none;
+					border-radius: 0;
+					padding: 2em;
+					border: 0;
+					width: auto;
+					
+					.mmc__closePopup {
+						background: none;
+						background-color: #f00;
+						position: absolute;
+						top: -10px;
+						right: -60px;
+						width: auto;
+						height: auto;
+						border-radius: 0;
+						padding: 8px 15px 11px;
+						color: #fff;
+						text-shadow: none;
+						font-family: 'VELUXGothicBold', Arial, sans-serif;
+						
+						&:before {
+							content: 'x';
+						}
+						.mmc__text {
+							font-size: 0;
+							line-height: 0;
+							width: 100%;
+							height: 100%;
+							position: absolute;
+							background: transparent;
+							top: 0;
+							left: 0;
+						}
+					}
+					.mmc__stepLine {
+						display: none;
+					}
+					.mmc__step {
+						
+						.mmc__stepIcon tr td {
+							background: none;
+							background-color: #fff;
+							color: #333;
+							font-style: normal;
+							font-family: 'VELUXGothicBold', Arial, sans-serif;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 767px) {
+	#mmc__Configurator {
+		[class*="grid"] {
+			float: none;
+			width: 100% !important;
+			display: inline-block;
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+}
+
+@media screen and (min-width: 768px) {
+	#mmc__Configurator {
+		#mmc__Options {
+			.mmc__configStep {
+				&.mmc__complete {
+					margin-left: 10px;
+					
+					&.mmc__next {
+						.mmc__content {
+							.mmc__products {
+								.mmc__product {
+									padding: 0 0 0 220px;
+								
+									.mmc__productImage {
+										position: absolute;
+										top: 0;
+										left: 0;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

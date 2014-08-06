@@ -101,13 +101,13 @@ jQuery.noConflict();
 						windowtype: function () { return mmc.vm.config.product1.windowtype(); },
 						/* If triggered by windowtype, don't return windowsize */
 						windowsize: function () { return (mmc.trigger.type == 'windowtype') ? '' : mmc.vm.config.product1.windowsize(); },
-						category: function () { return (mmc.isBasket()) ? mmc.vm.config.product1.categoryText() : (!mmc.vm.config.product1.windowtype() || !mmc.vm.config.product1.windowsize()) ? '' : (mmc.vm.controls.showCombination()) ? mmc.vm.config.product1.category() + mmc.vm.config.product1.category().match(/[A-Z][a-z]+/g)[0] : mmc.vm.config.product1.category(); },
-						operation: function () { return (mmc.isBasket()) ? mmc.vm.config.product1.operationText() : mmc.vm.config.product1.operation(); },
-						finishtype: function () { return (mmc.isBasket()) ? mmc.vm.config.product1.finishtypeText() : mmc.vm.config.product1.finishtype(); },
-						colour: function () { return (mmc.isBasket()) ? mmc.vm.config.product1.colourText() : mmc.vm.config.product1.colour(); },
-						outersurface: function () { return (mmc.isBasket()) ? mmc.vm.config.product1.outersurfaceText() : mmc.vm.config.product1.outersurface(); },
-						openingwidth: function () { return (mmc.isBasket()) ? mmc.vm.config.product1.insectWidthText() : mmc.vm.config.product1.insectWidth(); },
-						openingheight: function () { return (mmc.isBasket()) ? mmc.vm.config.product1.insectHeightText() : mmc.vm.config.product1.insectHeight(); },
+						category: function () { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product1.categoryText()) : (!mmc.vm.config.product1.windowtype() || !mmc.vm.config.product1.windowsize()) ? '' : (mmc.vm.controls.showCombination()) ? mmc.vm.config.product1.category() + mmc.vm.config.product1.category().match(/[A-Z][a-z]+/g)[0] : mmc.vm.config.product1.category(); },
+						operation: function () { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product1.operationText()) : mmc.vm.config.product1.operation(); },
+						finishtype: function () { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product1.finishtypeText()) : mmc.vm.config.product1.finishtype(); },
+						colour: function () { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product1.colourText()) : mmc.vm.config.product1.colour(); },
+						outersurface: function () { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product1.outersurfaceText()) : mmc.vm.config.product1.outersurface(); },
+						openingwidth: function () { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product1.insectWidthText()) : mmc.vm.config.product1.insectWidth(); },
+						openingheight: function () { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product1.insectHeightText()) : mmc.vm.config.product1.insectHeight(); },
 						productid: function () { if (mmc.isBasket()) return mmc.vm.config.product1.serviceProductID(); },
 						categorynodeid: function () { if (mmc.isBasket() && mmc.vm.controls.showCombination()) return mmc.vm.config.product1.category(); },
 						// serviceproductid: function () { if (mmc.isBasket()) return mmc.vm.config.product1.serviceProductID(); },
@@ -118,13 +118,13 @@ jQuery.noConflict();
 						windowtype: function () { return mmc.vm.config.product2.windowtype(); },
 						/* If triggered by windowtype, don't return windowsize */
 						windowsize: function () { return (mmc.trigger.type == 'windowtype') ? '' : mmc.vm.config.product2.windowsize(); },
-						category: function () { return (mmc.isBasket()) ? mmc.vm.config.product2.categoryText() : (!mmc.vm.config.product2.windowtype() || !mmc.vm.config.product2.windowsize()) ? '' : (mmc.vm.controls.showCombination()) ? mmc.vm.config.product2.category() + mmc.vm.config.product2.category().match(/[A-Z][a-z]+/g)[1] : mmc.vm.config.product2.category(); },
-						operation: function () { return (mmc.isBasket()) ? mmc.vm.config.product2.operationText() : mmc.vm.config.product2.operation(); },
-						finishtype: function () { return (mmc.isBasket()) ? mmc.vm.config.product2.finishtypeText() : mmc.vm.config.product2.finishtype(); },
-						colour: function () { return (mmc.isBasket()) ? mmc.vm.config.product2.colourText() : mmc.vm.config.product2.colour(); },
-						outersurface: function () { return (mmc.isBasket()) ? mmc.vm.config.product2.outersurfaceText() : mmc.vm.config.product2.outersurface(); },
-						openingwidth: function () { return (mmc.isBasket()) ? mmc.vm.config.product1.insectWidthText() : mmc.vm.config.product2.insectWidth(); },
-						openingheight: function () { return (mmc.isBasket()) ? mmc.vm.config.product2.insectHeightText() : mmc.vm.config.product2.insectHeight(); },
+						category: function () { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product2.categoryText()) : (!mmc.vm.config.product2.windowtype() || !mmc.vm.config.product2.windowsize()) ? '' : (mmc.vm.controls.showCombination()) ? mmc.vm.config.product2.category() + mmc.vm.config.product2.category().match(/[A-Z][a-z]+/g)[1] : mmc.vm.config.product2.category(); },
+						operation: function () { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product2.operationText()) : mmc.vm.config.product2.operation(); },
+						finishtype: function () { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product2.finishtypeText()) : mmc.vm.config.product2.finishtype(); },
+						colour: function () { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product2.colourText()) : mmc.vm.config.product2.colour(); },
+						outersurface: function () { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product2.outersurfaceText()) : mmc.vm.config.product2.outersurface(); },
+						openingwidth: function () { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product1.insectWidthText()) : mmc.vm.config.product2.insectWidth(); },
+						openingheight: function () { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product2.insectHeightText()) : mmc.vm.config.product2.insectHeight(); },
 						productid: function () { if (mmc.isBasket()) return mmc.vm.config.product2.serviceProductID(); },
 						categorynodeid: function () { if (mmc.isBasket() && mmc.vm.controls.showCombination()) return mmc.vm.config.product2.category(); },
 						// serviceproductid: function () { if (mmc.isBasket()) return mmc.vm.config.product2.serviceProductID(); },
@@ -246,7 +246,7 @@ jQuery.noConflict();
 									requestName = (mmc.settings.basketType == 'veluxshop') ? 'product' + name : name;
 									
 								$.each(product, function (data, option) {
-									if (option()) {
+									if (option() && option() != 'undefined') {
 										requestData.push('"' + data + '":"' + option() + '"');
 									}
 								});
@@ -443,6 +443,9 @@ jQuery.noConflict();
 					jsonpCallback: 'jsonCallback',
 					type: "GET",
 					url: mmc.buildRequest(),
+					beforeSend: function(xhr) {
+						xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+					},
 					success: function(data) {
 						t4 = new Date();
 						
@@ -663,10 +666,10 @@ jQuery.noConflict();
 				HeightWidth: function (productIndex, options) {
 					var data = mmc.vm.data,
 						obsIndex = 0;
-						
+					
 					/* Skip this step when operation is set and update is triggered by a change */
 					if ((mmc.vm.config.product1.operation() != '' || mmc.trigger.type != 'category') && mmc.trigger.type) {
-						return;
+						// return;
 					}
 					
 					$.each(options, function (index, value) {
@@ -822,7 +825,7 @@ jQuery.noConflict();
 					
 					/* Add an extra check to see if the required steps are filled. If so, then trigger the updateConfigurator again */
 					if (mmc.dom.base.find('.mmc__configStep.mmc__required.mmc__filled:not(.mmc__complete)').length == mmc.dom.base.find('.mmc__configStep.mmc__required:not(.mmc__complete)').length) {
-						mmc.settings.doNotHide = true;
+						// mmc.settings.doNotHide = true;
 						mmc.update();
 					}
 					
@@ -911,8 +914,8 @@ jQuery.noConflict();
 					}
 					
 					/* Add an extra check to see if the required steps are filled. If so, then trigger the updateConfigurator again */
-					if (mmc.dom.base.find('.mmc__configStep.mmc__required.mmc__filled:not(.mmc__complete)').length == mmc.dom.base.find('.mmc__configStep.mmc__required:not(.mmc__complete)').length) {
-						mmc.settings.doNotHide = true;
+					if (mmc.dom.base.find('.mmc__configStep.mmc__required.mmc__filled:not(.mmc__complete)').length == mmc.dom.base.find('.mmc__configStep.mmc__required:not(.mmc__complete)').length && !mmc.dom.base.hasClass('mmc__loading')) {
+						// mmc.settings.doNotHide = true;
 						mmc.update();
 					}
 				},
@@ -1210,12 +1213,13 @@ jQuery.noConflict();
 		};
 		/* End MassMarketConfigurator object */
 		
-		/* Immediately after creating the MMC object, overwrite the MMC settings with the general settings, then clear the global var */
+		/* Set all the general settings before creating the view models, to allow customising the configurator when loading */
 		try {
 			$.each(generalSettings, function (index, value) {
-				mmc.settings[index] = value;
+				if (typeof value != 'object') {
+					mmc.settings[index] = value;
+				}
 			});
-			delete generalSettings;
 		} catch (error) {
 		}
 		
@@ -1257,6 +1261,7 @@ jQuery.noConflict();
 			self.showDealerButton = ko.observable(mmc.settings.showDealerButton);
 			self.showPrintButton = ko.observable(mmc.settings.showPrintButton);
 			self.showMailButton = ko.observable(mmc.settings.showMailButton);
+			self.showCategoryStep = ko.observable(mmc.settings.showCategoryStep);
 			
 			/* Catch updateConfigurator */
 			self.updateConfigurator = function (data, event) {
@@ -1466,6 +1471,21 @@ jQuery.noConflict();
 		}
 		ko.applyBindings(mmc.vm);
 		
+		/* Before initialising the configurator, check if there are pre configuration settings. Use these to override the view models. Delete the generalSettings var afterwards */
+		try {
+			$.each(generalSettings, function (index, value) {
+				if (typeof value === 'object') {
+					if (index === 'preConfig') {
+						$.each(value, function (configIndex, configValue) {
+							mmc.vm.config.product1[configIndex.toLowerCase()](configValue);
+						});
+					}
+				}
+			});
+			delete generalSettings;
+		} catch (error) {
+		}
+		
 		/* Initiate the Configurator on page load */
 		mmc.init();
 		
@@ -1542,7 +1562,7 @@ jQuery.noConflict();
 			},
 			mouseover: function (event) {
 				/* Break this function when: Hovering over the active tooltip, option is finishtype */
-				if ($(event.target).closest('.mmc__tooltip').length > 0 || $(event.target).closest('.mmc__option').hasClass('mmc__finishtype')) {
+				if ($(event.target).closest('.mmc__tooltip').length > 0 || $(event.target).closest('.mmc__option').hasClass('mmc__finishtype') || $(event.target).closest('.mmc__option').hasClass('mmc__disableTooltip')) {
 					return;
 				}
 			
