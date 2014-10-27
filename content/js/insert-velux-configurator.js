@@ -38,7 +38,10 @@ function loadConfigurator(obj) {
 	obj.basketType = (obj.basketType === undefined) ? 'veluxshop' : obj.basketType;
 	
 	/* Settings to show or hide certain steps */
+	obj.showWindowStep = (obj.showWindowStep === undefined) ? true : obj.showWindowStep;
 	obj.showCategoryStep = (obj.showCategoryStep === undefined) ? true : obj.showCategoryStep;
+	obj.showExtraQuestion = (obj.showExtraQuestion === undefined) ? true : obj.showExtraQuestion;
+	obj.showOnlyFlatroof = (obj.showOnlyFlatroof === undefined) ? false : obj.showOnlyFlatroof;
 	
 	/* Set the environment properly depending on the value */
 	obj.environment = (obj.environment === undefined) ? '//configurator.veluxshop.com/' : obj.environment;
@@ -57,7 +60,7 @@ function loadConfigurator(obj) {
 	
 	obj.min = (obj.min === undefined) ? true : obj.min;
 	obj.disableRules = (obj.disableRules === undefined) ? false : obj.disableRules;
-	obj.formMethod = (obj.formMethod === undefined) ? 'POST' : obj.formMethod;
+	obj.formMethod = (obj.formMethod === undefined) ? 'GET' : obj.formMethod;
 	obj.returnFunc = (obj.returnFunc === undefined) ? null : obj.returnFunc;
 	
 	obj.loadingTitle = (obj.loadingTitle === undefined) ? '' : obj.loadingTitle;
@@ -189,29 +192,29 @@ function loadConfigurator(obj) {
 				$(obj.target).prepend(obj.loading);
 			}
 			
-			if (navigator.userAgent.match(/MSIE/gi) && window.XDomainRequest) {
-				// Use Microsoft XDR
-				var xdr = new XDomainRequest();
-				xdr.open("POST", requestURL + requestData + preConfig);
-				
-				xdr.onload = function () {
+			var url = requestURL + requestData + preConfig;
+			if(XMLHttpRequest) {
+				var request = new XMLHttpRequest();
+				if("withCredentials" in request) {
+					// Firefox 3.5 and Safari 4
+					request.open('GET', url, true);
+					request.onloadend = function () {
+						processData(request.response);
+					};
+					request.send();
+				}
+				else if (XDomainRequest) {
+					// IE8
+					var xdr = new XDomainRequest();
+					xdr.open("get", url);
+					xdr.send();
+
+					// handle XDR responses -- not shown here :-)
 					processData(xdr.responseText);
-				};
-				
-				xdr.send();
-			} else {
-		
-				$.ajax({
-					dataType: 'html',
-					type: "POST",
-					url: requestURL + requestData + preConfig,
-					beforeSend: function(xhr) {
-						xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-					},
-					success: function (data) {
-						processData(data);
-					}
-				});
+				}
+
+				// This version of XHR does not support CORS  
+				// Handle accordingly
 			}
 			
 			function processData(data) {

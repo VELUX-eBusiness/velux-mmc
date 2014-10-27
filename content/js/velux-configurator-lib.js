@@ -676,9 +676,6 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
 			type: "GET",
 			url: mmc.buildRequest(),
 			data: bodyObj,
-			beforeSend: function(xhr) {
-				xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-			},
 			success: function(data) {
 				status.addClass('mmc__success').removeClass('mmc__sending');
 			}, error: function (err) {

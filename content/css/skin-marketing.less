@@ -15,6 +15,16 @@
 	font-weight: inherit;
 }
 
+.font-white #mmc__Configurator #mmc__LoadingConfigurator *,
+.font-white #mmc__Configurator .mmc__titleBar *,
+.font-white #mmc__Configurator .mmc__contentIntro,
+.font-white #mmc__Configurator #mmc__Options label,
+.font-white #mmc__Configurator #mmc__Options .mmc__product *,
+.font-white #mmc__Configurator .mmc__button a:hover {
+	color: #fff !important;
+	border-color: #fff !important;
+}
+
 #mmc__Configurator {
 	
 	.mmc__active{
@@ -33,6 +43,11 @@
 	
 	#mmc__LoadingConfigurator {
 		font-size: 2em;
+		text-shadow: none;
+		
+		.mmc__loadingIcon {
+			background-image: url(images/marketing-configurator-loading.gif);
+		}
 	}
 	#mmc__Options {
 		width: 100%;
@@ -431,6 +446,20 @@
 	
 	#mmc__Selection {
 		display: none;
+	}
+	
+	.mmc__infotip .mmc__infotipMessage {
+		text-shadow: none;
+		line-height: 30px;
+	}
+	
+	.mmc__updating .mmc__infoBlock.mmc__updateBlock .mmc__updatingIcon
+	{
+		background-image: url(../images/ajax-loader-marketing.gif);
+	}
+	
+	.mmc__addToCart.mmc__checkbox label {
+		text-shadow: none;
 	}
 }
 

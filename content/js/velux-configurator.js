@@ -443,9 +443,6 @@ jQuery.noConflict();
 					jsonpCallback: 'jsonCallback',
 					type: "GET",
 					url: mmc.buildRequest(),
-					beforeSend: function(xhr) {
-						xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-					},
 					success: function(data) {
 						t4 = new Date();
 						
@@ -540,7 +537,9 @@ jQuery.noConflict();
 						
 						/* Loop through all the values and update the Observable */
 						$.each(options, function (name, id) {
-							product.windowtype()[++obsIndex] = {'val': id.WindowID, 'name': id.WindowID};
+							if (mmc.vm.controls.showOnlyFlatroof() === true && $.inArray(id.WindowID, ['CVP','CFP']) != -1 || mmc.vm.controls.showOnlyFlatroof() === false) {
+								product.windowtype()[++obsIndex] = {'val': id.WindowID, 'name': id.WindowID};
+							}
 						});
 						
 						/* Update the observable when array has been built */
@@ -616,7 +615,7 @@ jQuery.noConflict();
 					
 					$.each(options, function (cat, option) {
 					
-						if ($.inArray(option.CategoryName, ['BLINDS','FLATROOF','COMBINATION']) != -1) {
+						if ($.inArray(option.CategoryName, ['BLINDS','FLATROOFBLINDS','COMBINATION']) != -1) {
 						
 							/* Loop through each of the category types */
 							$.each(option.ChildCategories, function (value, category) {
@@ -1261,7 +1260,12 @@ jQuery.noConflict();
 			self.showDealerButton = ko.observable(mmc.settings.showDealerButton);
 			self.showPrintButton = ko.observable(mmc.settings.showPrintButton);
 			self.showMailButton = ko.observable(mmc.settings.showMailButton);
+			
+			/* Observables to show/hide certain steps, controllable by the settings */
+			self.showWindowStep = ko.observable(mmc.settings.showWindowStep);
 			self.showCategoryStep = ko.observable(mmc.settings.showCategoryStep);
+			self.showExtraQuestion = ko.observable(mmc.settings.showExtraQuestion);
+			self.showOnlyFlatroof = ko.observable(mmc.settings.showOnlyFlatroof);
 			
 			/* Catch updateConfigurator */
 			self.updateConfigurator = function (data, event) {
