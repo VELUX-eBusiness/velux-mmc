@@ -1,7 +1,5 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
-
-
 .mmc__button,
 .mmc__button a,
 .mmc__button button,
@@ -30,85 +28,57 @@
 .mmc__illustrationZoom div.mmc__close div.mmc__border,
 .mmc__select .chosen-single div,
 .mmc__select .chosen-with-drop .chosen-single div,
-.mmc__windowTypeSize .mmc__steps .mmc__step .mmc__stepIcon
-{
-	background-image: url(images/veluxshop-sprite-default.png);
+.mmc__windowTypeSize .mmc__steps .mmc__step .mmc__stepIcon {
+  background-image: url(images/veluxshop-sprite-default.png);
 }
-
-
-#mmc__Configurator
-{
-	font-family: Arial, sans-serif;
-	color: #333;
+#mmc__Configurator {
+  font-family: Arial, sans-serif;
+  color: #333;
 }
-
-
-#mmc__LoadingConfigurator p
-{
-	font-family: Tahoma, Verdana, sans-serif;
+#mmc__LoadingConfigurator p {
+  font-family: Tahoma, Verdana, sans-serif;
 }
-	#mmc__LoadingConfigurator .mmc__loadingTitle
-	{
-		color: #464549;
-	}
-	#mmc__LoadingConfigurator .mmc__loadingSubTitle
-	{
-		color: #ff0000;
-	}
-	
-	
-.mmc__titleBar table.mmc__stepIndex
-{
-	font-family: Arial, sans-serif;
-	color: #fff;
-}	
-.mmc__titleBar .mmc__stepName
-{
-	color: #ababab;
+#mmc__LoadingConfigurator .mmc__loadingTitle {
+  color: #464549;
 }
-.mmc__filled .mmc__titleBar .mmc__stepName
-{
-	color: #ff0000;
-}	
-	.mmc__titleBar .mmc__stepEdit a
-	{
-		color: #f00;
-	}		
-	.mmc__filled .mmc__titleBar:hover .mmc__stepEdit a,
-	.mmc__titleBar .mmc__stepEdit a:hover
-	{
-		color: #ff0000;
-	}
-
-	
-.mmc__infotip
-{
-	font-family: Verdana, sans-serif;
-	color: #fff;
+#mmc__LoadingConfigurator .mmc__loadingSubTitle {
+  color: #ff0000;
 }
-
-
-.mmc__illustrationZoom div.mmc__close
-{
-	font-family: Arial, sans-serif;
-	color: #fff;
+.mmc__titleBar table.mmc__stepIndex {
+  font-family: Arial, sans-serif;
+  color: #fff;
 }
-
-
-#sb-container
-{
-	font-family: Arial, sans-serif;
-	color: #333;
+.mmc__titleBar .mmc__stepName {
+  color: #ababab;
 }
-
-
+.mmc__filled .mmc__titleBar .mmc__stepName {
+  color: #ff0000;
+}
+.mmc__titleBar .mmc__stepEdit a {
+  color: #f00;
+}
+.mmc__filled .mmc__titleBar:hover .mmc__stepEdit a,
+.mmc__titleBar .mmc__stepEdit a:hover {
+  color: #ff0000;
+}
+.mmc__infotip {
+  font-family: Verdana, sans-serif;
+  color: #fff;
+}
+.mmc__illustrationZoom div.mmc__close {
+  font-family: Arial, sans-serif;
+  color: #fff;
+}
+#sb-container {
+  font-family: Arial, sans-serif;
+  color: #333;
+}
 .mmc__button a,
 .mmc__button button,
 .mmc__button input[type="button"],
-.mmc__button label
-{
-	color: #404040;
-}	
+.mmc__button label {
+  color: #404040;
+}
 .mmc__button.mmc__small:hover a,
 .mmc__button.mmc__small:hover button,
 .mmc__button.mmc__small:hover input[type="button"],
@@ -120,143 +90,92 @@
 .mmc__button.mmc__small.mmc__blue:hover a,
 .mmc__button.mmc__small.mmc__blue:hover button,
 .mmc__button.mmc__small.mmc__blue:hover input[type="button"],
-.mmc__button.mmc__small.mmc__blue:hover label
-{
-	color: #ffffff;
+.mmc__button.mmc__small.mmc__blue:hover label {
+  color: #ffffff;
 }
-
-
-.mmc__option.mmc__active label
-{
-	color: #fff;
+.mmc__option.mmc__active label {
+  color: #fff;
 }
-.mmc__option.mmc__inactive label
-{
-	color: #9b9b9b;
-}	
-		.mmc__option.mmc__finishtype label .mmc__tooltipDescription .mmc__tooltipTitle
-		{
-			color: #ff0000;
-		}
-		.mmc__option.mmc__finishtype.mmc__inactive label .mmc__tooltipDescription .mmc__tooltipTitle,
-		.mmc__option.mmc__outersurface.mmc__inactive label .mmc__tooltipDescription .mmc__tooltipTitle
-		{
-			color: #ff7f7f;
-		}		
-	.mmc__option .mmc__tooltip .mmc__tooltipDescription .mmc__tooltipTitle
-	{
-		color: #ff0000;
-	}
-	.mmc__insectNetTypes .mmc__option .mmc__imageLabel
-	{
-		color: #333333;
-	}
-
-
-.mmc__userMessage .mmc__userMessageDescription
-{
-	color: #666666;
+.mmc__option.mmc__inactive label {
+  color: #9b9b9b;
+}
+.mmc__option.mmc__finishtype label .mmc__tooltipDescription .mmc__tooltipTitle {
+  color: #ff0000;
+}
+.mmc__option.mmc__finishtype.mmc__inactive label .mmc__tooltipDescription .mmc__tooltipTitle,
+.mmc__option.mmc__outersurface.mmc__inactive label .mmc__tooltipDescription .mmc__tooltipTitle {
+  color: #ff7f7f;
+}
+.mmc__option .mmc__tooltip .mmc__tooltipDescription .mmc__tooltipTitle {
+  color: #ff0000;
+}
+.mmc__insectNetTypes .mmc__option .mmc__imageLabel {
+  color: #333333;
+}
+.mmc__userMessage .mmc__userMessageDescription {
+  color: #666666;
 }
 .mmc__userMessage.mmc__error .mmc__userMessageDescription,
 .mmc__userMessage.mmc__note .mmc__userMessageDescription,
-.mmc__userMessage.mmc__check .mmc__userMessageDescription
-{
-	color: #ffffff;
-}	
-	.mmc__userMessage .mmc__userMessageDescription a
-	{
-		color: #666666;
-	}
-	.mmc__userMessage.mmc__error .mmc__userMessageDescription a,
-	.mmc__userMessage.mmc__note .mmc__userMessageDescription a,
-	.mmc__userMessage.mmc__check .mmc__userMessageDescription a
-	{
-		color: #ffffff;
-	}		
-	.mmc__userMessage .mmc__userMessageClose span
-	{
-		color: #777777;
-	}
-	.mmc__userMessage.mmc__error .mmc__userMessageClose span,
-	.mmc__userMessage.mmc__note .mmc__userMessageClose span,
-	.mmc__userMessage.mmc__check .mmc__userMessageClose span
-	{
-		color: #ffffff;
-	}
-
-
-
-.mmc__codeCheck label input
-{
-	color: #7f7f7f;
+.mmc__userMessage.mmc__check .mmc__userMessageDescription {
+  color: #ffffff;
 }
-
-
-.mmc__configStep.mmc__complete .mmc__contentIntro .mmc__contentTitle
-{
-	color: #ff0000;
+.mmc__userMessage .mmc__userMessageDescription a {
+  color: #666666;
 }
-
-	
-.mmc__product .mmc__productRow.mmc__title
-{
-	color: #000000;
-}		
-	.mmc__product .mmc__productRow.mmc__selection span.mmc__type
-	{
-		color: #ff0000;
-	}			
-		.mmc__product .mmc__productRow.mmc__selection span.mmc__edit a:hover
-		{
-			color: #ff0000;
-		}
-.mmc__product .mmc__productRow.mmc__price
-{
-	color: #000000;
-}		
-	.mmc__product .mmc__productRow.mmc__price div.mmc__label
-	{
-		color: #ff0000;
-	}			
-.mmc__product .mmc__productRow.mmc__campaignText
-{
-	color: #ff0000;
-}		
-.mmc__product.mmc__addon .mmc__productInfo .mmc__productDesc
-{
-	color: #333333;
+.mmc__userMessage.mmc__error .mmc__userMessageDescription a,
+.mmc__userMessage.mmc__note .mmc__userMessageDescription a,
+.mmc__userMessage.mmc__check .mmc__userMessageDescription a {
+  color: #ffffff;
 }
-
-
-.mmc__addToCart.mmc__checkbox label
-{
-	color: #333333;
+.mmc__userMessage .mmc__userMessageClose span {
+  color: #777777;
 }
-
-
-.mmc__illustrationZoom div.mmc__close:hover
-{
-	color: #ff0000;
+.mmc__userMessage.mmc__error .mmc__userMessageClose span,
+.mmc__userMessage.mmc__note .mmc__userMessageClose span,
+.mmc__userMessage.mmc__check .mmc__userMessageClose span {
+  color: #ffffff;
 }
-
-
-.mmc__infoPopup .mmc__closePopup
-{
-	color: #797979;
-}	
-	.mmc__infoPopup .mmc__closePopup span.mmc__text:hover
-	{
-		color: #ff0000;
-	}
-	
-
-#sb-loading-inner span
-{
-	color: #333333;
+.mmc__codeCheck label input {
+  color: #7f7f7f;
 }
-
-
-.mmc__windowTypeSize .mmc__steps .mmc__step .mmc__stepIcon
-{
-	
+.mmc__configStep.mmc__complete .mmc__contentIntro .mmc__contentTitle {
+  color: #ff0000;
 }
+.mmc__product .mmc__productRow.mmc__title {
+  color: #000000;
+}
+.mmc__product .mmc__productRow.mmc__selection span.mmc__type {
+  color: #ff0000;
+}
+.mmc__product .mmc__productRow.mmc__selection span.mmc__edit a:hover {
+  color: #ff0000;
+}
+.mmc__product .mmc__productRow.mmc__price {
+  color: #000000;
+}
+.mmc__product .mmc__productRow.mmc__price div.mmc__label {
+  color: #ff0000;
+}
+.mmc__product .mmc__productRow.mmc__campaignText {
+  color: #ff0000;
+}
+.mmc__product.mmc__addon .mmc__productInfo .mmc__productDesc {
+  color: #333333;
+}
+.mmc__addToCart.mmc__checkbox label {
+  color: #333333;
+}
+.mmc__illustrationZoom div.mmc__close:hover {
+  color: #ff0000;
+}
+.mmc__infoPopup .mmc__closePopup {
+  color: #797979;
+}
+.mmc__infoPopup .mmc__closePopup span.mmc__text:hover {
+  color: #ff0000;
+}
+#sb-loading-inner span {
+  color: #333333;
+}
+/*# sourceMappingURL=skin-veluxshop.css.map */

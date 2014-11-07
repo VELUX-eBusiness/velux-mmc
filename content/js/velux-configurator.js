@@ -628,17 +628,28 @@ jQuery.noConflict();
 							
 									/* Loop through each of the child categories */
 									$.each(category, function (index, child) {
-									
 										/* If either window type IS flatroof and category IS flatroof or window type IS NOT flatroof and category IS NOT flatroof, add the category to the list */
 										if (($.inArray(mmc.vm.config.product1.windowtype(), mmc.settings.flatroofSizes) == -1 && !child.CategoryName.match(/flatroof/gi)) ||
 											($.inArray(mmc.vm.config.product1.windowtype(), mmc.settings.flatroofSizes) != -1 && child.CategoryName.match(/flatroof/gi))) {
 											
 											/* Only add the product type to the list when it's set to selling, or when categories order does not exist */
-											// if ($.inArray(child.CategoryName, mmc.settings.categoriesOrder) != -1 || mmc.settings.categoriesOrder != '') {
-												if (child.MatchFound || (!child.MatchFound && mmc.settings.showInactive) || child.CategoryName == 'InsectNet') {
-													product.category.push({val: child.CategoryName, name: child.Name, desc: child.Description, parent: option.CategoryName, inactive: (child.MatchFound || child.CategoryName == 'InsectNet') ? '' : 'inactive', order: mmc.settings.categoriesOrder.indexOf(child.CategoryName)});
-												}
-											// }
+										    // if ($.inArray(child.CategoryName, mmc.settings.categoriesOrder) != -1 || mmc.settings.categoriesOrder != '') {
+										    var wt = mmc.vm.config.product1.windowtype().trim();
+										    if ( child.MatchFound || (!child.MatchFound && mmc.settings.showInactive) || child.CategoryName == 'InsectNet') {
+
+										        if (wt != 'GDL' || option.CategoryName != 'COMBINATION') {
+										            product.category.push({
+										                val: child.CategoryName,
+										                name: child.Name,
+										                desc: child.Description,
+										                parent: option.CategoryName,
+										                inactive: (child.MatchFound || child.CategoryName == 'InsectNet') ? '' : 'inactive',
+										                order: mmc.settings.categoriesOrder.indexOf(child.CategoryName)
+										            });
+										        }
+
+										    }
+										    // }
 											
 										}
 									});
@@ -679,11 +690,26 @@ jQuery.noConflict();
 							mmc.settings.insect.sizes[value.Width][value.Height] = value.Height;
 						}
 					});
-					
-					$.each(mmc.settings.insect.sizes, function (index, width) {
-						data.product1.insectWidth()[obsIndex++] = {val: index, name: mmc.settings.insect.widthPreText + (mmc.settings.insect.widths[index] / mmc.settings.insect.measurement) + mmc.settings.insect.postText};
+
+
+					var widthKeys = [];
+					for (var n in mmc.settings.insect.sizes) {
+					    if (mmc.settings.insect.sizes.hasOwnProperty(n)) {
+					        widthKeys.push(n);
+					    }
+					}
+				    widthKeys.sort(function(a, b) {
+				        if (a < b) return -1;
+				        if (a > b) return 1;
+				        return 0;
+				    });
+
+				    $.each(widthKeys, function (index, width) {
+				        var k = widthKeys[index];
+				        data.product1.insectWidth()[obsIndex++]  = { val: k, name: mmc.settings.insect.widthPreText + (mmc.settings.insect.widths[k] / mmc.settings.insect.measurement) + mmc.settings.insect.postText };
 					});
-					
+
+
 					/* Update the observable when array has been built */
 					data.product1.insectWidth.valueHasMutated();
 					
@@ -886,12 +912,12 @@ jQuery.noConflict();
 									/* Create a check for BlackoutDisney colours, in case they show up in the Blackout category */
 									tempCategory = (id.ColorID > 4609 && id.ColorID < 4622) ? 'BlackoutDisney' : mmc.vm.config[productIndex].category().match(/[A-Z][a-z]+/g)[productIndex.charAt(productIndex.length - 1) - 1];
 									
-									data[productIndex].colour()[obsIndex++] = {cat: tempCategory, val: id.ColorID, name: id.ColorID, desc: id.ColorDescription, inactive: (id.IsValid) ? '' : 'inactive'};
+									data[productIndex].colour()[obsIndex++] = { cat: tempCategory, val: id.ColorID, name: id.ColorID + ' ' + id.ColorDescription, desc: '', inactive: (id.IsValid) ? '' : 'inactive' };
 								} else {
 									/* Create a check for BlackoutDisney colours, in case they show up in the Blackout category */
 									tempCategory = (id.ColorID > 4609 && id.ColorID < 4622) ? 'BlackoutDisney' : mmc.vm.config.product1.category();
 									
-									product.colour()[obsIndex++] = {cat: tempCategory, val: id.ColorID, name: id.ColorID, desc: id.Name, inactive: (id.IsValid) ? '' : 'inactive'};
+									product.colour()[obsIndex++] = { cat: tempCategory, val: id.ColorID, name: id.ColorID + ' ' + id.Name, desc: '', inactive: (id.IsValid) ? '' : 'inactive' };
 								}
 							}
 						});

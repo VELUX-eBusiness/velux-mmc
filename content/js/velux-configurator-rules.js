@@ -397,6 +397,8 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 			newMessage.appendTo($('#sb-container .mmc__infoPopup .mmc__codeCheck')).show();
 		} else if (mmc.dom.activeStep().hasClass('mmc__variant')) {
 			newMessage.prependTo(mmc.dom.activeStep().find('.mmc__content')).show();
+		} else if (rule.Addon) {
+			newMessage.insertAfter(mmc.dom.complete.find('.mmc__addon .mmc__title')).show();
 		} else {
 			newMessage.insertBefore(mmc.dom.complete.find('.mmc__products')).show();
 		}

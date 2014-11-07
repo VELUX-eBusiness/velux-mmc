@@ -270,7 +270,7 @@ function loadConfigurator(obj) {
 					if (obj.min == false) {
 						$.getScript(siteLocation + 'js/velux-configurator.js');
 					} else {
-						$.getScript(siteLocation + 'js/velux-configurator.min.js');
+						$.getScript(siteLocation + 'js/velux-configurator-bundle.min.js');
 					}
 				}
 

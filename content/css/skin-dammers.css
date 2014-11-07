@@ -1,7 +1,5 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
-
-
 #mmc__Options .mmc__configStep.mmc__active,
 .mmc__button,
 .mmc__button a,
@@ -32,85 +30,75 @@
 .mmc__select .chosen-single div,
 .mmc__select .chosen-with-drop .chosen-single div,
 .mmc__windowTypeSize .mmc__steps .mmc__step .mmc__stepIcon,
-.mmc__userMessage .mmc__userMessageIcon
-{
-	background-image: url(images/dammers-sprite.png);
+.mmc__userMessage .mmc__userMessageIcon {
+  background-image: url(images/dammers-sprite.png);
 }
-
 .mmc__product .mmc__productRow.mmc__selection span.mmc__type,
 .mmc__filled .mmc__titleBar .mmc__stepName,
 .mmc__titleBar .mmc__stepEdit a,
-.mmc__filled .mmc__titleBar:hover .mmc__stepEdit a, .mmc__titleBar .mmc__stepEdit a:hover,
+.mmc__filled .mmc__titleBar:hover .mmc__stepEdit a,
+.mmc__titleBar .mmc__stepEdit a:hover,
 .mmc__option .mmc__tooltip .mmc__tooltipDescription .mmc__tooltipTitle,
 .mmc__product .mmc__productRow.mmc__price div.mmc__label,
 .mmc__configStep.mmc__complete .mmc__contentIntro .mmc__contentTitle,
 .mmc__infoPopup .mmc__closePopup span.mmc__text:hover,
 #mmc__LoadingConfigurator .mmc__loadingSubTitle {
-	color: #eb891b;
+  color: #eb891b;
 }
 .mmc__contentIntro .mmc__contentTitle,
 .mmc__product .mmc__productRow.mmc__price {
-	color: #0d4c89
+  color: #0d4c89;
 }
-
 .mmc__windowTypeSize .mmc__steps .mmc__stepLine {
-	background-color: #eb891b;
+  background-color: #eb891b;
 }
 .mmc__windowTypeSize .mmc__steps .mmc__step .mmc__stepIcon tr td {
-	font-size: 1em;
+  font-size: 1em;
 }
-
 .mmc__insectNetTypes .mmc__option.mmc__active label img {
-	border-color: #eb891b;
+  border-color: #eb891b;
 }
-
 .mmc__option.mmc__active label table td {
-	color: #fff;
+  color: #fff;
 }
 .mmc__option.mmc__outersurface label table td {
-	color: #333;
+  color: #333;
 }
-
 .mmc__option .mmc__tooltip .mmc__tooltipDescription td {
-	font-size: 0.7em;
+  font-size: 0.7em;
 }
-
 .mmc__infotip {
-	text-shadow: none;
-	font-weight: bold;
+  text-shadow: none;
+  font-weight: bold;
 }
-
-.mmc__select .chosen-container .chosen-drop .chosen-results .highlighted
-{
-	background-color: #f39731;
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f39731', endColorstr='#eb891b', GradientType=0 );  
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(20%, #f39731), color-stop(90%, #eb891b));
-	background-image: -webkit-linear-gradient(top, #f39731 20%, #eb891b 90%);
-	background-image: -moz-linear-gradient(top, #f39731 20%, #eb891b 90%);
-	background-image: -o-linear-gradient(top, #f39731 20%, #eb891b 90%);
-	background-image: linear-gradient(#f39731 20%, #eb891b 90%);
+.mmc__select .chosen-container .chosen-drop .chosen-results .highlighted {
+  background-color: #f39731;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f39731', endColorstr='#eb891b', GradientType=0);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(20%, #f39731), color-stop(90%, #eb891b));
+  background-image: -webkit-linear-gradient(top, #f39731 20%, #eb891b 90%);
+  background-image: -moz-linear-gradient(top, #f39731 20%, #eb891b 90%);
+  background-image: -o-linear-gradient(top, #f39731 20%, #eb891b 90%);
+  background-image: linear-gradient(#f39731 20%, #eb891b 90%);
 }
-
 .mmc__userMessage {
-	background: none;
-	background-color: #7a7a7a;
-	box-shadow: none;
-	border: 0;
-	border-radius: 8px;
+  background: none;
+  background-color: #7a7a7a;
+  box-shadow: none;
+  border: 0;
+  border-radius: 8px;
 }
 .mmc__userMessage .mmc__userMessageDescription {
-	color: #fff;
-	text-shadow: none !important;
+  color: #fff;
+  text-shadow: none !important;
 }
 .mmc__userMessage .mmc__userMessageClose {
-	background: none;
+  background: none;
 }
 .mmc__userMessage .mmc__userMessageClose span {
-	color: #fff;
-	text-shadow: none;
+  color: #fff;
+  text-shadow: none;
 }
-
-#mmc__LoadingConfigurator .mmc__loadingIcon
-{
-	background-image: url(images/dammers-configurator-loading.gif);
+#mmc__LoadingConfigurator .mmc__loadingIcon {
+  background-image: url(images/dammers-configurator-loading.gif);
 }
+/*# sourceMappingURL=skin-dammers.css.map */

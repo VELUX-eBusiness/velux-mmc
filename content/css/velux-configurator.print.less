@@ -1,0 +1,317 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+#mmc__LoadingConfigurator,
+#mmc__Settings,
+#mmc__Blocks,
+#mmc__Selection .mmc__operators,
+#mmc__Selection .mmc__product,
+#sb-container,
+.mmc__configStep,
+.mmc__button,
+.mmc__product .mmc__productRow.mmc__option span,
+.mmc__product .mmc__addToCart.mmc__checkbox,
+.mmc__userMessageIcon
+{
+	display: none;
+}
+.mmc__configStep.mmc__complete
+{
+	display: block;
+}
+
+body
+{
+	font-family: Arial;
+	font-size: 12px;
+}
+*
+{
+	background-image: none !important;
+	background-color: transparent !important;
+}
+
+#mmc__Options
+{
+	clear: right;
+}
+#mmc__Selection
+{
+	clear: left;
+}
+.mmc__userMessage
+{
+	margin-top: 20px;
+}
+.mmc__product.mmc__addon
+{
+	clear: both;
+}
+
+
+
+/*  ================================================================================================================
+/   Configurator Complete
+/   ============================================================================================================= */
+.mmc__configStep.mmc__complete .mmc__completeIntro
+{
+}
+	.mmc__configStep.mmc__complete .mmc__contentIntro .mmc__contentTitle
+	{
+		color: #ff0000;
+		font-size: 160%;
+		line-height: 1.5em;
+	}
+	.mmc__configStep.mmc__complete .mmc__contentIntro .mmc__contentSubTitle
+	{
+		font-size: 220%;
+	}
+.mmc__products
+{
+	position: relative;
+	padding: 18px 0 0;
+	width: 646px;
+}
+.mmc__products.mmc__multiple
+{
+	padding: 18px 0 50px;
+}
+	.mmc__products .mmc__product
+	{
+		float: left;
+		width: 303px;
+		margin: 0 20px 25px 0;
+	}
+	.mmc__product.mmc__disabled .mmc__productRow,
+	.mmc__product.mmc__disabled .mmc__productImage,
+	.mmc__product.mmc__disabled .mmc__productName,
+	.mmc__product.mmc__disabled .mmc__productDesc
+	{
+		opacity: 0.3;
+		filter: alpha(opacity=30);
+	}
+	.mmc__products .mmc__product.mmc__even
+	{
+		margin-right: 0;
+	}
+		.mmc__product .mmc__productRow
+		{
+			border-bottom: 1px solid #d5d5d5;
+			padding: 3px 10px 3px 0;
+			line-height: 1.4em;
+		}
+		.mmc__product .mmc__productRow.mmc__title
+		{
+			color: #000000;
+			font-weight: bold;
+			padding-bottom: 10px;
+		}
+		.mmc__product .mmc__productRow.mmc__title span.mmc__hidden
+		{
+			display: none;
+		}
+		.mmc__product .mmc_productRow.mmc__delivery
+		{
+			text-align: right;
+			border-bottom: 0;
+			padding: 30px 6px 0;
+			text-transform: none;
+		}
+		.mmc__product .mmc__productRow.mmc__placement
+		{
+			border-bottom: 0;
+			font-size: 140%;
+		}
+		.mmc__product .mmc__productRow.mmc__option
+		{
+			position: relative;
+			padding-right: 25px;
+		}
+			.mmc__product .mmc__productRow.mmc__option span.mmc__type
+			{
+				display: block;
+				color: #ff0000;
+				font-weight: bold;
+				text-transform: none;
+				font-size: 90%;
+			}
+			.mmc__product .mmc__productRow.mmc__option span.mmc__value
+			{
+				display: block;
+				font-weight: bold;
+			}
+			.mmc__product .mmc__productRow.mmc__option span.mmc__icon.mmc__tick
+			{
+				display: none;
+			}
+			.mmc__product .mmc__productRow.mmc__option span.mmc__edit
+			{
+				width: 17px;
+				height: 17px;
+				position: absolute;
+				right: 0;
+				top: 50%;
+				margin-top: -8px;
+			}
+				.mmc__product .mmc__productRow.mmc__option span.mmc__edit div.mmc__edit
+				{
+					position: absolute;
+					right: 0;
+					top: 0;
+					padding: 0;
+				}
+			div#mmc__Configurator div#mmc__Selection div.mmc__finishedProducts div.mmc__product div.mmc__row.mmc__option span.mmc__edit
+			{
+				background-position: 0 1px;
+				top: 6px;
+			}
+				.mmc__product .mmc__productRow.mmc__option span.mmc__edit a
+				{
+					text-decoration: none;
+				}
+				.mmc__product .mmc__productRow.mmc__option span.mmc__edit a:hover
+				{
+					color: #ff0000;
+				}
+		.mmc__product .mmc__productRow.mmc__price
+		{
+			border: 0;
+			padding-top: 13px;
+			padding-right: 0;
+			color: #000000;
+		}
+		#mmc__Selection .mmc__product .mmc__productRow.mmc__price
+		{
+			padding-top: 3px;
+		}
+		.mmc__product .mmc__productRow.mmc__price.mmc__discount
+		{
+			padding-top: 0;
+		}
+			.mmc__product .mmc__productRow.mmc__price div.mmc__label
+			{
+				color: #ff0000;
+			}
+			.mmc__product .mmc__productRow.mmc__price div.mmc__amount
+			{
+				font-weight: bold;
+				text-align: right;
+				font-size: 400%;
+				line-height: 1em;
+			}
+				.mmc__product .mmc__productRow.mmc__price div.mmc__amount span.mmc__currency
+				{
+					padding: 0 0 0 3px;
+					font-size: 50%;
+				}
+				.mmc__product .mmc__productRow.mmc__price div.mmc__amount span.mmc__decimals
+				{
+					font-size: 50%;
+				}
+				.mmc__product .mmc__productRow.mmc__price div.mmc__amount span.mmc__from
+				{
+					padding: 0 4px 0 0;
+					display: none;
+				}
+		.mmc__product .mmc__productRow.mmc__campaignText
+		{
+			font-size: 140%;
+			font-weight: bold;
+			color: #ff0000;
+			text-align: center;
+			margin-top: 10px;
+		}
+
+.mmc__product.mmc__addon
+{
+	width: 100%;
+	float: none;
+}
+	div.mmc__separator
+	{
+		line-height: 0;
+		font-size: 0;
+		border-bottom: 1px solid #ffffff;
+	}
+	.mmc__product.mmc__addon .mmc__productInfo
+	{
+		position: relative;
+		min-height: 120px;
+		margin: 20px 0 0;
+	}
+		.mmc__product.mmc__addon .mmc__productInfo table.mmc__productImage
+		{
+			background-color: #ffffff;
+			box-shadow: 0 0 2px #c9c9c9;
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 120px;
+			height: 120px;
+			text-align: center;
+			overflow: hidden;
+		}
+			.mmc__product.mmc__addon .mmc__productInfo table.mmc__productImage td
+			{
+				vertical-align: middle;
+				width: 116px;
+				height: 116px;
+			}
+				.mmc__product.mmc__addon .mmc__productInfo table.mmc__productImage td img
+				{
+					width: 87px;
+					height: 87px;
+				}
+		.mmc__product.mmc__addon .mmc__productInfo .mmc__productName
+		{
+			padding: 0 0 5px 135px;
+			font-size: 110%;
+			font-weight: bold;
+			text-transform: none;
+		}
+		.mmc__product.mmc__addon .mmc__productInfo .mmc__productDesc
+		{
+			padding: 0 0 15px 135px;
+			font-size: 100%;
+			text-transform: none;
+			color: #333333;
+		}
+		.mmc__product.mmc__addon .mmc__productInfo .mmc__productRow.mmc__price
+		{
+			float: right;
+			padding-top: 0;
+			font-size: 60%;
+		}
+			.mmc__product.mmc__addon .mmc__productInfo .mmc__productRow.mmc__price div.mmc__label
+			{
+				text-align: right;
+				font-size: 150%;
+				padding: 0 0 3px;
+			}
+
+.mmc__addToCart.mmc__checkbox
+{
+	background-image: none;
+	margin: 10px 0 0;
+	clear: both;
+	padding-right: 5px;
+}
+.mmc__addToCart.mmc__checkbox label
+{
+	font-size: 100%;
+	text-shadow: 1px 1px 0 #ffffff;
+	color: #333333;
+	float: right;
+}
+.mmc__addToCart.mmc__checkbox input
+{
+	width: auto;
+	height: auto;
+	float: none;
+	margin: 2px 10px 0 0;
+}
+
+.mmc__configStep.mmc__stopPurchase .mmc__buttonBar
+{
+	display: none;
+}

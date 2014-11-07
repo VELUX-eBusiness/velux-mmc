@@ -1,0 +1,22 @@
+<div id="InsertConfigurator"></div>
+<script type="text/javascript" src="//www.veluxshop.be/media/com_configurator/mmc/content/js/insert-velux-configurator.min.js"></script> 
+<script>
+	window.onload = function () { 
+			loadConfigurator({ 
+					target: '#InsertConfigurator',
+					returnURL: '//www.veluxshop.be/?option=com_configurator&task=addItemToBasket',
+					returnTarget: '_blank',
+					directory: '//www.veluxshop.be/media/com_configurator/mmc/',
+					illustrationsDirectory: '//www.veluxshop.be/images/configurator/illustrations/',
+					skin: 'veluxshop',
+					language: 'nl',
+					clientID: 'velux_be',
+					showDealerButton: true,
+					dealerURL: 'http://www.velux.it/privati/dove-acquistare/rivenditori.aspx',
+					dealerTarget: '_blank',
+					shopTarget: '_blank',
+					basketType: 'veluxshop',
+					environment: 'http://www.veluxshop.be/'
+			}); 
+	}; 
+</script>
