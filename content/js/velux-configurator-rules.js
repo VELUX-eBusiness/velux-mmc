@@ -45,7 +45,7 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 				/* Show the user message as last, after all checks have completed */
 				self.showRuleMessage(rule, rule.PostText, messageType.join(' '));
 			},
-			range: ['8','10','11','100','101','102','103','501']
+			range: ['8','10','11','100','101','103','501']
 		},
 		/* Behavior to show an adapter, not requiring a Variant or Production code check */
 		adapter: {
@@ -73,19 +73,31 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 			},
 			range: ['504']
 		},
-		/* Specific to rule 505: Solar Awning and Shutter do not fit a window size starting with B, C or F */
+	    /* Specific to rule 102: Duplicate Roller blind for GDL */
+		rule102: {
+		    run: function (rule) {
+		        mmc.vm.controls.showProduct2(true);
+		        $.each(mmc.vm.config.product1, function (index, value) {
+		            if ((mmc.vm.config.product2[index]() === '' && value() !== '') || (mmc.vm.config.product2[index]() !== value())) {
+		                mmc.vm.config.product2[index](mmc.vm.config.product1[index]());
+		            }
+		        });
+		    },
+		    range: ['102']
+		},
+	    /* Specific to rule 505: Solar Awning and Shutter do not fit a window size starting with B, C or F */
 		rule505: {
-			run: function (rule) {
-				var messageType = ['error'],
+		    run: function (rule) {
+		        var messageType = ['note'],
 					config = mmc.vm.config.product1;
-				
-				/* Show the user message only when window size start with a B, C or F */
-				if (config.windowsize().charAt(0) == 'B' || config.windowsize().charAt(0) == 'C' || config.windowsize().charAt(0) == 'F') {
-					self.showRuleMessage(rule, rule.PostText, messageType.join(' '));
-				}
-				
-			},
-			range: ['505']
+
+		        /* Show the user message only when window size start with a B, C or F */
+		        if (config.windowsize().charAt(0) == 'B' || config.windowsize().charAt(0) == 'C' || config.windowsize().charAt(0) == 'F') {
+		            self.showRuleMessage(rule, rule.PostText, messageType.join(' '));
+		        }
+
+		    },
+		    range: ['505']
 		},
 		/* Specific rule to 506: Blackout, Venetian, Pleated for VL 045/Y45 */
 		rule506: {

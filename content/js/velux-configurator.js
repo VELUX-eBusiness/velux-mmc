@@ -478,7 +478,7 @@ jQuery.noConflict();
 						
 						/* Reset the doNotHide setting */
 						mmc.settings.doNotHide = false;
-				
+
 						/* Update the illustration */
 						lib.updateIllustration(self);
 						
