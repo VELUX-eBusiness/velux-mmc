@@ -223,16 +223,25 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
 		}
 		
 		function loadImage() {
-			img.attr('src', mmc.settings.ill.loc() + imgSrc.join('-') + '.png').attr('alt', imgSrc.join(' ')).load().error(function () {
-				/* If a colour is selected but image cannot be loaded, clear the operation */
-				if (image.colour) {
-					imgSrc.splice(1,1);
-				/* If no colour is selected, a operation is selected and the image cannot be loaded, clear the operation */
-				} else if (image.operation) {
-					imgSrc.splice(1,1);
-				}
+		    img.attr('src', mmc.settings.ill.loc() + imgSrc.join('-') + '.png').attr('alt', imgSrc.join(' ')).load().error(function () {
+		        /* If a colour is selected but image cannot be loaded, clear the colour */
+		        if (image.colour) {
+		            imgSrc.splice(1, 1);
+		            delete image.colour;
+		            /* If no colour is selected, a operation is selected and the image cannot be loaded, clear the operation */
+		        } else if (image.operation) {
+		            imgSrc.splice(1, 1);
+		            delete image.operation;
+		        } else if (imgSrc.indexOf('window') === -1) {
+		            imgSrc = ['window'];
+		        } else {
+		            return false;
+		        }
 				
-				/* Try and load the image again after clearing the operation */
+				/* Try and load the image again after clearing the operation
+				 * When nothing can be found, default back to window.png
+				 * Stop when nothing can be found
+				  */
 				loadImage(img);
 			});
 		};

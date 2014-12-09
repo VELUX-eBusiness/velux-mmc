@@ -287,6 +287,9 @@
   text-align: center;
   margin: 0 0 1em;
 }
+#mmc__Configurator #mmc__Options .mmc__configStep.mmc__complete.mmc__show .mmc__content .mmc__products .mmc__product .mmc__productImage img {
+  width: 190px;
+}
 #mmc__Configurator #mmc__Options .mmc__configStep.mmc__complete.mmc__show .mmc__content .mmc__products .mmc__product .mmc__productDetails {
   padding: 0 0 1em;
 }
@@ -450,6 +453,9 @@
     position: absolute;
     top: 0;
     left: 0;
+  }
+  #mmc__Configurator #mmc__Options .mmc__configStep.mmc__complete.mmc__next .mmc__content .mmc__products .mmc__product .mmc__productImage img {
+    width: 190px;
   }
 }
 /*# sourceMappingURL=skin-marketing.css.map */

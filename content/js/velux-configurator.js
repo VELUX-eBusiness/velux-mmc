@@ -230,7 +230,7 @@ jQuery.noConflict();
 								/* If triggering go to basket, check whether request should include product 2 and/or 3 */
 								if (mmc.isBasket()) {
 									if ((name == 2 && !mmc.vm.controls.showProduct2() && !mmc.vm.controls.showCombination())
-										|| (name == 3 && !mmc.vm.controls.showAddon())) {
+										|| (name == 3 && !mmc.vm.addon.Checked())) {
 										return;
 									}
 								} else {
@@ -856,8 +856,8 @@ jQuery.noConflict();
 					
 				},
 				Rules: function (productIndex, options) {
-					var data = mmc.vm.data;
-					
+				    var data = mmc.vm.data;
+
 					/* Clear the timeout when not yet ready gathering rules */
 					if (mmc.settings.rules.timeout != null) {
 						clearTimeout(mmc.settings.rules.timeout);
@@ -1290,6 +1290,10 @@ jQuery.noConflict();
 			/* Observables to show/hide certain steps, controllable by the settings */
 			self.showWindowStep = ko.observable(mmc.settings.showWindowStep);
 			self.showCategoryStep = ko.observable(mmc.settings.showCategoryStep);
+			self.showOperationStep = ko.observable(mmc.settings.showOperationStep);
+			self.showColourStep = ko.observable(mmc.settings.showColourStep);
+			self.showOuterSurfaceStep = ko.observable(mmc.settings.showOuterSurfaceStep);
+			self.showInsectNetStep = ko.observable(mmc.settings.showInsectNetStep);
 			self.showExtraQuestion = ko.observable(mmc.settings.showExtraQuestion);
 			self.showOnlyFlatroof = ko.observable(mmc.settings.showOnlyFlatroof);
 			

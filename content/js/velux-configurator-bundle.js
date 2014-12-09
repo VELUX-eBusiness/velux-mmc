@@ -46,7 +46,7 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 				/* Show the user message as last, after all checks have completed */
 				self.showRuleMessage(rule, rule.PostText, messageType.join(' '));
 			},
-			range: ['8','10','11','100','101','103','501']
+			range: ['8','10','11','100','101','102','103','501']
 		},
 		/* Behavior to show an adapter, not requiring a Variant or Production code check */
 		adapter: {
@@ -74,31 +74,19 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 			},
 			range: ['504']
 		},
-	    /* Specific to rule 102: Duplicate Roller blind for GDL */
-		rule102: {
-		    run: function (rule) {
-		        mmc.vm.controls.showProduct2(true);
-		        $.each(mmc.vm.config.product1, function (index, value) {
-		            if ((mmc.vm.config.product2[index]() === '' && value() !== '') || (mmc.vm.config.product2[index]() !== value())) {
-		                mmc.vm.config.product2[index](mmc.vm.config.product1[index]());
-		            }
-		        });
-		    },
-		    range: ['102']
-		},
-	    /* Specific to rule 505: Solar Awning and Shutter do not fit a window size starting with B, C or F */
+		/* Specific to rule 505: Solar Awning and Shutter do not fit a window size starting with B, C or F */
 		rule505: {
-		    run: function (rule) {
-		        var messageType = ['note'],
+			run: function (rule) {
+				var messageType = ['error'],
 					config = mmc.vm.config.product1;
-
-		        /* Show the user message only when window size start with a B, C or F */
-		        if (config.windowsize().charAt(0) == 'B' || config.windowsize().charAt(0) == 'C' || config.windowsize().charAt(0) == 'F') {
-		            self.showRuleMessage(rule, rule.PostText, messageType.join(' '));
-		        }
-
-		    },
-		    range: ['505']
+				
+				/* Show the user message only when window size start with a B, C or F */
+				if (config.windowsize().charAt(0) == 'B' || config.windowsize().charAt(0) == 'C' || config.windowsize().charAt(0) == 'F') {
+					self.showRuleMessage(rule, rule.PostText, messageType.join(' '));
+				}
+				
+			},
+			range: ['505']
 		},
 		/* Specific rule to 506: Blackout, Venetian, Pleated for VL 045/Y45 */
 		rule506: {
@@ -410,8 +398,6 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 			newMessage.appendTo($('#sb-container .mmc__infoPopup .mmc__codeCheck')).show();
 		} else if (mmc.dom.activeStep().hasClass('mmc__variant')) {
 			newMessage.prependTo(mmc.dom.activeStep().find('.mmc__content')).show();
-		} else if (rule.Addon) {
-			newMessage.insertAfter(mmc.dom.complete.find('.mmc__addon .mmc__title')).show();
 		} else {
 			newMessage.insertBefore(mmc.dom.complete.find('.mmc__products')).show();
 		}
@@ -826,7 +812,7 @@ jQuery.noConflict();
 								/* If triggering go to basket, check whether request should include product 2 and/or 3 */
 								if (mmc.isBasket()) {
 									if ((name == 2 && !mmc.vm.controls.showProduct2() && !mmc.vm.controls.showCombination())
-										|| (name == 3 && !mmc.vm.controls.showAddon())) {
+										|| (name == 3 && !mmc.vm.addon.Checked())) {
 										return;
 									}
 								} else {
@@ -1452,8 +1438,8 @@ jQuery.noConflict();
 					
 				},
 				Rules: function (productIndex, options) {
-					var data = mmc.vm.data;
-					
+				    var data = mmc.vm.data;
+
 					/* Clear the timeout when not yet ready gathering rules */
 					if (mmc.settings.rules.timeout != null) {
 						clearTimeout(mmc.settings.rules.timeout);
@@ -1886,6 +1872,10 @@ jQuery.noConflict();
 			/* Observables to show/hide certain steps, controllable by the settings */
 			self.showWindowStep = ko.observable(mmc.settings.showWindowStep);
 			self.showCategoryStep = ko.observable(mmc.settings.showCategoryStep);
+			self.showOperationStep = ko.observable(mmc.settings.showOperationStep);
+			self.showColourStep = ko.observable(mmc.settings.showColourStep);
+			self.showOuterSurfaceStep = ko.observable(mmc.settings.showOuterSurfaceStep);
+			self.showInsectNetStep = ko.observable(mmc.settings.showInsectNetStep);
 			self.showExtraQuestion = ko.observable(mmc.settings.showExtraQuestion);
 			self.showOnlyFlatroof = ko.observable(mmc.settings.showOnlyFlatroof);
 			
@@ -2684,16 +2674,25 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
 		}
 		
 		function loadImage() {
-			img.attr('src', mmc.settings.ill.loc() + imgSrc.join('-') + '.png').attr('alt', imgSrc.join(' ')).load().error(function () {
-				/* If a colour is selected but image cannot be loaded, clear the operation */
-				if (image.colour) {
-					imgSrc.splice(1,1);
-				/* If no colour is selected, a operation is selected and the image cannot be loaded, clear the operation */
-				} else if (image.operation) {
-					imgSrc.splice(1,1);
-				}
+		    img.attr('src', mmc.settings.ill.loc() + imgSrc.join('-') + '.png').attr('alt', imgSrc.join(' ')).load().error(function () {
+		        /* If a colour is selected but image cannot be loaded, clear the colour */
+		        if (image.colour) {
+		            imgSrc.splice(1, 1);
+		            delete image.colour;
+		            /* If no colour is selected, a operation is selected and the image cannot be loaded, clear the operation */
+		        } else if (image.operation) {
+		            imgSrc.splice(1, 1);
+		            delete image.operation;
+		        } else if (imgSrc.indexOf('window') === -1) {
+		            imgSrc = ['window'];
+		        } else {
+		            return false;
+		        }
 				
-				/* Try and load the image again after clearing the operation */
+				/* Try and load the image again after clearing the operation
+				 * When nothing can be found, default back to window.png
+				 * Stop when nothing can be found
+				  */
 				loadImage(img);
 			});
 		};
