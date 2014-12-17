@@ -82,7 +82,7 @@ function loadConfigurator(obj) {
     /* Allow the settings of discounts through the configuration, which will be calculated into the price */
     obj.percentDiscount = (obj.percentDiscount === undefined) ? null : obj.percentDiscount;
     obj.percentDiscountAddOnPleated = (obj.percentDiscountAddOnPleated === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountAddOnPleated;
-    obj.percentDiscountAwning = (obj.percentDiscountAwning === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountAwning;
+    obj.percentDiscountAwning = (obj.percentDiscountAwning === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountAswning;
     obj.percentDiscountBlackout = (obj.percentDiscountBlackout === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountBlackout;
     obj.percentDiscountDuo = (obj.percentDiscountDuo === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountDuo;
     obj.percentDiscountEnergy = (obj.percentDiscountEnergy === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountEnergy;
@@ -94,6 +94,9 @@ function loadConfigurator(obj) {
     obj.percentDiscountRoller = (obj.percentDiscountRoller === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountRoller;
     obj.percentDiscountShutters = (obj.percentDiscountShutters === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountShutters;
     obj.percentDiscountVenetian = (obj.percentDiscountVenetian === undefined) ? (obj.percentDiscount) ? obj.percentDiscount : null : obj.percentDiscountVenetian;
+
+    obj.includeVatInPrice = (obj.includeVatInPrice === undefined) ? true : obj.includeVatInPrice;
+    obj.includeVatInPriceText = (obj.includeVatInPrice === true) ? null : obj.includeVatInPriceText;
 
     /* Functions that are triggered before of after default actions */
     obj.onBeforeLoad = (obj.onBeforeLoad === undefined) ? function () { return; } : obj.onBeforeLoad;
