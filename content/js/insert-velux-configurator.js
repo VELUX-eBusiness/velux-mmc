@@ -99,37 +99,37 @@ function loadConfigurator(obj) {
     obj.includeVatInPriceText = (obj.includeVatInPrice === true) ? null : obj.includeVatInPriceText;
 
     /* Functions that are triggered before of after default actions */
-    obj.onBeforeLoad = (obj.onBeforeLoad === undefined) ? function () { return; } : obj.onBeforeLoad;
-    obj.onAfterLoad = (obj.onAfterLoad === undefined) ? function () { return; } : obj.onAfterLoad;
-    obj.onBeforeInit = (obj.onBeforeInit === undefined) ? function () { return; } : obj.onBeforeInit;
-    obj.onAfterInit = (obj.onAfterInit === undefined) ? function () { return; } : obj.onAfterInit;
-    obj.onBeforeUpdate = (obj.onBeforeUpdate === undefined) ? function () { return; } : obj.onBeforeUpdate;
-    obj.onAfterUpdate = (obj.onAfterUpdate === undefined) ? function () { return; } : obj.onAfterUpdate;
-    obj.onBeforeSwitchStep = (obj.onBeforeSwitchStep === undefined) ? function () { return; } : obj.onBeforeSwitchStep;
-    obj.onAfterSwitchStep = (obj.onAfterSwitchStep === undefined) ? function () { return; } : obj.onAfterSwitchStep;
-    obj.onBeforeAddToBasket = (obj.onBeforeAddToBasket === undefined) ? function () { return; } : obj.onBeforeAddToBasket;
-    obj.onAfterAddToBasket = (obj.onAfterAddToBasket === undefined) ? function () { return; } : obj.onAfterAddToBasket;
+    obj.onBeforeLoad = (obj.onBeforeLoad === undefined) ? function() { return; } : obj.onBeforeLoad;
+    obj.onAfterLoad = (obj.onAfterLoad === undefined) ? function() { return; } : obj.onAfterLoad;
+    obj.onBeforeInit = (obj.onBeforeInit === undefined) ? function() { return; } : obj.onBeforeInit;
+    obj.onAfterInit = (obj.onAfterInit === undefined) ? function() { return; } : obj.onAfterInit;
+    obj.onBeforeUpdate = (obj.onBeforeUpdate === undefined) ? function() { return; } : obj.onBeforeUpdate;
+    obj.onAfterUpdate = (obj.onAfterUpdate === undefined) ? function() { return; } : obj.onAfterUpdate;
+    obj.onBeforeSwitchStep = (obj.onBeforeSwitchStep === undefined) ? function() { return; } : obj.onBeforeSwitchStep;
+    obj.onAfterSwitchStep = (obj.onAfterSwitchStep === undefined) ? function() { return; } : obj.onAfterSwitchStep;
+    obj.onBeforeAddToBasket = (obj.onBeforeAddToBasket === undefined) ? function() { return; } : obj.onBeforeAddToBasket;
+    obj.onAfterAddToBasket = (obj.onAfterAddToBasket === undefined) ? function() { return; } : obj.onAfterAddToBasket;
 
     /* Functions that are triggered on user events */
-    obj.onSelectWindowType = (obj.onSelectWindowType === undefined) ? function () { return; } : obj.onSelectWindowType;
-    obj.onSelectWindowSize = (obj.onSelectWindowSize === undefined) ? function () { return; } : obj.onSelectWindowSize;
-    obj.onSelectCategory = (obj.onSelectCategory === undefined) ? function () { return; } : obj.onSelectCategory;
-    obj.onSelectOperation = (obj.onSelectOperation === undefined) ? function () { return; } : obj.onSelectOperation;
-    obj.onSelectColour = (obj.onSelectColour === undefined) ? function () { return; } : obj.onSelectColour;
-    obj.onSelectInsectNetType = (obj.onSelectInsectNetType === undefined) ? function () { return; } : obj.onSelectInsectNetType;
-    obj.onSelectInsectNet = (obj.onSelectInsectNet === undefined) ? function () { return; } : obj.onSelectInsectNet;
-    obj.onSelectOuterSurface = (obj.onSelectOuterSurface === undefined) ? function () { return; } : obj.onSelectOuterSurface;
-    obj.onNextWindow = (obj.onNextWindow === undefined) ? function () { return; } : obj.onNextWindow;
-    obj.onNextCategory = (obj.onNextCategory === undefined) ? function () { return; } : obj.onNextCategory;
-    obj.onNextOperation = (obj.onNextOperation === undefined) ? function () { return; } : obj.onNextOperation;
-    obj.onNextColour = (obj.onNextColour === undefined) ? function () { return; } : obj.onNextColour;
-    obj.onNextInsectnet = (obj.onNextInsectnet === undefined) ? function () { return; } : obj.onNextInsectnet;
-    obj.onNextOuterSurface = (obj.onNextOuterSurface === undefined) ? function () { return; } : obj.onNextOuterSurface;
-    obj.onButtonWindowUnknown = (obj.onButtonWindowUnknown === undefined) ? function () { return; } : obj.onButtonWindowUnknown;
-    obj.onButtonDealer = (obj.onButtonDealer === undefined) ? function () { return; } : obj.onButtonDealer
-    obj.onButtonAddToBasket = (obj.onButtonAddToBasket === undefined) ? function () { return; } : obj.onButtonAddToBasket;
-    obj.onButtonPrint = (obj.onButtonPrint === undefined) ? function () { return; } : obj.onButtonPrint;
-    obj.onButtonEmail = (obj.onButtonEmail === undefined) ? function () { return; } : obj.onButtonEmail;
+    obj.onSelectWindowType = (obj.onSelectWindowType === undefined) ? function() { return; } : obj.onSelectWindowType;
+    obj.onSelectWindowSize = (obj.onSelectWindowSize === undefined) ? function() { return; } : obj.onSelectWindowSize;
+    obj.onSelectCategory = (obj.onSelectCategory === undefined) ? function() { return; } : obj.onSelectCategory;
+    obj.onSelectOperation = (obj.onSelectOperation === undefined) ? function() { return; } : obj.onSelectOperation;
+    obj.onSelectColour = (obj.onSelectColour === undefined) ? function() { return; } : obj.onSelectColour;
+    obj.onSelectInsectNetType = (obj.onSelectInsectNetType === undefined) ? function() { return; } : obj.onSelectInsectNetType;
+    obj.onSelectInsectNet = (obj.onSelectInsectNet === undefined) ? function() { return; } : obj.onSelectInsectNet;
+    obj.onSelectOuterSurface = (obj.onSelectOuterSurface === undefined) ? function() { return; } : obj.onSelectOuterSurface;
+    obj.onNextWindow = (obj.onNextWindow === undefined) ? function() { return; } : obj.onNextWindow;
+    obj.onNextCategory = (obj.onNextCategory === undefined) ? function() { return; } : obj.onNextCategory;
+    obj.onNextOperation = (obj.onNextOperation === undefined) ? function() { return; } : obj.onNextOperation;
+    obj.onNextColour = (obj.onNextColour === undefined) ? function() { return; } : obj.onNextColour;
+    obj.onNextInsectnet = (obj.onNextInsectnet === undefined) ? function() { return; } : obj.onNextInsectnet;
+    obj.onNextOuterSurface = (obj.onNextOuterSurface === undefined) ? function() { return; } : obj.onNextOuterSurface;
+    obj.onButtonWindowUnknown = (obj.onButtonWindowUnknown === undefined) ? function() { return; } : obj.onButtonWindowUnknown;
+    obj.onButtonDealer = (obj.onButtonDealer === undefined) ? function() { return; } : obj.onButtonDealer
+    obj.onButtonAddToBasket = (obj.onButtonAddToBasket === undefined) ? function() { return; } : obj.onButtonAddToBasket;
+    obj.onButtonPrint = (obj.onButtonPrint === undefined) ? function() { return; } : obj.onButtonPrint;
+    obj.onButtonEmail = (obj.onButtonEmail === undefined) ? function() { return; } : obj.onButtonEmail;
 
     /* Trigger customer action: onBeforeLoad */
     obj.onBeforeLoad();
@@ -155,7 +155,7 @@ function loadConfigurator(obj) {
 
         /* Create a list of existing files, to make sure files are not added multiple times */
         var files = [];
-        $.each(document.getElementsByTagName('link'), function (index, value) {
+        $.each(document.getElementsByTagName('link'), function(index, value) {
             var source = $(value).attr('href');
             if (source) {
                 files.push(source.slice(source.lastIndexOf('/') + 1, source.lastIndexOf('.')));
@@ -177,8 +177,7 @@ function loadConfigurator(obj) {
 
     function init() {
 
-        (function (window, document, $) {
-
+        (function(window, document, $) {
             var requestURL = obj.environment + '?option=com_configurator&view=' + obj.renderer,
                 requestData = '&baseurl=' + obj.directory + '&imagesDirectory=' + obj.imagesDirectory + '&lang=' + obj.language + '&did=' + obj.did + '&cid=' + obj.cid + '&dealerurl=' + obj.dealerURL + '&dealertarget=' + obj.dealerTarget + '&shoptarget=' + obj.shopTarget + '&formmethod=' + obj.formMethod,
                 preConfig = '&windowtype=' + obj.windowType + '&windowsize=' + obj.windowSize + '&category=' + obj.category + '&operation=' + obj.operation + '&colour=' + obj.colour + '&outersurface=' + obj.outerSurface;
@@ -206,7 +205,7 @@ function loadConfigurator(obj) {
                 if ("withCredentials" in request) {
                     // Firefox 3.5 and Safari 4
                     request.open('GET', url, true);
-                    request.onloadend = function () {
+                    request.onloadend = function() {
                         processData(request.response);
                     };
                     request.send();
@@ -220,7 +219,7 @@ function loadConfigurator(obj) {
                     //CORS FIX from Daniel
                     //CORS FIX from Daniel
                     //CORS FIX from Daniel
-                    (function (factory) {
+                    (function(factory) {
                         if (typeof define === 'function' && define.amd) {
                             // AMD. Register as anonymous module.
                             define(['jquery'], factory);
@@ -231,7 +230,7 @@ function loadConfigurator(obj) {
                             // Browser globals.
                             factory(jQuery);
                         }
-                    }(function ($) {
+                    }(function($) {
 
                         // Only continue if we're on IE8/IE9 with jQuery 1.5+ (contains the ajaxTransport function)
                         if ($.support.cors || !$.ajaxTransport || !window.XDomainRequest) {
@@ -243,7 +242,7 @@ function loadConfigurator(obj) {
                         var sameSchemeRegEx = new RegExp('^' + location.protocol, 'i');
 
                         // ajaxTransport exists in jQuery 1.5+
-                        $.ajaxTransport('* text html xml json', function (options, userOptions, jqXHR) {
+                        $.ajaxTransport('* text html xml json', function(options, userOptions, jqXHR) {
 
                             // Only continue if the request is: asynchronous, uses GET or POST method, has HTTP or HTTPS protocol, and has the same scheme as the calling page
                             if (!options.crossDomain || !options.async || !getOrPostRegEx.test(options.type) || !httpRegEx.test(options.url) || !sameSchemeRegEx.test(options.url)) {
@@ -253,7 +252,7 @@ function loadConfigurator(obj) {
                             var xdr = null;
 
                             return {
-                                send: function (headers, complete) {
+                                send: function(headers, complete) {
                                     var postData = '';
                                     var userType = (userOptions.dataType || '').toLowerCase();
 
@@ -262,11 +261,11 @@ function loadConfigurator(obj) {
                                         xdr.timeout = userOptions.timeout;
                                     }
 
-                                    xdr.ontimeout = function () {
+                                    xdr.ontimeout = function() {
                                         complete(500, 'timeout');
                                     };
 
-                                    xdr.onload = function () {
+                                    xdr.onload = function() {
                                         var allResponseHeaders = 'Content-Length: ' + xdr.responseText.length + '\r\nContent-Type: ' + xdr.contentType;
                                         var status = {
                                             code: 200,
@@ -309,8 +308,8 @@ function loadConfigurator(obj) {
                                     };
 
                                     // set an empty handler for 'onprogress' so requests don't get aborted
-                                    xdr.onprogress = function () { };
-                                    xdr.onerror = function () {
+                                    xdr.onprogress = function() {};
+                                    xdr.onerror = function() {
                                         complete(500, 'error', {
                                             text: xdr.responseText
                                         });
@@ -322,7 +321,7 @@ function loadConfigurator(obj) {
                                     xdr.open(options.type, options.url);
                                     xdr.send(postData);
                                 },
-                                abort: function () {
+                                abort: function() {
                                     if (xdr) {
                                         xdr.abort();
                                     }
@@ -340,10 +339,10 @@ function loadConfigurator(obj) {
                         url: url,
                         processData: true,
                         dataType: "html",
-                        success: function (data) {
+                        success: function(data) {
                             processData(data);
                         },
-                        error: function (a, b, c) {
+                        error: function(a, b, c) {
                         }
                     });
                 }
@@ -358,7 +357,7 @@ function loadConfigurator(obj) {
                         'js/knockout-2.2.1.js',
                         'js/chosen/chosen.jquery.min.js',
                         'js/shadowbox/shadowbox.js'
-                ],
+                    ],
                     scriptCount = 0,
                     attemptCount2 = 0,
                     temp = $('<div />');
@@ -380,8 +379,8 @@ function loadConfigurator(obj) {
                 loadSettings();
 
                 /* Load all the scripts, before loading the final one that places the configurator */
-                $.each(scripts, function (index, value) {
-                    $.getScript(siteLocation + value, function () {
+                $.each(scripts, function(index, value) {
+                    $.getScript(siteLocation + value, function() {
                         scriptCount++;
                     });
                 });

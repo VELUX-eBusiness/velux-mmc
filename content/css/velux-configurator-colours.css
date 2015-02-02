@@ -1,5 +1,8 @@
 ﻿@charset "utf-8";
 /* CSS Document */
+.mmc__option.mmc__colour .mmc__fill {
+  background-repeat: no-repeat;
+}
 /* Colours ------------------------------------------------------------------------------------------------------------- */
 .mmc__option.mmc__colour.Awning div.mmc__fill,
 .mmc__option.mmc__colour.BlackoutAwningAwning div.mmc__fill,
@@ -24,6 +27,243 @@
 .mmc__option.mmc__colour div.mmc__fill.colour_1310 {
   background-position: -300px -7px;
 }
+/*ROMAN BLINDS*/
+.mmc__option.mmc__colour.Roman div.mmc__fill,
+.mmc__option.mmc__colour.RomanCloth div.mmc__fill,
+.mmc__option.mmc__colour.RomanDesign div.mmc__fill {
+  background-image: url(images/veluxshop-colour-roman.png) !important;
+  background-position: 4px 4px;
+  top: 4px !important;
+  left: 4px !important;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1155 {
+  background-position: 0 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1156 {
+  background-position: -118px 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1157 {
+  background-position: -236px 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1158 {
+  background-position: -354px 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1159 {
+  background-position: -472px 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1160 {
+  background-position: -590px 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1161 {
+  background-position: -708px 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1255 {
+  background-position: -826px 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1256 {
+  background-position: -944px 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1257 {
+  background-position: -1062px 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1258 {
+  background-position: -1180px 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1259 {
+  background-position: -1298px 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1260 {
+  background-position: -1416px 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1261 {
+  background-position: -1534px 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1262 {
+  background-position: -1652px 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1264 {
+  background-position: -1770px 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1265 {
+  background-position: -1888px 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1266 {
+  background-position: 0 -118px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1267 {
+  background-position: -118px -118px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1268 {
+  background-position: -236px -118px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1269 {
+  background-position: -354px -118px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1270 {
+  background-position: -472px -118px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1271 {
+  background-position: -590px -118px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1273 {
+  background-position: -708px -118px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4155 {
+  background-position: -826px -118px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4156 {
+  background-position: -944px -118px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4157 {
+  background-position: -1062px -118px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4158 {
+  background-position: -1180px -118px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4159 {
+  background-position: -1298px -118px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4160 {
+  background-position: -1416px -118px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4559 {
+  background-position: -1888px -118px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4560 {
+  background-position: 0 -236px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4561 {
+  background-position: -118px -236px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4562 {
+  background-position: -236px -236px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4563 {
+  background-position: -354px -236px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4564 {
+  background-position: -472px -236px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4565 {
+  background-position: -590px -236px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4567 {
+  background-position: -708px -236px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4569 {
+  background-position: -944px -236px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4570 {
+  background-position: -1062px -236px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4571 {
+  background-position: -1180px -236px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4572 {
+  background-position: -1298px -236px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4573 {
+  background-position: -1416px -236px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6500 {
+  background-position: -1534px -236px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6501 {
+  background-position: -1652px -236px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6502 {
+  background-position: -1770px -236px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6503 {
+  background-position: -1888px -236px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6504 {
+  background-position: 0 -354px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6505 {
+  background-position: -118px -354px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6506 {
+  background-position: -236px -354px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6507 {
+  background-position: -354px -354px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6508 {
+  background-position: -472px -354px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6509 {
+  background-position: -590px -354px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6510 {
+  background-position: -708px -354px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6511 {
+  background-position: -826px -354px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6512 {
+  background-position: -944px -354px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6513 {
+  background-position: -1062px -354px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6514 {
+  background-position: -1298px -472px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6515 {
+  background-position: -1180px -354px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6516 {
+  background-position: -1298px -354px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6517 {
+  background-position: -1416px -354px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6518 {
+  background-position: -1534px -354px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6519 {
+  background-position: -1652px -354px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6520 {
+  background-position: -1770px -354px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6521 {
+  background-position: -1888px -354px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6522 {
+  background-position: 0 -472px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6523 {
+  background-position: -118px -472px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6524 {
+  background-position: -236px -472px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_6525 {
+  background-position: -354px -472px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_7055 {
+  background-position: -472px -472px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_7056 {
+  background-position: -590px -472px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_7057 {
+  background-position: -708px -472px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_7058 {
+  background-position: -826px -472px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_7059 {
+  background-position: -944px -472px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_7060 {
+  background-position: -1062px -472px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_7061 {
+  background-position: -1180px -472px;
+}
 .mmc__option.mmc__colour.Blackout div.mmc__fill,
 .mmc__option.mmc__colour.BlackoutBudget div.mmc__fill,
 .mmc__option.mmc__colour.BlackoutDesign div.mmc__fill,
@@ -32,6 +272,57 @@
 .mmc__option.mmc__colour.BlackoutAwningBlackout div.mmc__fill {
   background-image: url(images/veluxshop-colour-blackout.png);
   background-position: 0 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4555 {
+  background-position: -75px -458px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4556 {
+  background-position: 0 -458px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4558 {
+  background-position: -150px -458px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4559 {
+  background-position: -225px -458px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4561 {
+  background-position: -300px -458px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4560 {
+  background-position: -375px -458px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4562 {
+  background-position: -450px -458px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4567 {
+  background-position: -526px -458px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4563 {
+  background-position: -601px -458px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4568 {
+  background-position: -676px -458px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4564 {
+  background-position: 0 -533px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4565 {
+  background-position: -75px -533px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4569 {
+  background-position: -150px -533px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4571 {
+  background-position: -225px -533px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4570 {
+  background-position: -300px -533px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4573 {
+  background-position: -375px -533px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4572 {
+  background-position: -450px -533px;
 }
 .mmc__option.mmc__colour div.mmc__fill.colour_0605 {
   background-position: 0 -7px;
@@ -219,6 +510,78 @@
   background-image: url(images/veluxshop-colour-duo.png);
   background-position: 0 0;
 }
+.mmc__option.mmc__colour div.mmc__fill.colour_4573-1016 {
+  background-position: -2400px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4572-1016 {
+  background-position: -2325px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4571-1016 {
+  background-position: -2250px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4570-1016 {
+  background-position: -2175px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4569-1016 {
+  background-position: -2100px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4568-1016 {
+  background-position: -2025px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4567-1016 {
+  background-position: -1950px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4565-1016 {
+  background-position: -1875px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4564-1016 {
+  background-position: -1800px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4563-1016 {
+  background-position: -1725px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4562-1016 {
+  background-position: -1650px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4561-1016 {
+  background-position: -1575px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4560-1016 {
+  background-position: -1500px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4559-1016 {
+  background-position: -1425px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4558-1016 {
+  background-position: -2475px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1705-1016 {
+  background-position: -600px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_2055-1016 {
+  background-position: -675px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4555-1016 {
+  background-position: -1200px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4556-1016 {
+  background-position: -1275px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_3009-1016 {
+  background-position: -750px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_0705-1016 {
+  background-position: -300px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1025-1016 {
+  background-position: -375px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1085-1016 {
+  background-position: -450px -7px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1100-1016 {
+  background-position: -525px -7px;
+}
 .mmc__option.mmc__colour div.mmc__fill.colour_0001 {
   background-position: 0px -7px;
 }
@@ -237,6 +600,30 @@
 .mmc__option.mmc__colour.FlatroofEnergy div.mmc__fill {
   background-image: url(images/veluxshop-colour-energy.png);
   background-position: 0 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1155 {
+  background-position: 0px -82px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1156 {
+  background-position: -75px -82px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1158 {
+  background-position: -150px -82px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1157 {
+  background-position: -225px -82px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1159 {
+  background-position: -300px -82px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1160 {
+  background-position: -375px -82px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1162 {
+  background-position: -525px -82px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1161 {
+  background-position: -450px -82px;
 }
 .mmc__option.mmc__colour div.mmc__fill.colour_1045 {
   background-position: 0px -7px;
@@ -271,8 +658,65 @@
   background-image: url(images/veluxshop-colour-pleated.png);
   background-position: 0 0;
 }
+.mmc__option.mmc__colour div.mmc__fill.colour_1256 {
+  background-position: -300px -233px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1257 {
+  background-position: -375px -233px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1255 {
+  background-position: -450px -233px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1269 {
+  background-position: -525px -233px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1267 {
+  background-position: -600px -233px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1268 {
+  background-position: -675px -233px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1266 {
+  background-position: -75px -308px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1262 {
+  background-position: -150px -308px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1264 {
+  background-position: -225px -308px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1263 {
+  background-position: -300px -308px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1265 {
+  background-position: -375px -308px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1271 {
+  background-position: -450px -308px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1270 {
+  background-position: -525px -308px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1273 {
+  background-position: -600px -308px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1272 {
+  background-position: -225px -383px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1261 {
+  background-position: -675px -308px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1259 {
+  background-position: 0 -383px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1258 {
+  background-position: -75px -383px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_1260 {
+  background-position: -150px -383px;
+}
 .mmc__option.mmc__colour div.mmc__fill.colour_0135 {
-  background-position: 0px -7px;
+  background-position: 0 -7px;
 }
 .mmc__option.mmc__colour div.mmc__fill.colour_0145 {
   background-position: -75px -7px;
@@ -380,8 +824,26 @@
   background-image: url(images/veluxshop-colour-roller.png);
   background-position: 0 0;
 }
+.mmc__option.mmc__colour div.mmc__fill.colour_4155 {
+  background-position: -525px -232px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4158 {
+  background-position: -675px -232px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4156 {
+  background-position: -600px -232px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4157 {
+  background-position: 0 -306px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4159 {
+  background-position: -75px -306px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_4160 {
+  background-position: -150px -306px;
+}
 .mmc__option.mmc__colour div.mmc__fill.colour_0310 {
-  background-position: 0px -7px;
+  background-position: 0 -7px;
 }
 .mmc__option.mmc__colour div.mmc__fill.colour_0650 {
   background-position: -75px -7px;
@@ -494,6 +956,27 @@
 .mmc__option.mmc__colour.Venetian div.mmc__fill {
   background-image: url(images/veluxshop-colour-venetian.png);
   background-position: 0 0;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_7055 {
+  background-position: 0px -83px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_7056 {
+  background-position: -75px -83px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_7057 {
+  background-position: -150px -83px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_7058 {
+  background-position: -225px -83px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_7061 {
+  background-position: -300px -83px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_7060 {
+  background-position: -375px -83px;
+}
+.mmc__option.mmc__colour div.mmc__fill.colour_7059 {
+  background-position: -450px -83px;
 }
 .mmc__option.mmc__colour div.mmc__fill.colour_4459 {
   background-position: 0px -7px;

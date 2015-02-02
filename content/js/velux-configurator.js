@@ -53,6 +53,7 @@ jQuery.noConflict();
                     updating: $('#mmc__Configurator #mmc__Blocks .mmc__updatingOverlay'),
                     usermessage: $('#mmc__Configurator #mmc__Blocks .mmc__userMessage'),
                     tooltip: $('#mmc__Configurator #mmc__Blocks .mmc__tooltip'),
+                    tooltipColors: $('#mmc__Configurator #mmc__Blocks .mmc__tooltipk15'),
                     infotip: $('#mmc__Configurator #mmc__Blocks .mmc__infotip'),
                     windowtypesize: $('#mmc__Configurator #mmc__Blocks .mmc__windowTypeSize'),
                     mailerPopup: $('#mmc__Configurator #mmc__Blocks .mmc__mailerPopup')
@@ -80,6 +81,7 @@ jQuery.noConflict();
                 lang: function() { return mmc.settings.language; },
                 format: 'json',
                 combi: function() {
+
                     return (mmc.vm.controls.showCombination() == true) ? true : false;
                 },
                 task: function() {
@@ -149,6 +151,7 @@ jQuery.noConflict();
                 } else {
                     return false;
                 }
+                b
             },
             /* Function to format the price */
             formatPrice: function(price) {
@@ -183,8 +186,8 @@ jQuery.noConflict();
 
                 if (activeStep.hasClass('mmc__complete')) {
                     mmc.dom.selection.find('.mmc__product').hide();
-                }
 
+                }
                 /* Position the Selection block next to the active step */
                 mmc.dom.selection.css('marginTop', mmc.measure.stepHeight * mmc.dom.activeStep().index('.mmc__required'));
             },
@@ -229,6 +232,7 @@ jQuery.noConflict();
 
                                 /* If triggering go to basket, check whether request should include product 2 and/or 3 */
                                 if (mmc.isBasket()) {
+
                                     if ((name == 2 && !mmc.vm.controls.showProduct2() && !mmc.vm.controls.showCombination())
                                         || (name == 3 && !mmc.vm.addon.Checked())) {
                                         return;
@@ -257,7 +261,8 @@ jQuery.noConflict();
                     }
                 });
 
-                return (mmc.isBasket()) ? '{' + requestProducts.join(',') + '}' : request.href + '&' + requestUrl.join('&') + '&data={' + requestProducts.join(',') + '}';
+                var url = (mmc.isBasket()) ? '{' + requestProducts.join(',') + '}' : request.href + '&' + requestUrl.join('&') + '&data={' + requestProducts.join(',') + '}';
+                return url;
             },
             /* Array with all the options that have localised texts */
             options: ['windowtype', 'windowsize', 'category', 'operation', 'finishtype', 'colour', 'outersurface', 'insectWidth', 'insectHeight'],
@@ -274,6 +279,14 @@ jQuery.noConflict();
                 decimalNum: 2,
                 closeText: $('#mmc__Settings .mmc__setCloseText').text(),
                 noResultsText: $('#mmc__Settings .mmc__setNoResultsText').text(),
+                transparency: {
+                    '1': $('#mmc__Settings .mmc__transparencyLabel1').text(),
+                    '2': $('#mmc__Settings .mmc__transparencyLabel2').text(),
+                    '3': $('#mmc__Settings .mmc__transparencyLabel3').text(),
+                    '4': $('#mmc__Settings .mmc__transparencyLabel4').text(),
+                    '5': $('#mmc__Settings .mmc__transparencyLabela5').text(),
+                    'A': $('#mmc__Settings .mmc__transparencyLabelA').text(),
+                },
                 insect: {
                     widthPreText: $('#mmc__Settings .mmc__setInsectNetWidthPretext').text() + ' ',
                     heightPreText: $('#mmc__Settings .mmc__setInsectNetHeightPretext').text() + ' ',
@@ -447,7 +460,6 @@ jQuery.noConflict();
                     url: mmc.buildRequest(),
                     success: function(data) {
                         t4 = new Date();
-
                         var obj = data;
                         /* Loop through each of the objects returned by the service */
                         $.each(obj, function(index, product) {
@@ -590,8 +602,7 @@ jQuery.noConflict();
                 ValidatedCategory: function(productIndex, options) {
                     var data = mmc.vm.data,
                         config = mmc.vm.config,
-                        activeCategory = mmc.dom.option(config[productIndex].category(), 'mmc__category', 'mmc__active').data('parent');
-
+                        activeCategory = mmc.dom.option(config[productIndex].category(), 'mmc__category', 'mmc__active').find('input');
                     /* Match the active category against the returned categories to see if it's valid */
                     $.each(options, function(cat, option) {
                         $.each(option.ChildCategories, function(value, category) {
@@ -639,7 +650,7 @@ jQuery.noConflict();
                                             var wt = mmc.vm.config.product1.windowtype().trim();
                                             if (child.MatchFound || (!child.MatchFound && mmc.settings.showInactive) || child.CategoryName == 'InsectNet') {
 
-                                                if (wt != 'GDL' || option.CategoryName != 'COMBINATION') {
+                                                if ((wt != 'GDL' || option.CategoryName != 'COMBINATION') && child.CategoryName != 'RomanCloth') {
                                                     product.category.push({
                                                         val: child.CategoryName,
                                                         name: child.Name,
@@ -668,12 +679,19 @@ jQuery.noConflict();
 
                                 });
                             });
+
+
                         }
 
                     });
 
+                    //DANIEL: TEMPORARY FIX, Danny have to change this to a better solution
+                    $('.BlackoutAwning.mmc__active input, .EnergyAwning.mmc__active input, .RollerAwning.mmc__active input').trigger('change');
+
                     /* Trigger selectWindowInput to focus on next button */
                     lib.selectWindowInput();
+
+
                 },
                 HeightWidth: function(productIndex, options) {
                     var data = mmc.vm.data,
@@ -727,7 +745,8 @@ jQuery.noConflict();
                         validCount = 0,
                         validOption;
 
-                    /* Skip this step when operation is set and update is triggered by a change */
+
+/* Skip this step when operation is set and update is triggered by a change */
                     if ((mmc.vm.config[productIndex].operation() != '' || mmc.vm.data[productIndex].operation().length > 0) && mmc.trigger.type) {
                         return;
                     }
@@ -735,12 +754,16 @@ jQuery.noConflict();
                     if (!options.length) {
                         options = [options];
                     }
+
+
                     /* Loop through both of the products and set the options */
                     $.each(data, function(index, product) {
                         var obsIndex = 0;
 
                         /* Loop through all the values and update the Observable */
                         $.each(options, function(name, id) {
+                            if (mmc.vm.config[productIndex].category() == 'BlackoutAwning') {
+                            }
                             if (id.IsValid || (!id.IsValid && mmc.settings.showInactive)) {
                                 if (mmc.vm.controls.showCombination()) {
                                     data[productIndex].operation()[obsIndex++] = { val: id.OperationID, name: id.Name, desc: id.Description, inactive: (id.IsValid) ? '' : 'inactive' };
@@ -789,7 +812,7 @@ jQuery.noConflict();
                         /* Loop through all the values and update the Observable */
                         $.each(options, function(name, id) {
                             if (id.IsValid || (!id.IsValid && mmc.settings.showInactive)) {
-                                product.finishtype()[obsIndex++] = { val: id.FinishTypeID, name: id.FinishTypeName, desc: id.FinishTypeDescription, inactive: (id.IsValid) ? '' : 'inactive' };
+                                product.finishtype()[obsIndex++] = { val: id.FinishTypeID, name: id.FinishTypeName, desc: id.FinishTypeDescription, trans: 1, inactive: (id.IsValid) ? '' : 'inactive' };
                             }
                         });
 
@@ -890,10 +913,10 @@ jQuery.noConflict();
                     }, 1);
                 },
                 Colors: function(productIndex, options) {
+
                     var data = mmc.vm.data,
                         validCount = 0,
                         validOption;
-
                     /* Skip this step when colour is set and update is triggered by a change */
                     if ((mmc.vm.config[productIndex].colour() != '' || mmc.vm.data[productIndex].colour().length > 0) && mmc.trigger.type) {
                         return;
@@ -912,15 +935,38 @@ jQuery.noConflict();
                             if (id.IsValid || (!id.IsValid && mmc.settings.showInactive)) {
                                 if (mmc.vm.controls.showCombination()) {
                                     /* Create a check for BlackoutDisney colours, in case they show up in the Blackout category */
-                                    tempCategory = (id.ColorID > 4609 && id.ColorID < 4622) ? 'BlackoutDisney' : mmc.vm.config[productIndex].category().match(/[A-Z][a-z]+/g)[productIndex.charAt(productIndex.length - 1) - 1];
+                                    tempCategory = (id.ColorID > 4609 && id.ColorID < 4622) ? 'BlackoutDisney'
+                                        : (id.ColorID >= 6520 && id.ColorID <= 6525) ? 'RomanDesign'
+                                        : mmc.vm.config[productIndex].category().match(/[A-Z][a-z]+/g)[productIndex.charAt(productIndex.length - 1) - 1];
 
-                                    data[productIndex].colour()[obsIndex++] = { cat: tempCategory, val: id.ColorID, name: id.ColorID + ' ' + id.ColorDescription, desc: '', inactive: (id.IsValid) ? '' : 'inactive' };
+                                    data[productIndex].colour()[obsIndex++] = {
+                                        cat: tempCategory,
+                                        val: id.ColorID,
+                                        name: id.ColorID + ' ' + id.ColorDescription,
+                                        trans: id.ColorFeatures.Transparency,
+                                        transDesc: mmc.settings.transparency[id.ColorFeatures.Transparency],
+                                        desc: '',
+                                        inactive: (id.IsValid) ? '' : 'inactive'
+                                    };
                                 } else {
                                     /* Create a check for BlackoutDisney colours, in case they show up in the Blackout category */
-                                    tempCategory = (id.ColorID > 4609 && id.ColorID < 4622) ? 'BlackoutDisney' : mmc.vm.config.product1.category();
-
-                                    product.colour()[obsIndex++] = { cat: tempCategory, val: id.ColorID, name: id.ColorID + ' ' + id.Name, desc: '', inactive: (id.IsValid) ? '' : 'inactive' };
+                                    tempCategory = (id.ColorID > 4609 && id.ColorID < 4622) ? 'BlackoutDisney'
+                                        : (id.ColorID >= 6520 && id.ColorID <= 6525) ? 'RomanDesign'
+                                        : mmc.vm.config.product1.category();
+                                    product.colour()[obsIndex++] = {
+                                        cat: tempCategory,
+                                        val: id.ColorID,
+                                        name: id.ColorID + ' ' + id.Name,
+                                        desc: '',
+                                        trans: id.ColorFeatures.Transparency,
+                                        transDesc: mmc.settings.transparency[id.ColorFeatures.Transparency],
+                                        inactive: (id.IsValid) ? '' : 'inactive'
+                                    };
+                                    tempCategory = (id.ColorID > 4609 && id.ColorID < 4622) ? 'BlackoutDisney'
+                                        : (id.ColorID >= 6520 && id.ColorID <= 6525) ? 'RomanDesign'
+                                        : mmc.vm.config.product1.category();
                                 }
+
                             }
                         });
 
@@ -1063,7 +1109,6 @@ jQuery.noConflict();
 
                     /* Reset the showing of the second product */
                     mmc.vm.controls.showProduct2(false);
-
                     if (parentCategory == 'COMBINATION') {
                         mmc.vm.controls.showCombination(true);
                     } else {
@@ -1085,6 +1130,7 @@ jQuery.noConflict();
 
                     /* Reset required steps before updating the configurator */
                     lib.resetSteps();
+
                 },
                 outersurface: function() {
                     var data = mmc.vm.data,
@@ -1457,7 +1503,8 @@ jQuery.noConflict();
 
             /* Function for checking which options are active upon building of templates */
             self.checkActive = function(category, elem) {
-                return (self[category]() == elem) ? 'mmc__active' : '';
+                var st = (self[category]() == elem) ? 'mmc__active' : '';
+                return st;
             }
 
         };
@@ -1711,6 +1758,9 @@ jQuery.noConflict();
         /* Trigger for adding products to a basket */
         mmc.dom.complete.on({
             click: function(event) {
+                mmc.dom.complete.find('.mmc__addon .mmc__addToCart input').click().click();
+                mmc.vm.addon.Checked(true);
+                //  alert(mmc.dom.complete.find('.mmc__addon .mmc__addToCart input').is(":checked"));
                 /* Trigger customer action: onBeforeAddToBasket */
                 mmc.settings.onBeforeAddToBasket();
 
@@ -1723,7 +1773,8 @@ jQuery.noConflict();
                 var basket = mmc.buildRequest();
                 mmc.dom.complete.find('#mmc__AddToBasket input').attr('name', 'productsinfo').val(basket);
 
-                /* Trigger customer action: onAfterAddToBasket */
+
+/* Trigger customer action: onAfterAddToBasket */
                 mmc.settings.onAfterAddToBasket();
 
                 if (mmc.settings.shopTarget == '_blank') {

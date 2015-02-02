@@ -79,6 +79,10 @@
 .mmc__icon.mmc__category.FlatroofPleated {
   background-position: -220px -120px;
 }
+.mmc__icon.mmc__category.Roman,
+.mmc__icon.mmc__category.RomanDesign {
+  background-position: -220px -120px;
+}
 .mmc__icon.mmc__category.PleatedAwning {
   background-position: -220px -160px;
 }
