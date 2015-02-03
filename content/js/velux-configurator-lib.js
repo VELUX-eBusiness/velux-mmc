@@ -475,8 +475,10 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
 
                 mmc.trigger.target.closest('.mmc__option').append(mmc.dom.blocks.tooltipColors.clone());
                 mmc.dom.tooltip = mmc.trigger.target.closest('.mmc__option').find('.mmc__tooltipk15');
-                mmc.dom.tooltip.find('.mmc__tooltipImage img').attr('src', mmc.settings.directory + 'content/' + typeMatch[mmc.trigger.type] + imgName + mmc.trigger.target.val() + '.png');
-                mmc.dom.tooltip.find('.mmc__tooltipImageTransparent img').attr('src', mmc.settings.directory + 'content/' + typeMatch['pk10'] + imgName + mmc.trigger.target.val() + '.png');
+                console.log(imgName);
+                console.log(mmc.trigger.target.val());
+                mmc.dom.tooltip.find('.mmc__tooltipImage img').attr('src', mmc.settings.directory + 'content/' + typeMatch[mmc.trigger.type] + imgName + mmc.trigger.target.val().replace('/', '-') + '.png');
+                mmc.dom.tooltip.find('.mmc__tooltipImageTransparent img').attr('src', mmc.settings.directory + 'content/' + typeMatch['pk10'] + imgName + mmc.trigger.target.val().replace('/', '-') + '.png');
                 mmc.dom.tooltip.find('.mmc__tooltipTitle').html(mmc.trigger.target.closest('.mmc__option').find('.mmc__optionTitle').text());
 
                 var trans_id = mmc.trigger.target.closest('.mmc__option').find('.mmc__optionTransparency').text();

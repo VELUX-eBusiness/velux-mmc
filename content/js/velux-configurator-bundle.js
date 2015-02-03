@@ -844,6 +844,7 @@ jQuery.noConflict();
                 });
 
                 var url = (mmc.isBasket()) ? '{' + requestProducts.join(',') + '}' : request.href + '&' + requestUrl.join('&') + '&data={' + requestProducts.join(',') + '}';
+
                 return url;
             },
             /* Array with all the options that have localised texts */
@@ -1370,6 +1371,11 @@ jQuery.noConflict();
                         mmc.vm.config[productIndex].operation(validOption);
                         lib.checkFilledSteps(mmc.vm.config[productIndex]);
                     }
+
+
+                    //DANIEL: TEMPORARY TERRIBLE FIX, Danny have to change this to a better solution
+                    $('.mmc__option.mmc__operation.mmc__active input').trigger('change');
+
                 },
                 Finishes: function(productIndex, options) {
                     /* Dummy function to make sure configurator does not break, list finish is not a required setting anymore */
@@ -2340,6 +2346,9 @@ jQuery.noConflict();
         /* Trigger for adding products to a basket */
         mmc.dom.complete.on({
             click: function(event) {
+
+
+                //DANIEL: TEMPORARY TERRIBLE FIX, Danny have to change this to a better solution
                 mmc.dom.complete.find('.mmc__addon .mmc__addToCart input').click().click();
                 mmc.vm.addon.Checked(true);
                 //  alert(mmc.dom.complete.find('.mmc__addon .mmc__addToCart input').is(":checked"));
@@ -2993,8 +3002,10 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
 
                 mmc.trigger.target.closest('.mmc__option').append(mmc.dom.blocks.tooltipColors.clone());
                 mmc.dom.tooltip = mmc.trigger.target.closest('.mmc__option').find('.mmc__tooltipk15');
-                mmc.dom.tooltip.find('.mmc__tooltipImage img').attr('src', mmc.settings.directory + 'content/' + typeMatch[mmc.trigger.type] + imgName + mmc.trigger.target.val() + '.png');
-                mmc.dom.tooltip.find('.mmc__tooltipImageTransparent img').attr('src', mmc.settings.directory + 'content/' + typeMatch['pk10'] + imgName + mmc.trigger.target.val() + '.png');
+                console.log(imgName);
+                console.log(mmc.trigger.target.val());
+                mmc.dom.tooltip.find('.mmc__tooltipImage img').attr('src', mmc.settings.directory + 'content/' + typeMatch[mmc.trigger.type] + imgName + mmc.trigger.target.val().replace('/', '-') + '.png');
+                mmc.dom.tooltip.find('.mmc__tooltipImageTransparent img').attr('src', mmc.settings.directory + 'content/' + typeMatch['pk10'] + imgName + mmc.trigger.target.val().replace('/', '-') + '.png');
                 mmc.dom.tooltip.find('.mmc__tooltipTitle').html(mmc.trigger.target.closest('.mmc__option').find('.mmc__optionTitle').text());
 
                 var trans_id = mmc.trigger.target.closest('.mmc__option').find('.mmc__optionTransparency').text();

@@ -262,6 +262,7 @@ jQuery.noConflict();
                 });
 
                 var url = (mmc.isBasket()) ? '{' + requestProducts.join(',') + '}' : request.href + '&' + requestUrl.join('&') + '&data={' + requestProducts.join(',') + '}';
+
                 return url;
             },
             /* Array with all the options that have localised texts */
@@ -788,6 +789,11 @@ jQuery.noConflict();
                         mmc.vm.config[productIndex].operation(validOption);
                         lib.checkFilledSteps(mmc.vm.config[productIndex]);
                     }
+
+
+                    //DANIEL: TEMPORARY TERRIBLE FIX, Danny have to change this to a better solution
+                    $('.mmc__option.mmc__operation.mmc__active input').trigger('change');
+
                 },
                 Finishes: function(productIndex, options) {
                     /* Dummy function to make sure configurator does not break, list finish is not a required setting anymore */
@@ -1758,6 +1764,9 @@ jQuery.noConflict();
         /* Trigger for adding products to a basket */
         mmc.dom.complete.on({
             click: function(event) {
+
+
+                //DANIEL: TEMPORARY TERRIBLE FIX, Danny have to change this to a better solution
                 mmc.dom.complete.find('.mmc__addon .mmc__addToCart input').click().click();
                 mmc.vm.addon.Checked(true);
                 //  alert(mmc.dom.complete.find('.mmc__addon .mmc__addToCart input').is(":checked"));
