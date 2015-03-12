@@ -151,7 +151,6 @@ jQuery.noConflict();
                 } else {
                     return false;
                 }
-                b
             },
             /* Function to format the price */
             formatPrice: function(price) {
@@ -263,6 +262,7 @@ jQuery.noConflict();
 
                 var url = (mmc.isBasket()) ? '{' + requestProducts.join(',') + '}' : request.href + '&' + requestUrl.join('&') + '&data={' + requestProducts.join(',') + '}';
 
+                //  console.log(url);
                 return url;
             },
             /* Array with all the options that have localised texts */
@@ -565,7 +565,6 @@ jQuery.noConflict();
                     if (config.product1.windowtype() != '') {
                         mmc.dom.windows.find('select#windowtype option[value="' + config.product1.windowtype() + '"]').attr('selected', 'selected');
                     }
-
                     lib.selectWindowInput();
                 },
                 WindowSizes: function(productIndex, options) {
@@ -602,10 +601,11 @@ jQuery.noConflict();
                 },
                 ValidatedCategory: function(productIndex, options) {
                     var data = mmc.vm.data,
-                        config = mmc.vm.config,
-                        activeCategory = mmc.dom.option(config[productIndex].category(), 'mmc__category', 'mmc__active').find('input');
+                        config = mmc.vm.config;
                     /* Match the active category against the returned categories to see if it's valid */
+
                     $.each(options, function(cat, option) {
+
                         $.each(option.ChildCategories, function(value, category) {
                             $.each(category, function(index, child) {
                                 try {
@@ -622,10 +622,12 @@ jQuery.noConflict();
                         });
                     });
 
+
                     /* Skip this step when category is set and update is triggered by a change */
-                    if ((mmc.vm.config[productIndex].category() != '' && mmc.vm.data[productIndex].category().length > 0) && mmc.trigger.type) {
+                    if ((mmc.vm.config[productIndex] != undefined && mmc.vm.config[productIndex].category() != '' && mmc.vm.data[productIndex].category().length > 0) && mmc.trigger.type) {
                         return;
                     }
+
 
                     $.each(options, function(cat, option) {
 
@@ -652,6 +654,7 @@ jQuery.noConflict();
                                             if (child.MatchFound || (!child.MatchFound && mmc.settings.showInactive) || child.CategoryName == 'InsectNet') {
 
                                                 if ((wt != 'GDL' || option.CategoryName != 'COMBINATION') && child.CategoryName != 'RomanCloth') {
+
                                                     product.category.push({
                                                         val: child.CategoryName,
                                                         name: child.Name,
@@ -686,6 +689,7 @@ jQuery.noConflict();
 
                     });
 
+
                     //DANIEL: TEMPORARY FIX, Danny have to change this to a better solution
                     $('.BlackoutAwning.mmc__active input, .EnergyAwning.mmc__active input, .RollerAwning.mmc__active input').trigger('change');
 
@@ -696,13 +700,13 @@ jQuery.noConflict();
                 },
                 HeightWidth: function(productIndex, options) {
                     var data = mmc.vm.data,
+                        config = mmc.vm.config,
                         obsIndex = 0;
-
                     /* Skip this step when operation is set and update is triggered by a change */
                     if ((mmc.vm.config.product1.operation() != '' || mmc.trigger.type != 'category') && mmc.trigger.type) {
                         // return;
                     }
-
+                    //
                     $.each(options, function(index, value) {
                         if (!mmc.settings.insect.sizes[value.Width]) {
                             mmc.settings.insect.sizes[value.Width] = {};
@@ -724,22 +728,25 @@ jQuery.noConflict();
                         if (a > b) return 1;
                         return 0;
                     });
-
+                    //   data.product1.insectWidth.unshift({ val: '', name: '' });
                     $.each(widthKeys, function(index, width) {
                         var k = widthKeys[index];
-                        data.product1.insectWidth()[obsIndex++] = { val: k, name: mmc.settings.insect.widthPreText + (mmc.settings.insect.widths[k] / mmc.settings.insect.measurement) + mmc.settings.insect.postText };
+                        data.product1.insectWidth()[index] = { val: k, name: mmc.settings.insect.widthPreText + (mmc.settings.insect.widths[k] / mmc.settings.insect.measurement) + mmc.settings.insect.postText };
                     });
-
 
                     /* Update the observable when array has been built */
                     data.product1.insectWidth.valueHasMutated();
 
-                    data.product1.insectWidth.unshift({ val: '', name: '' });
-
-                    mmc.dom.insect.find('.mmc__height select, .mmc__height2 select').attr('disabled', 'disabled');
 
                     /* Update the selects for Chosen */
+                    /* Daniel: FIX select width when user selects height, else disable height */
+                    if (config.product1.insectWidth() != '') {
+                        mmc.dom.insect.find('select[name=insectWidth] option[value="' + config.product1.insectWidth() + '"]').attr('selected', 'selected');
+                    } else {
+                        mmc.dom.insect.find('.mmc__height select, .mmc__height2 select').attr('disabled', 'disabled');
+                    }
                     mmc.dom.insect.find('select').trigger("chosen:updated");
+
                 },
                 Operations: function(productIndex, options) {
                     var data = mmc.vm.data,
@@ -747,7 +754,7 @@ jQuery.noConflict();
                         validOption;
 
 
-/* Skip this step when operation is set and update is triggered by a change */
+                    /* Skip this step when operation is set and update is triggered by a change */
                     if ((mmc.vm.config[productIndex].operation() != '' || mmc.vm.data[productIndex].operation().length > 0) && mmc.trigger.type) {
                         return;
                     }
@@ -760,11 +767,9 @@ jQuery.noConflict();
                     /* Loop through both of the products and set the options */
                     $.each(data, function(index, product) {
                         var obsIndex = 0;
-
                         /* Loop through all the values and update the Observable */
                         $.each(options, function(name, id) {
-                            if (mmc.vm.config[productIndex].category() == 'BlackoutAwning') {
-                            }
+
                             if (id.IsValid || (!id.IsValid && mmc.settings.showInactive)) {
                                 if (mmc.vm.controls.showCombination()) {
                                     data[productIndex].operation()[obsIndex++] = { val: id.OperationID, name: id.Name, desc: id.Description, inactive: (id.IsValid) ? '' : 'inactive' };
@@ -777,7 +782,6 @@ jQuery.noConflict();
                         /* Update the observable when array has been built */
                         product.operation.valueHasMutated();
                     });
-
                     /* Loop through each of the options to see how many are valid. If only 1 valid, automatically set that one */
                     $.each(options, function(name, id) {
                         if (id.IsValid) {
@@ -948,9 +952,9 @@ jQuery.noConflict();
                                     data[productIndex].colour()[obsIndex++] = {
                                         cat: tempCategory,
                                         val: id.ColorID,
-                                        name: id.ColorID + ' ' + id.ColorDescription,
+                                        name: id.ColorID + ' ' + id.Name,
                                         trans: id.ColorFeatures.Transparency,
-                                        transDesc: mmc.settings.transparency[id.ColorFeatures.Transparency],
+                                        transDesc: id.ColorFeatures.TransparencyDesc,
                                         desc: '',
                                         inactive: (id.IsValid) ? '' : 'inactive'
                                     };
@@ -965,7 +969,7 @@ jQuery.noConflict();
                                         name: id.ColorID + ' ' + id.Name,
                                         desc: '',
                                         trans: id.ColorFeatures.Transparency,
-                                        transDesc: mmc.settings.transparency[id.ColorFeatures.Transparency],
+                                        transDesc: id.ColorFeatures.TransparencyDesc,
                                         inactive: (id.IsValid) ? '' : 'inactive'
                                     };
                                     tempCategory = (id.ColorID > 4609 && id.ColorID < 4622) ? 'BlackoutDisney'
@@ -1107,6 +1111,7 @@ jQuery.noConflict();
                     if (config.product1.windowsize() == null) {
                         return false;
                     }
+
                 },
                 category: function() {
                     var data = mmc.vm.data,
@@ -1130,7 +1135,6 @@ jQuery.noConflict();
                 operation: function() {
                     var data = mmc.vm.data,
                         config = mmc.vm.config;
-
                     /* Trigger custom function */
                     mmc.settings.onSelectOperation(config.product1.operation());
 
@@ -1230,7 +1234,6 @@ jQuery.noConflict();
                 insectHeight: function() {
                     var data = mmc.vm.data,
                         config = mmc.vm.config;
-
                     /* Save the original height value to set it back after configurator update */
                     mmc.settings.insect.height = config.product1.insectHeight();
 
@@ -1259,7 +1262,6 @@ jQuery.noConflict();
                             config.product2.insectHeight(2400);
 
                         }
-
                         /* Trigger custom function */
                         mmc.settings.onSelectInsectNet(config.product1.insectWidth() + ' ' + config.product1.insectHeight() + ' ' + config.product2.insectHeight());
                     } else {
@@ -1709,7 +1711,6 @@ jQuery.noConflict();
         mmc.dom.insectSelect.on({
             click: function(e) {
                 e.preventDefault();
-
                 $(this).closest('.mmc__insectNetTypes').find('.mmc__option').removeClass('mmc__active');
                 $(this).closest('.mmc__option').addClass('mmc__active');
                 $(this).closest('.mmc__configStep').removeClass('mmc__filled');
@@ -1767,7 +1768,7 @@ jQuery.noConflict();
 
 
                 //DANIEL: TEMPORARY TERRIBLE FIX, Danny have to change this to a better solution
-                mmc.dom.complete.find('.mmc__addon .mmc__addToCart input').click().click();
+                mmc.dom.complete.find('.mmc__addon .mmc__addToCart input').click();
                 mmc.vm.addon.Checked(true);
                 //  alert(mmc.dom.complete.find('.mmc__addon .mmc__addToCart input').is(":checked"));
                 /* Trigger customer action: onBeforeAddToBasket */
@@ -1783,7 +1784,7 @@ jQuery.noConflict();
                 mmc.dom.complete.find('#mmc__AddToBasket input').attr('name', 'productsinfo').val(basket);
 
 
-/* Trigger customer action: onAfterAddToBasket */
+                /* Trigger customer action: onAfterAddToBasket */
                 mmc.settings.onAfterAddToBasket();
 
                 if (mmc.settings.shopTarget == '_blank') {
@@ -1854,6 +1855,25 @@ jQuery.noConflict();
                 });
             }
         }, '.mmc__userMessage.mmc__codeCheck');
+
+
+        /* Trigger for clicking on delivery message moreinfo */
+        mmc.dom.complete.on({
+            click: function(event) {
+                event.preventDefault();
+                var content = $(event.target).parent().find('div.sbContent').html();
+                console.log(event);
+                Shadowbox.open(
+                {
+                    content: '<div class="mmc__infoPopup">' + content + '<div class="mmc__closePopup"><span class="text mmc__shadowBoxClose">' + mmc.settings.closeText + ' x</span></div></div>',
+                    player: 'html',
+                    width: 884,
+                    options: {
+                        displayNav: false
+                    }
+                });
+            }
+        }, '.mmc__delivery a');
 
         /* Triggers for opening send email popup */
         mmc.dom.complete.on({

@@ -190,7 +190,7 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
             illustration[index] = {
                 category: (mmc.vm.controls.showCombination() == true) ? product.category().match(/[A-Z]*[^A-Z]+/g)[combiIndex] : product.category(),
                 operation: product.operation(),
-                colour: (product.category() == 'Shutters') ? product.outersurface() : product.colour()
+                colour: ((product.category() == 'Shutters') ? product.outersurface() : product.colour()).replace('/', '-')
             };
         });
 
@@ -337,10 +337,11 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
                     product.insectHeight.removeAll();
                 }
             });
-
+            //DANIEL: COMMENT settings REST for marketing site. 
             /* Reset the config settings for both products */
             $.each(config, function(index, product) {
                 if (product[type]) {
+                    //if (product[type] && mmc.settings.skin == 'marketing' && type != 'category') {
                     product[type]('');
                 }
                 if (type == 'insectnet') {
@@ -475,8 +476,6 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
 
                 mmc.trigger.target.closest('.mmc__option').append(mmc.dom.blocks.tooltipColors.clone());
                 mmc.dom.tooltip = mmc.trigger.target.closest('.mmc__option').find('.mmc__tooltipk15');
-                console.log(imgName);
-                console.log(mmc.trigger.target.val());
                 mmc.dom.tooltip.find('.mmc__tooltipImage img').attr('src', mmc.settings.directory + 'content/' + typeMatch[mmc.trigger.type] + imgName + mmc.trigger.target.val().replace('/', '-') + '.png');
                 mmc.dom.tooltip.find('.mmc__tooltipImageTransparent img').attr('src', mmc.settings.directory + 'content/' + typeMatch['pk10'] + imgName + mmc.trigger.target.val().replace('/', '-') + '.png');
                 mmc.dom.tooltip.find('.mmc__tooltipTitle').html(mmc.trigger.target.closest('.mmc__option').find('.mmc__optionTitle').text());

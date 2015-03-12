@@ -1,7 +1,6 @@
 var generalSettings;
 
 function loadConfigurator(obj) {
-
     var tempDir = obj.directory,
         attemptCount = 0;
 
@@ -176,7 +175,6 @@ function loadConfigurator(obj) {
     }
 
     function init() {
-
         (function(window, document, $) {
             var requestURL = obj.environment + '?option=com_configurator&view=' + obj.renderer,
                 requestData = '&baseurl=' + obj.directory + '&imagesDirectory=' + obj.imagesDirectory + '&lang=' + obj.language + '&did=' + obj.did + '&cid=' + obj.cid + '&dealerurl=' + obj.dealerURL + '&dealertarget=' + obj.dealerTarget + '&shoptarget=' + obj.shopTarget + '&formmethod=' + obj.formMethod,
