@@ -41,3 +41,17 @@ How to install the VELUX Mass Market Configurator
 		});
 	};
 </script>
+
+In the basket page:
+$products = json_decode($_POST['productsinfo']);
+foreach ($products as $product){
+
+if($product->productid){
+echo $product->productid  . ': ' . $product->productprice;
+//var_dump($product);
+
+}
+
+}
+
+
