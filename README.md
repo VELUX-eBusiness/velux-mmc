@@ -20,8 +20,8 @@ How to install the VELUX Mass Market Configurator
 	6. clientID: Client ID that is used to authenticate the client when connecting to the VELUX services (will be provided in a e-mail)
 
 	
-	<script type="text/javascript" src="content/js/insert-velux-configurator.js"></script>
-	<script>
+		<script type="text/javascript" src="content/js/insert-velux-configurator.js"></script>
+		<script>
 		window.onload = function () {
 			loadConfigurator({
 				returnURL: 	'//qa.veluxshop.nl/?option=com_configurator&utm_source=velux&utm_medium=link&utm_campaign=product_configurator&utm_content=pr	oduct_configurator_edsp&task=addItemToBasket',
