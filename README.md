@@ -20,27 +20,23 @@ How to install the VELUX Mass Market Configurator
 	6. clientID: Client ID that is used to authenticate the client when connecting to the VELUX services (will be provided in a e-mail)
 
 	
-<!-- Add these lines to your page -->
-
-	&lt;div id=&quot;mmc__InsertConfigurator&quot; /&gt;
-
-	&lt;script type=&quot;text/javascript&quot; 		src=&quot;content/js/insert-velux-configurator.js&quot;&gt;&lt;/script&gt;
-		&lt;script&gt;
+	<script type="text/javascript" src="content/js/insert-velux-configurator.js"></script>
+	<script>
 		window.onload = function () {
 			loadConfigurator({
-				returnURL: 	&#39;//qa.veluxshop.nl/?option=com_configurator&amp;utm_source=velux&amp;utm_medium=link&amp;utm_campaign=product_configurato	r&amp;utm_content=product_configurator_edsp&amp;task=addItemToBasket&#39;,
-				directory: &#39;//localhost/mmc-demo&#39;,
-				clientID: &#39;dtest&#39;,
+				returnURL: 	'//qa.veluxshop.nl/?option=com_configurator&utm_source=velux&utm_medium=link&utm_campaign=product_configurator&utm_content=pr	oduct_configurator_edsp&task=addItemToBasket',
+				directory: '//localhost/mmc-demo',
+				clientID: 'dtest',
 				showPrintButton: true,
 				showMailButton: true,
 				showDealerButton: true,
-				language: &#39;nl&#39;,
-				dealerTarget: &#39;_blank&#39;,
-				shopTarget: &#39;_blank&#39;,
-				skin: &#39;veluxshop&#39;
-			});
-		};
-	&lt;/script&gt;
+				language: 'nl',
+				dealerTarget: '_blank',
+				shopTarget: '_blank',
+				skin: 'veluxshop'
+				});
+			};
+		</script>
 
 In the basket page:
 
