@@ -48,7 +48,9 @@ $products = json_decode($_POST['productsinfo']);
 foreach ($products as $product){
 
 if($product->productid){
+
 echo $product->productid  . ': ' . $product->productprice;
+
 //var_dump($product);
 
 }
