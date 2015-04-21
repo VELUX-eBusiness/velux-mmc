@@ -22,28 +22,27 @@ How to install the VELUX Mass Market Configurator
 	
 <!-- Add these lines to your page -->
 
-<div id="mmc__InsertConfigurator" />
+&lt;div id=&quot;mmc__InsertConfigurator&quot; /&gt;
 
-<script type="text/javascript" src="content/js/insert-velux-configurator.js"></script>
-<script>
+&lt;script type=&quot;text/javascript&quot; src=&quot;content/js/insert-velux-configurator.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
 	window.onload = function () {
 		loadConfigurator({
-			returnURL: '//qa.veluxshop.nl/?option=com_configurator&utm_source=velux&utm_medium=link&utm_campaign=product_configurator&utm_content=product_configurator_edsp&task=addItemToBasket',
-			directory: '//localhost/mmc-demo',
-			clientID: 'dtest',
+			returnURL: &#39;//qa.veluxshop.nl/?option=com_configurator&amp;utm_source=velux&amp;utm_medium=link&amp;utm_campaign=product_configurator&amp;utm_content=product_configurator_edsp&amp;task=addItemToBasket&#39;,
+			directory: &#39;//localhost/mmc-demo&#39;,
+			clientID: &#39;dtest&#39;,
 			showPrintButton: true,
 			showMailButton: true,
 			showDealerButton: true,
-			language: 'nl',
-			dealerTarget: '_blank',
-			shopTarget: '_blank',
-			skin: 'veluxshop'
+			language: &#39;nl&#39;,
+			dealerTarget: &#39;_blank&#39;,
+			shopTarget: &#39;_blank&#39;,
+			skin: &#39;veluxshop&#39;
 		});
 	};
-</script>
+&lt;/script&gt;
 
 In the basket page:
-
 $products = json_decode($_POST['productsinfo']);
 foreach ($products as $product){
 
