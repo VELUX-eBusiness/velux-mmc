@@ -22,25 +22,25 @@ How to install the VELUX Mass Market Configurator
 	
 <!-- Add these lines to your page -->
 
-&lt;div id=&quot;mmc__InsertConfigurator&quot; /&gt;
+	&lt;div id=&quot;mmc__InsertConfigurator&quot; /&gt;
 
-&lt;script type=&quot;text/javascript&quot; src=&quot;content/js/insert-velux-configurator.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;
-	window.onload = function () {
-		loadConfigurator({
-			returnURL: &#39;//qa.veluxshop.nl/?option=com_configurator&amp;utm_source=velux&amp;utm_medium=link&amp;utm_campaign=product_configurator&amp;utm_content=product_configurator_edsp&amp;task=addItemToBasket&#39;,
-			directory: &#39;//localhost/mmc-demo&#39;,
-			clientID: &#39;dtest&#39;,
-			showPrintButton: true,
-			showMailButton: true,
-			showDealerButton: true,
-			language: &#39;nl&#39;,
-			dealerTarget: &#39;_blank&#39;,
-			shopTarget: &#39;_blank&#39;,
-			skin: &#39;veluxshop&#39;
-		});
-	};
-&lt;/script&gt;
+	&lt;script type=&quot;text/javascript&quot; 		src=&quot;content/js/insert-velux-configurator.js&quot;&gt;&lt;/script&gt;
+		&lt;script&gt;
+		window.onload = function () {
+			loadConfigurator({
+				returnURL: 	&#39;//qa.veluxshop.nl/?option=com_configurator&amp;utm_source=velux&amp;utm_medium=link&amp;utm_campaign=product_configurato	r&amp;utm_content=product_configurator_edsp&amp;task=addItemToBasket&#39;,
+				directory: &#39;//localhost/mmc-demo&#39;,
+				clientID: &#39;dtest&#39;,
+				showPrintButton: true,
+				showMailButton: true,
+				showDealerButton: true,
+				language: &#39;nl&#39;,
+				dealerTarget: &#39;_blank&#39;,
+				shopTarget: &#39;_blank&#39;,
+				skin: &#39;veluxshop&#39;
+			});
+		};
+	&lt;/script&gt;
 
 In the basket page:
 
