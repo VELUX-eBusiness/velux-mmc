@@ -56,7 +56,8 @@
 .mmc__icon.mmc__category.BlackoutDisney {
   background-position: -100px -120px;
 }
-.mmc__icon.mmc__category.BlackoutAwning {
+.mmc__icon.mmc__category.BlackoutAwning,
+.mmc__icon.mmc__category.BlackoutBudgetAwning {
   background-position: -100px -160px;
 }
 .mmc__icon.mmc__category.BlackoutDesign {

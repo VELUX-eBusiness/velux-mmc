@@ -201,12 +201,17 @@ function loadConfigurator(obj) {
             if (XMLHttpRequest) {
                 var request = new XMLHttpRequest();
                 if ("withCredentials" in request) {
-                    // Firefox 3.5 and Safari 4
-                    request.open('GET', url, true);
-                    request.onloadend = function() {
-                        processData(request.response);
-                    };
-                    request.send();
+                    $.ajax({
+                        type: 'GET',
+                        url: url,
+                        processData: true,
+                        dataType: "html",
+                        success: function(data) {
+                            processData(data);
+                        },
+                        error: function(a, b, c) {
+                        }
+                    });
                 } else if (XDomainRequest) {
                     //CORS FIX from Daniel
                     //CORS FIX from Daniel

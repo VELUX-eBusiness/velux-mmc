@@ -45,7 +45,7 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 				/* Show the user message as last, after all checks have completed */
 				self.showRuleMessage(rule, rule.PostText, messageType.join(' '));
 			},
-			range: ['8','10','11','100','101','102','103','501']
+			range: ['8','10','11','100','101','102','501']
 		},
 		/* Behavior to show an adapter, not requiring a Variant or Production code check */
 		adapter: {
@@ -87,18 +87,18 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 			},
 			range: ['505']
 		},
-		/* Specific rule to 506: Blackout, Venetian, Pleated for VL 045/Y45 */
+	    /* Specific rule to 506: Blackout, Venetian, Pleated for VL 045/Y45 */
 		rule506: {
-			run: function (rule) {
-				var messageType = ['note'],
+		    run: function (rule) {
+		        var messageType = ['note'],
 					config = mmc.vm.config.product1;
-				
-				/* Show the user message when the window size does not start with a Y */
-				if (config.windowsize().charAt(0) != 'Y') {
-					self.showRuleMessage(rule, rule.PostText, messageType.join(' '));
-				}
-			},
-			range: ['506']
+
+		        /* Show the user message when the window size does not start with a Y */
+		        if (config.windowsize().charAt(0) != 'Y') {
+		            self.showRuleMessage(rule, rule.PostText, messageType.join(' '));
+		        }
+		    },
+		    range: ['506']
 		},
 		/* Production check relies on the AskForProductCode to decide whether the variant check is required or optional */
 		production: {
@@ -113,7 +113,7 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 						
 						mmc.settings.rules.production.MatchFoundTrue = function (ruleNo) {
 							mmc.trigger.target.addClass('mmc__check');
-							self.showRuleMessage(rule, rule.ProductionTrue, 'check', 'tick');
+							self.showRuleMessage(rule, rule.ProductionTrue, 'true', 'tick');
 							
 							if (rule.RuleNo == '9') {
 								var product = mmc.dom.base.find('.mmc__product[data-productid*="MAD"]');
@@ -124,7 +124,7 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 						}
 						mmc.settings.rules.production.MatchFoundFalse = function () {
 							mmc.trigger.target.addClass('mmc__error');
-							self.showRuleMessage(rule, rule.ProductionFalse, 'error', 'exclamation');
+							self.showRuleMessage(rule, rule.ProductionFalse, 'false', 'exclamation');
 							
 							if (rule.RuleNo == '9') {
 								var product = mmc.dom.base.find('.mmc__product[data-productid*="MAD"]');
@@ -156,7 +156,7 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 					
 						mmc.settings.rules.production.MatchFoundTrue = function (ruleNo) {
 							mmc.trigger.target.addClass('mmc__check');
-							self.showRuleMessage(rule, rule.ProductionTrue, 'check', 'tick');
+							self.showRuleMessage(rule, rule.ProductionTrue, 'true', 'tick');
 							
 							if (ruleNo != '' && rule.Addon) {
 								self.showAddonProduct(rule);
@@ -168,7 +168,7 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 						}
 						mmc.settings.rules.production.MatchFoundFalse = function () {
 							mmc.trigger.target.addClass('mmc__error');
-							self.showRuleMessage(rule, rule.ProductionFalse, 'error', 'exclamation');
+							self.showRuleMessage(rule, rule.ProductionFalse, 'falce', 'exclamation');
 							
 							if (rule.Addon) {
 								self.hideAddonProduct(rule);
@@ -202,7 +202,7 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 						if (!mmc.settings.rules.variant.MatchFoundTrue) {
 							mmc.settings.rules.variant.MatchFoundTrue = function (ruleNo) {
 								mmc.trigger.target.addClass('mmc__check');
-								self.showRuleMessage(rule, rule.VariantTrue, 'check', 'tick');
+								self.showRuleMessage(rule, rule.VariantTrue, 'true', 'tick');
 								
 								if (rule.RuleNo == '7') {
 									var product = mmc.dom.base.find('.mmc__product[data-productid*="MAL"]');
@@ -216,7 +216,7 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 						if (!mmc.settings.rules.variant.MatchFoundFalse) {
 							mmc.settings.rules.variant.MatchFoundFalse = function () {
 								mmc.trigger.target.addClass('mmc__check');
-								self.showRuleMessage(rule, rule.VariantFalse, 'error', 'exclamation');
+								self.showRuleMessage(rule, rule.VariantFalse, 'false', 'exclamation');
 								
 								if (rule.RuleNo == '7') {
 									var product = mmc.dom.base.find('.mmc__product[data-productid*="MAL"]');
@@ -252,7 +252,7 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 				
 				mmc.settings.rules.variant.MatchFoundTrue = function (ruleNo) {
 					mmc.trigger.target.addClass('mmc__check');
-					self.showRuleMessage(rule, rule.VariantTrue, 'check', 'tick');
+					self.showRuleMessage(rule, rule.VariantTrue, 'true', 'tick');
 					
 					mmc.dom.complete.find('.mmc__userMessage[data-rule="53"]').hide();
 					mmc.dom.complete.find('.mmc__userMessage[data-rule="51"]').hide();
@@ -273,7 +273,7 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 				}
 				mmc.settings.rules.variant.MatchFoundFalse = function () {
 					mmc.trigger.target.addClass('mmc__error');
-					self.showRuleMessage(rule, rule.VariantFalse, 'error', 'exclamation');
+					self.showRuleMessage(rule, rule.VariantFalse, 'false', 'exclamation');
 					
 					self.hideAddonProduct(rule);
 					// mmc.vm.controls.showAddon(false);
@@ -301,13 +301,13 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 				if (!mmc.settings.rules.variant.MatchFoundTrue) {
 					mmc.settings.rules.variant.MatchFoundTrue = function (ruleNo) {
 						mmc.trigger.target.addClass('mmc__check');
-						self.showRuleMessage(rule, rule.VariantTrue, 'check', 'tick');
+						self.showRuleMessage(rule, rule.VariantTrue, 'true', 'tick');
 					}
 				}
 				if (!mmc.settings.rules.variant.MatchFoundFalse) {
 					mmc.settings.rules.variant.MatchFoundFalse = function () {
 						mmc.trigger.target.addClass('mmc__error');
-						self.showRuleMessage(rule, rule.VariantFalse, 'error', 'exclamation');
+						self.showRuleMessage(rule, rule.VariantFalse, 'false', 'exclamation');
 					}
 				}
 				
@@ -333,7 +333,7 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 				if (!mmc.settings.rules.variant.MatchFoundTrue) {
 					mmc.settings.rules.variant.MatchFoundTrue = function (ruleNo) {
 						mmc.trigger.target.addClass('mmc__check');
-						self.showRuleMessage(rule, rule.VariantTrue, 'check', 'tick');
+						self.showRuleMessage(rule, rule.VariantTrue, 'true', 'tick');
 						
 						if (ruleNo != '' && ruleNo == rule.RuleNo) {
 							self.showAddonProduct(rule);
@@ -345,7 +345,7 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 				if (!mmc.settings.rules.variant.MatchFoundFalse) {
 					mmc.settings.rules.variant.MatchFoundFalse = function () {
 						mmc.trigger.target.addClass('mmc__error');
-						self.showRuleMessage(rule, rule.VariantFalse, 'error', 'exclamation');
+						self.showRuleMessage(rule, rule.VariantFalse, 'false', 'exclamation');
 						
 						self.hideAddonProduct(rule);
 					}
@@ -373,12 +373,30 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 	/* List of functions to process rules */
 	this.showRuleMessage = function (rule, message, messageType, messageIcon) {
 		var newMessage = mmc.dom.blocks.usermessage.clone(),
-			messageClass = [];
-			
-		$.each(messageType.split(' '), function (index, value) {
-			messageClass.push('mmc__' + value);
-		});
-		
+			messageClass = [],
+		    types = {
+		        '0': 'question',
+		        '1': 'error',
+		        '2': 'note',
+		        '3': 'check'
+		    };
+
+        /* Add the message types (colours) to the user message */
+	    //$.each(messageType.split(' '), function (index, value) {
+		if (messageType === 'true') {
+		    messageClass.push('mmc__check');
+
+		} else if (messageType === 'false') {
+		    messageClass.push('mmc__error');
+
+		} else if (rule.PostTextMessageType) {
+		    messageClass.push('mmc__' + types[rule.PostTextMessageType]);
+
+		} else {
+		    messageClass.push('mmc__note');
+		}
+	    //});
+
 		/* Change the content of the user message */
 		newMessage.attr('data-rule', rule.RuleNo);
 		// newMessage.find('.mmc__userMessageIcon').text(rule.RuleNo);
@@ -390,6 +408,12 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 		/* When a type is supplied, make user message open a variant or production code */
 		if (messageType.match('variant') || messageType.match('production')) {
 			newMessage.addClass('mmc__codeCheck');
+		}
+		if (messageType.match('variant')) {
+		    newMessage.addClass('mmc__variant');
+		}
+		if (messageType.match('production')) {
+		    newMessage.addClass('mmc__production');
 		}
 		
 		/* Add the new rule message to the correct view */
@@ -546,7 +570,8 @@ function loadRulesFunctions(mmc, lib, window, document, $) {
 					
 				} else {
 					/* Trigger the correct function depending on: Variant or Production code check / MatchFound true or false. Hide the rule message that triggers the check */
-					if (obj.MatchFound == true) {
+				    if (obj.MatchFound == true) {
+
 						rules[triggerType].MatchFoundTrue(obj.MatchCompatibility.RuleNo);
 						
 						/* If a rule number is returned, show the related user message. When a rule number is not returned, hide the related user message, only for fourth question */

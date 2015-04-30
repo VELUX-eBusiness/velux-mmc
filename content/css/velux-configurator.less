@@ -945,10 +945,6 @@
 .mmc__userMessage
 {
 	background-color: #ffffff;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#f0f0f0));
-	background-image: -moz-linear-gradient(top, #ffffff, #f0f0f0);
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#ffffff, endColorstr=#f0f0f0);
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#ffffff, endColorstr=#f0f0f0)";
 	width: 96%;
 	margin: 0 2%;
 	border: 1px solid #ffffff;
@@ -984,27 +980,15 @@
 .mmc__userMessage.mmc__error
 {
 	background-color: #ff0000;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#ff0000), to(#dc1420));
-	background-image: -moz-linear-gradient(top, #ff0000, #dc1420);
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#ff0000, endColorstr=#dc1420);
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#ff0000, endColorstr=#dc1420)";
 }
 .mmc__userMessage.mmc__note,
 .mmc__userMessage.mmc__question
 {
 	background-color: #aacae3;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#aacae3), to(#98c2db));
-	background-image: -moz-linear-gradient(top, #aacae3, #98c2db);
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#aacae3, endColorstr=#98c2db);
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#aacae3, endColorstr=#98c2db)";
 }
 .mmc__userMessage.mmc__check
 {
 	background-color: #18b335;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#18b335), to(#09a427));
-	background-image: -moz-linear-gradient(top, #18b335, #09a427);
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#18b335, endColorstr=#09a427);
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#18b335, endColorstr=#09a427)";
 }
 	.mmc__userMessage .mmc__userMessageIcon
 	{
@@ -1075,11 +1059,7 @@
 		}
 	.mmc__userMessage .mmc__userMessageClose
 	{
-		background-color: #f4f4f4;
-		background-image: -webkit-gradient(linear, left top, left bottom, from(#f4f4f4), to(#c2c2c2));
-		background-image: -moz-linear-gradient(top, #f4f4f4, #c2c2c2);
-		filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#f4f4f4, endColorstr=#c2c2c2);
-		-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#f4f4f4, endColorstr=#c2c2c2)";
+		background-color: darken(#ffffff, 15%);
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -1089,27 +1069,15 @@
 	}
 	.mmc__userMessage.mmc__error .mmc__userMessageClose
 	{
-		background-color: #ca424b;
-		background-image: -webkit-gradient(linear, left top, left bottom, from(#ca424b), to(#98111a));
-		background-image: -moz-linear-gradient(top, #ca424b, #98111a);
-		filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#ca424b, endColorstr=#98111a);
-		-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#ca424b, endColorstr=#98111a)";
+		background-color: darken(#ff0000, 20%);
 	}
 	.mmc__userMessage.mmc__note .mmc__userMessageClose
 	{
-		background-color: #a1cde7;
-		background-image: -webkit-gradient(linear, left top, left bottom, from(#a1cde7), to(#709bb6));
-		background-image: -moz-linear-gradient(top, #a1cde7, #709bb6);
-		filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#a1cde7, endColorstr=#709bb6);
-		-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#a1cde7, endColorstr=#709bb6)";
+		background-color: darken(#aacae3, 20%);
 	}
 	.mmc__userMessage.mmc__check .mmc__userMessageClose
 	{
-		background-color: #39984b;
-		background-image: -webkit-gradient(linear, left top, left bottom, from(#39984b), to(#08671a));
-		background-image: -moz-linear-gradient(top, #39984b, #08671a);
-		filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#39984b, endColorstr=#08671a);
-		-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#39984b, endColorstr=#08671a)";
+		background-color: darken(#18b335, 20%)
 	}
 		.mmc__userMessage .mmc__userMessageClose span
 		{
@@ -1831,7 +1799,7 @@
 		{
 			display: none;
 		}
-		.mmc__product .mmc__mmc_productRow.mmc__delivery
+		.mmc__delivery
 		{
 			text-align: right;
 			border-bottom: 0;

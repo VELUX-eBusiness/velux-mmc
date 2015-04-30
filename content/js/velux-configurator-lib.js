@@ -162,7 +162,6 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
 
     /* Function for showing the correct illustration on each update */
     this.updateIllustration = function() {
-
         if (mmc.settings.turning == true) {
             return;
         }
@@ -188,7 +187,7 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
 
             /* Add the selection into an array */
             illustration[index] = {
-                category: (mmc.vm.controls.showCombination() == true) ? product.category().match(/[A-Z]*[^A-Z]+/g)[combiIndex] : product.category(),
+                category: (mmc.vm.controls.showCombination() == true) ? mmc.settings.combinations[product.category()][combiIndex] : product.category(),
                 operation: product.operation(),
                 colour: ((product.category() == 'Shutters') ? product.outersurface() : product.colour()).replace('/', '-')
             };
@@ -284,7 +283,7 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
             nextStep = (newStep) ? newStep : $(activeStep.nextAll('.mmc__required')[0]);
 
         /* Allow moving to next step when the active step if filled, or when the next step if filled but is not window */
-        if (activeStep.hasClass('mmc__filled') || (nextStep.hasClass('mmc__filled') && !activeStep.hasClass('mmc__window'))) {
+        if (activeStep.hasClass('mmc__filled') || (!newStep && activeStep.hasClass('mmc__filled')) || (newStep && nextStep.hasClass('mmc__filled') && !activeStep.hasClass('mmc__window'))) {
             mmc.sliding = true;
             activeStep.find('.mmc__content').slideUp(500, 'linear', function() {
                 $(this).closest('.mmc__configStep').removeClass('mmc__active');
@@ -317,7 +316,7 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
         }
     }
 
-    /* Function for resetting configuration steps, after the current active step */
+/* Function for resetting configuration steps, after the current active step */
     this.resetSteps = function() {
         var steps = mmc.trigger.target.closest('.mmc__configStep').nextAll().not('.mmc__complete'),
             data = mmc.vm.data,
@@ -354,7 +353,7 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
         mmc.vm.controls.showQuestion(false);
     }
 
-    /* Function for selecting the correct window input */
+/* Function for selecting the correct window input */
     this.selectWindowInput = function() {
         var config = mmc.vm.config.product1;
 
@@ -431,13 +430,13 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
 
     }
 
-    /* Hide the user message */
+/* Hide the user message */
     this.hideMessage = function(fadeSpeed) {
         // mmc.dom.message.base().fadeOut((fadeSpeed === undefined) ? 200 : fadeSpeed, function () { mmc.dom.message.base().remove(); });
         mmc.dom.base.find('.mmc__userMessage:not(.mmc__configStep.mmc__complete .mmc__userMessage)').fadeOut((fadeSpeed === undefined) ? 200 : fadeSpeed, function() { $(this).remove(); });
     }
 
-    /* Show the option tooltips */
+/* Show the option tooltips */
     this.showOptionTooltip = function() {
 
         if (mmc.settings.tooltip.timeout) {
@@ -468,7 +467,7 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
 
             /* Split the imgName into 2 and select the one that's hovered */
             if (mmc.vm.controls.showCombination() == true && imgName) {
-                imgName = imgName.match(/[A-Z]*[^A-Z]+/g)[mmc.trigger.target.closest('.mmc__options').attr('data-product') - 1];
+                imgName = mmc.settings.combinations[imgName][mmc.trigger.target.closest('.mmc__options').attr('data-product') - 1];
             }
 
 
@@ -558,7 +557,7 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
 
     }
 
-    /* Hide the option tooltips */
+/* Hide the option tooltips */
     this.hideOptionTooltip = function() {
 
         if (mmc.settings.tooltip.timeout) {
@@ -727,7 +726,6 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
         });
 
     }
-
 }
 
 /* Returns true to the insert-velux-configurator.js file to indicate when file has loaded */

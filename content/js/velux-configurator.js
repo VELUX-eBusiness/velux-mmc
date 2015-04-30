@@ -103,7 +103,11 @@ jQuery.noConflict();
                         windowtype: function() { return mmc.vm.config.product1.windowtype(); },
                         /* If triggered by windowtype, don't return windowsize */
                         windowsize: function() { return (mmc.trigger.type == 'windowtype') ? '' : mmc.vm.config.product1.windowsize(); },
-                        category: function() { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product1.categoryText()) : (!mmc.vm.config.product1.windowtype() || !mmc.vm.config.product1.windowsize()) ? '' : (mmc.vm.controls.showCombination()) ? mmc.vm.config.product1.category() + mmc.vm.config.product1.category().match(/[A-Z][a-z]+/g)[0] : mmc.vm.config.product1.category(); },
+                        category: function() {
+                            return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product1.categoryText()) : (!mmc.vm.config.product1.windowtype()
+                                    || !mmc.vm.config.product1.windowsize()) ? '' : (mmc.vm.controls.showCombination())
+                                ? mmc.vm.config.product1.category() + mmc.settings.combinations[mmc.vm.config.product1.category()][0] : mmc.vm.config.product1.category();
+                        },
                         operation: function() { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product1.operationText()) : mmc.vm.config.product1.operation(); },
                         finishtype: function() { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product1.finishtypeText()) : mmc.vm.config.product1.finishtype(); },
                         colour: function() { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product1.colourText()) : mmc.vm.config.product1.colour(); },
@@ -114,13 +118,18 @@ jQuery.noConflict();
                         categorynodeid: function() { if (mmc.isBasket() && mmc.vm.controls.showCombination()) return mmc.vm.config.product1.category(); },
                         // serviceproductid: function () { if (mmc.isBasket()) return mmc.vm.config.product1.serviceProductID(); },
                         productprice: function() { if (mmc.isBasket()) return mmc.vm.config.product1.productPrice(); },
-                        configuratorType: function() { if (!mmc.isBasket()) return mmc.vm.config.product1.configureType(); }
+                        configuratorType: function() { if (!mmc.isBasket()) return mmc.vm.config.product1.configureType(); },
+                        deliveryTime: function() { return mmc.vm.config.product1.deliveryTime(); }
                     },
                     2: {
                         windowtype: function() { return mmc.vm.config.product2.windowtype(); },
                         /* If triggered by windowtype, don't return windowsize */
                         windowsize: function() { return (mmc.trigger.type == 'windowtype') ? '' : mmc.vm.config.product2.windowsize(); },
-                        category: function() { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product2.categoryText()) : (!mmc.vm.config.product2.windowtype() || !mmc.vm.config.product2.windowsize()) ? '' : (mmc.vm.controls.showCombination()) ? mmc.vm.config.product2.category() + mmc.vm.config.product2.category().match(/[A-Z][a-z]+/g)[1] : mmc.vm.config.product2.category(); },
+                        category: function() {
+                            return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product2.categoryText()) : (!mmc.vm.config.product2.windowtype()
+                                    || !mmc.vm.config.product2.windowsize()) ? '' : (mmc.vm.controls.showCombination())
+                                ? mmc.vm.config.product2.category() + mmc.settings.combinations[mmc.vm.config.product2.category()][1] : mmc.vm.config.product2.category();
+                        },
                         operation: function() { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product2.operationText()) : mmc.vm.config.product2.operation(); },
                         finishtype: function() { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product2.finishtypeText()) : mmc.vm.config.product2.finishtype(); },
                         colour: function() { return (mmc.isBasket()) ? encodeURI(mmc.vm.config.product2.colourText()) : mmc.vm.config.product2.colour(); },
@@ -131,7 +140,8 @@ jQuery.noConflict();
                         categorynodeid: function() { if (mmc.isBasket() && mmc.vm.controls.showCombination()) return mmc.vm.config.product2.category(); },
                         // serviceproductid: function () { if (mmc.isBasket()) return mmc.vm.config.product2.serviceProductID(); },
                         productprice: function() { if (mmc.isBasket()) return mmc.vm.config.product2.productPrice(); },
-                        configuratorType: function() { if (!mmc.isBasket()) return mmc.vm.config.product2.configureType(); }
+                        configuratorType: function() { if (!mmc.isBasket()) return mmc.vm.config.product2.configureType(); },
+                        deliveryTime: function() { return mmc.vm.config.product2.deliveryTime(); }
                     },
                     3: {
                         windowtype: function() { return mmc.vm.config.product1.windowtype(); },
@@ -231,8 +241,7 @@ jQuery.noConflict();
 
                                 /* If triggering go to basket, check whether request should include product 2 and/or 3 */
                                 if (mmc.isBasket()) {
-
-                                    if ((name == 2 && !mmc.vm.controls.showProduct2() && !mmc.vm.controls.showCombination())
+                                    if ((name == 2 && (!mmc.vm.controls.showProduct2() && !mmc.vm.controls.showCombination() || !mmc.vm.controls.buyProduct2()))
                                         || (name == 3 && !mmc.vm.addon.Checked())) {
                                         return;
                                     }
@@ -262,7 +271,6 @@ jQuery.noConflict();
 
                 var url = (mmc.isBasket()) ? '{' + requestProducts.join(',') + '}' : request.href + '&' + requestUrl.join('&') + '&data={' + requestProducts.join(',') + '}';
 
-                //  console.log(url);
                 return url;
             },
             /* Array with all the options that have localised texts */
@@ -309,6 +317,17 @@ jQuery.noConflict();
                         return mmc.dom.insect.find('.mmc__option.mmc__active').attr('id').replace('mmc__', '');
                     }
                 },
+                /* Set up which two products are used to configure the combinations */
+                combinations: {
+                    BlackoutAwning: ['Blackout', 'Awning'],
+                    RollerAwning: ['Roller', 'Awning'],
+                    EnergyAwning: ['Energy', 'Awning'],
+                    DOPAwning: ['DOP', 'Awning'],
+                    ROPAwning: ['ROP', 'Awning'],
+                    FOPAwning: ['FOP', 'Awning'],
+                    BlackoutBudgetAwning: ['BlackoutBudget', 'Awning']
+                },
+                isBom: false,
                 selectTypeText: $('#mmc__Settings .mmc__setSelectTypeText').text(),
                 selectSizeText: $('#mmc__Settings .mmc__setSelectSizeText').text(),
                 flatroofSizes: ['CVP', 'CFP'],
@@ -690,8 +709,8 @@ jQuery.noConflict();
                     });
 
 
-                    //DANIEL: TEMPORARY FIX, Danny have to change this to a better solution
-                    $('.BlackoutAwning.mmc__active input, .EnergyAwning.mmc__active input, .RollerAwning.mmc__active input').trigger('change');
+                    /* When a combination product is already pre-selected, it needs to be triggered again to ensure a configure combination is requested */
+                    mmc.dom.option('mmc__category', false, 'mmc__active').filter('[data-parent="COMBINATION"]').find('input').trigger('change');
 
                     /* Trigger selectWindowInput to focus on next button */
                     lib.selectWindowInput();
@@ -728,10 +747,11 @@ jQuery.noConflict();
                         if (a > b) return 1;
                         return 0;
                     });
-                    //   data.product1.insectWidth.unshift({ val: '', name: '' });
+                    data.product1.insectWidth([]);
+                    data.product1.insectWidth.unshift({ val: '', name: '' });
                     $.each(widthKeys, function(index, width) {
                         var k = widthKeys[index];
-                        data.product1.insectWidth()[index] = { val: k, name: mmc.settings.insect.widthPreText + (mmc.settings.insect.widths[k] / mmc.settings.insect.measurement) + mmc.settings.insect.postText };
+                        data.product1.insectWidth.push({ val: k, name: mmc.settings.insect.widthPreText + (mmc.settings.insect.widths[k] / mmc.settings.insect.measurement) + mmc.settings.insect.postText });
                     });
 
                     /* Update the observable when array has been built */
@@ -741,7 +761,7 @@ jQuery.noConflict();
                     /* Update the selects for Chosen */
                     /* Daniel: FIX select width when user selects height, else disable height */
                     if (config.product1.insectWidth() != '') {
-                        mmc.dom.insect.find('select[name=insectWidth] option[value="' + config.product1.insectWidth() + '"]').attr('selected', 'selected');
+                        mmc.dom.insect.find('select[name=insectWidth] option[value="' + config.product1.insectWidth() + '"]').attr('selected', true);
                     } else {
                         mmc.dom.insect.find('.mmc__height select, .mmc__height2 select').attr('disabled', 'disabled');
                     }
@@ -783,6 +803,7 @@ jQuery.noConflict();
                         product.operation.valueHasMutated();
                     });
                     /* Loop through each of the options to see how many are valid. If only 1 valid, automatically set that one */
+
                     $.each(options, function(name, id) {
                         if (id.IsValid) {
                             validCount++;
@@ -794,9 +815,10 @@ jQuery.noConflict();
                         lib.checkFilledSteps(mmc.vm.config[productIndex]);
                     }
 
-
-                    //DANIEL: TEMPORARY TERRIBLE FIX, Danny have to change this to a better solution
-                    $('.mmc__option.mmc__operation.mmc__active input').trigger('change');
+                    /* Add an extra check to see if the required steps are filled. If so, then trigger the updateConfigurator again */
+                    if (mmc.dom.base.find('.mmc__configStep.mmc__required.mmc__filled:not(.mmc__complete)').length == mmc.dom.base.find('.mmc__configStep.mmc__required:not(.mmc__complete)').length && !mmc.dom.base.hasClass('mmc__loading')) {
+                        mmc.update();
+                    }
 
                 },
                 Finishes: function(productIndex, options) {
@@ -947,7 +969,7 @@ jQuery.noConflict();
                                     /* Create a check for BlackoutDisney colours, in case they show up in the Blackout category */
                                     tempCategory = (id.ColorID > 4609 && id.ColorID < 4622) ? 'BlackoutDisney'
                                         : (id.ColorID >= 6520 && id.ColorID <= 6525) ? 'RomanDesign'
-                                        : mmc.vm.config[productIndex].category().match(/[A-Z][a-z]+/g)[productIndex.charAt(productIndex.length - 1) - 1];
+                                        : mmc.settings.combinations[mmc.vm.config[productIndex].category()][productIndex.charAt(productIndex.length - 1) - 1];
 
                                     data[productIndex].colour()[obsIndex++] = {
                                         cat: tempCategory,
@@ -994,8 +1016,8 @@ jQuery.noConflict();
                     if (validCount == 1) {
                         mmc.vm.config[productIndex].colour(validOption);
                         lib.checkFilledSteps(mmc.vm.config[productIndex]);
-                    }
 
+                    }
                     /* Add an extra check to see if the required steps are filled. If so, then trigger the updateConfigurator again */
                     if (mmc.dom.base.find('.mmc__configStep.mmc__required.mmc__filled:not(.mmc__complete)').length == mmc.dom.base.find('.mmc__configStep.mmc__required:not(.mmc__complete)').length && !mmc.dom.base.hasClass('mmc__loading')) {
                         // mmc.settings.doNotHide = true;
@@ -1020,11 +1042,9 @@ jQuery.noConflict();
                     $.each(options, function(index, value) {
                         var product = (productIndex == 'product2') ? productIndex : 'product' + (index + 1);
 
-                        var productPrice =
-                            mmc.settings.includeVatInPrice ?
-                                (!value.Price) ? value.PriceWithVAT : (value.Price.HasDiscount) ? value.Price.ProductPriceDiscounted.PriceWithVAT : value.Price.ProductPrice.PriceWithVAT
-                                :
-                                (!value.Price) ? value.PriceExVAT : (value.Price.HasDiscount) ? value.Price.ProductPriceDiscounted.PriceExVAT : value.Price.ProductPrice.PriceExVAT;
+                        var productPrice = (mmc.settings.includeVatInPrice)
+                            ? (!value.Price) ? value.PriceWithVAT : (value.Price.HasDiscount) ? value.Price.ProductPriceDiscounted.PriceWithVAT : value.Price.ProductPrice.PriceWithVAT
+                            : (!value.Price) ? value.PriceExVAT : (value.Price.HasDiscount) ? value.Price.ProductPriceDiscounted.PriceExVAT : value.Price.ProductPrice.PriceExVAT;
 
                         var productDiscount = mmc.settings['percentDiscount' + data[product].category()];
                         if (productDiscount === undefined) {
@@ -1036,12 +1056,21 @@ jQuery.noConflict();
                             productPrice = (parseFloat(productPrice) * ((100 - productDiscount) / 100)).toFixed(2);
                         }
 
+                        /* Hack for German BOMS, reading the individual prices, not combinations prices */
+                        if ($.inArray(value.ProductGroup, ['DOP', 'ROP', 'FOP']) != -1 || mmc.settings.isBom) {
+                            productPrice = ($.inArray(value.ProductGroup, ['DOP', 'ROP', 'FOP']) != -1) ? (mmc.settings.includeVatInPrice) ? value.PriceWithVAT : value.PriceExVAT : data['product1'].productPrice();
+                            mmc.settings.isBom = true;
+                        }
+
                         data[product].productPrice(productPrice);
                         data[product].productID(value.VCE);
+                        data[product].deliveryTime(value.DeliveryTime);
                         data[product].serviceProductID(value.ProductID);
                         data[product].includeVatInPrice = mmc.settings.includeVatInPrice;
 
-                        mmc.settings.rules.product[product] = (data[productIndex].category() == 'Shutters') ? value.RollerShutter : (data[productIndex].category() == 'InsectNet') ? value.InsectNet : value.Blind;
+                        mmc.settings.rules.product[product] =
+                        (data[productIndex].category() == 'Shutters') ? value.RollerShutter :
+                        (data[productIndex].category() == 'InsectNet') ? value.InsectNet : value.Blind;
 
                         if (mmc.vm.controls.showProduct2() == true) {
                             if (mmc.settings.rules.product[product].AskForTypeSignVariant == true) {
@@ -1218,7 +1247,7 @@ jQuery.noConflict();
                         $.each(heights, function(index, value) {
                             data['product' + i].insectHeight.push({ val: value, name: mmc.settings.insect.heightPreText + (value / mmc.settings.insect.measurement) + mmc.settings.insect.postText });
                         });
-                        data['product' + i].insectHeight.unshift({ val: '', name: '' })
+                        data['product' + i].insectHeight.unshift({ val: '', name: '' });
                     }
 
                     /* Reset the configured heights */
@@ -1362,15 +1391,19 @@ jQuery.noConflict();
             /* Catch updateConfigurator */
             self.updateConfigurator = function(data, event) {
 
-
                 /* Always clear the price when updating the configurator */
                 mmc.vm.config.product1.productPrice('');
                 mmc.vm.config.product2.productPrice('');
 
+                mmc.settings.isBom = false;
+
                 /* Always set the buyProduct observable to true, and tick the select boxes */
                 mmc.vm.controls.buyProduct1(true);
                 mmc.vm.controls.buyProduct2(true);
-                mmc.dom.complete.find('.mmc__product .mmc__addToCart input:not(input:checked)').click();
+
+                mmc.dom.complete.find('.mmc__product:not(.mmc__addon) .mmc__addToCart input:not(input:checked)').click();
+
+                // DANIEL: FIX FOR ADDON checked by previous line (we need to exlude addons)
 
                 if (!mmc.dom.base.hasClass('mmc__loading')) {
                     mmc.trigger.target = $(event.target);
@@ -1434,6 +1467,7 @@ jQuery.noConflict();
             self.operation = ko.observable('');
             self.finishtype = ko.observable('');
             self.colour = ko.observable('');
+            self.deliveryTime = ko.observable('');
             self.outersurface = ko.observable('');
             self.insectWidth = ko.observable('');
             self.insectHeight = ko.observable('');
@@ -1453,11 +1487,20 @@ jQuery.noConflict();
             $.each(mmc.options, function(index, value) {
                 self[value + 'Text'] = ko.computed(function() {
                     if (self[value]()) {
-                        var optionText = '';
+                        var optionText = '',
+                            parentCategory = (mmc.trigger.target) ? mmc.trigger.target.closest('.mmc__option').data('parent') : '';
 
                         /* Loop through the data to grab the active option text */
                         $.each(mmc.vm.data['product' + product][value](), function(cat, options) {
-                            var compareVal = (mmc.vm.controls.showCombination() && value == 'category') ? self[value]().match(/[A-Z][a-z]+/g)[product - 1] : self[value]();
+                            var compareVal = (parentCategory === 'COMBINATION' && value === 'category') ? mmc.settings.combinations[self[value]()][product - 1] : self[value]();
+                            if (compareVal === 'DOP') {
+                                compareVal = 'Blackout';
+                            } else if (compareVal === 'FOP') {
+                                compareVal = 'Energy';
+                            } else if (compareVal === 'ROP') {
+                                compareVal = 'Roller';
+                            }
+
                             if (options.val == compareVal) {
                                 optionText = options.name;
                             }
@@ -1488,7 +1531,7 @@ jQuery.noConflict();
                 try {
                     if (mmc.vm.controls.showCombination() == true) {
                         if (product == 2 && mmc.vm.config.product1.productPrice()) {
-                            // price = (parseFloat(mmc.vm.config.product1.productPrice()) + parseFloat(mmc.vm.config.product2.productPrice())).toFixed(2).toString();
+                            //price = (parseFloat(mmc.vm.config.product1.productPrice()) + parseFloat(mmc.vm.config.product2.productPrice())).toFixed(2).toString();
                         } else {
                             return;
                         }
@@ -1766,23 +1809,28 @@ jQuery.noConflict();
         mmc.dom.complete.on({
             click: function(event) {
 
+                if (event.target.nodeName == 'SPAN') {
+                    $(event.target).closest('.mmc__button').find('button').trigger('click');
+                    return false;
 
-                //DANIEL: TEMPORARY TERRIBLE FIX, Danny have to change this to a better solution
-                mmc.dom.complete.find('.mmc__addon .mmc__addToCart input').click();
-                mmc.vm.addon.Checked(true);
-                //  alert(mmc.dom.complete.find('.mmc__addon .mmc__addToCart input').is(":checked"));
+                }
+
                 /* Trigger customer action: onBeforeAddToBasket */
                 mmc.settings.onBeforeAddToBasket();
 
                 /* Trigger custom function */
                 mmc.settings.onButtonAddToBasket();
 
+                /* When configuring German BOM, only add the BOM to the basket */
+                if (mmc.settings.isBom) {
+                    mmc.vm.controls.buyProduct2(false);
+                }
+
                 mmc.trigger.target = $(event.target).closest('.mmc__button');
                 mmc.trigger.type = 'gotobasket';
 
                 var basket = mmc.buildRequest();
                 mmc.dom.complete.find('#mmc__AddToBasket input').attr('name', 'productsinfo').val(basket);
-
 
                 /* Trigger customer action: onAfterAddToBasket */
                 mmc.settings.onAfterAddToBasket();
@@ -1796,7 +1844,7 @@ jQuery.noConflict();
                     mmc.update();
                 }
             }
-        }, '.mmc__button button');
+        }, '.mmc__button button, .mmc__button span');
 
         /* Handlers for select boxes to enable/disable the purchase of a product */
         mmc.dom.complete.on({
@@ -1862,7 +1910,7 @@ jQuery.noConflict();
             click: function(event) {
                 event.preventDefault();
                 var content = $(event.target).parent().find('div.sbContent').html();
-                console.log(event);
+
                 Shadowbox.open(
                 {
                     content: '<div class="mmc__infoPopup">' + content + '<div class="mmc__closePopup"><span class="text mmc__shadowBoxClose">' + mmc.settings.closeText + ' x</span></div></div>',
