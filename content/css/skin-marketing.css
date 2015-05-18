@@ -434,6 +434,9 @@
   font-style: normal;
   font-family: 'VELUXGothicBold', Arial, sans-serif;
 }
+#sb-container #sb-wrapper #sb-wrapper-inner #sb-body #sb-body-inner #sb-player .mmc__infoPopup .mmc__windowTypeSize .mmc__step .mmc__stepText img {
+  width: auto !important;
+}
 @media screen and (max-width: 767px) {
   #mmc__Configurator [class*="grid"] {
     float: none;

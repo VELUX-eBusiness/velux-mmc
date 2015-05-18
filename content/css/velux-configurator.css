@@ -488,6 +488,18 @@
   padding: 0 0 25px 0;
   width: 200px;
 }
+.mmc__updatingOverlay.mmc__landingOverlay .mmc__infoBlock {
+  background: none;
+  background-color: #ff0000;
+  color: #fff;
+  width: 300px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.mmc__updatingOverlay.mmc__landingOverlay .mmc__infoBlock .mmc__updatingDesc {
+  width: 100%;
+}
 .mmc__shareButtons {
   position: absolute;
   top: 16px;

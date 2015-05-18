@@ -220,6 +220,19 @@
 .mmc__updating .mmc__infoBlock.mmc__updateBlock .mmc__updatingIcon img {
   display: none;
 }
+.mmc__updatingOverlay.mmc__landingOverlay .mmc__infoBlock {
+  background: none;
+  background-color: #ff0000;
+  color: #fff;
+  width: 300px;
+  border-color: #fff;
+}
+.mmc__updatingOverlay.mmc__landingOverlay .mmc__infoBlock .mmc__updatingTitle {
+  border-color: #fff;
+}
+.mmc__updatingOverlay.mmc__landingOverlay .mmc__infoBlock .mmc__updatingDesc {
+  width: 100%;
+}
 .mmc__select .chosen-container .chosen-drop .chosen-results .highlighted {
   background-color: #8dc526;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8dc526', endColorstr='#72a21a', GradientType=0);

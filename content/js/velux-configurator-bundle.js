@@ -51,7 +51,8 @@ jQuery.noConflict();
                 updating: false,
                 insectSelect: $('#mmc__Options .mmc__insectNetTypes label, #mmc__Options .mmc__insectNetTypes button'),
                 blocks: {
-                    updating: $('#mmc__Configurator #mmc__Blocks .mmc__updatingOverlay'),
+                    updating: $('#mmc__Configurator #mmc__Blocks .mmc__updatingOverlay:not(.mmc__landingOverlay)'),
+                    landing: $('#mmc__Configurator #mmc__Blocks .mmc__updatingOverlay.mmc__landingOverlay'),
                     usermessage: $('#mmc__Configurator #mmc__Blocks .mmc__userMessage'),
                     tooltip: $('#mmc__Configurator #mmc__Blocks .mmc__tooltip'),
                     tooltipColors: $('#mmc__Configurator #mmc__Blocks .mmc__tooltipk15'),
@@ -120,7 +121,8 @@ jQuery.noConflict();
                         // serviceproductid: function () { if (mmc.isBasket()) return mmc.vm.config.product1.serviceProductID(); },
                         productprice: function() { if (mmc.isBasket()) return mmc.vm.config.product1.productPrice(); },
                         configuratorType: function() { if (!mmc.isBasket()) return mmc.vm.config.product1.configureType(); },
-                        deliveryTime: function() { return mmc.vm.config.product1.deliveryTime(); }
+                        deliveryTime: function() { return mmc.vm.config.product1.deliveryTime(); },
+                        campaignDescription: function() { return mmc.vm.config.product1.campaignDescription(); }
                     },
                     2: {
                         windowtype: function() { return mmc.vm.config.product2.windowtype(); },
@@ -142,7 +144,8 @@ jQuery.noConflict();
                         // serviceproductid: function () { if (mmc.isBasket()) return mmc.vm.config.product2.serviceProductID(); },
                         productprice: function() { if (mmc.isBasket()) return mmc.vm.config.product2.productPrice(); },
                         configuratorType: function() { if (!mmc.isBasket()) return mmc.vm.config.product2.configureType(); },
-                        deliveryTime: function() { return mmc.vm.config.product2.deliveryTime(); }
+                        deliveryTime: function() { return mmc.vm.config.product2.deliveryTime(); },
+                        campaignDescription: function() { return mmc.vm.config.product2.campaignDescription(); }
                     },
                     3: {
                         windowtype: function() { return mmc.vm.config.product1.windowtype(); },
@@ -152,6 +155,7 @@ jQuery.noConflict();
                         // serviceproductid: function () { if (mmc.isBasket()) return mmc.vm.config.product2.serviceProductID(); },
                         productprice: function() { if (mmc.isBasket()) return mmc.vm.addon.productPrice(); },
                         description: function() { if (mmc.isBasket()) return mmc.vm.addon.Name(); },
+                        campaignDescription: function() { return mmc.vm.config.product3.campaignDescription(); }
                     }
                 }
             },
@@ -190,7 +194,7 @@ jQuery.noConflict();
             },
             setActiveStep: function() {
                 /* Set the correct step as the active step. */
-                var activeStep = $(mmc.dom.options.find('.mmc__configStep.mmc__required:not(.mmc__filled)')[0]);
+                var activeStep = (mmc.settings.landing) ? $(mmc.dom.step[0]) : $(mmc.dom.options.find('.mmc__configStep.mmc__required:not(.mmc__filled)')[0]);
                 activeStep.find('.mmc__content').show();
                 activeStep.addClass('mmc__active');
 
@@ -259,6 +263,7 @@ jQuery.noConflict();
                                     requestName = (mmc.settings.basketType == 'veluxshop') ? 'product' + name : name;
 
                                 $.each(product, function(data, option) {
+
                                     if (option() && option() != 'undefined') {
                                         requestData.push('"' + data + '":"' + option() + '"');
                                     }
@@ -282,6 +287,7 @@ jQuery.noConflict();
             },
             /* Object with site settings */
             settings: {
+                landing: false, /* Set landing setting that controls how the configurator behaves when loading */
                 doNotHide: false, /* Set whether the mmc.update should hide the updating block when the AJAX call is finished */
                 defaultImg: 'product1',
                 sepT: '.',
@@ -421,6 +427,10 @@ jQuery.noConflict();
                     /* Add window type and window size options to select */
                     if (option == 'windowtype' || option == 'windowsize') {
                         mmc.vm.data.product1[option].push({ val: data, name: data });
+                    }
+
+                    if (option === 'referrer' && data === 'itzalalanding') {
+                        mmc.settings.landing = true;
                     }
 
                     /* Set the observable with the correct data */
@@ -1047,6 +1057,7 @@ jQuery.noConflict();
                             ? (!value.Price) ? value.PriceWithVAT : (value.Price.HasDiscount) ? value.Price.ProductPriceDiscounted.PriceWithVAT : value.Price.ProductPrice.PriceWithVAT
                             : (!value.Price) ? value.PriceExVAT : (value.Price.HasDiscount) ? value.Price.ProductPriceDiscounted.PriceExVAT : value.Price.ProductPrice.PriceExVAT;
 
+
                         var productDiscount = mmc.settings['percentDiscount' + data[product].category()];
                         if (productDiscount === undefined) {
                             productDiscount = mmc.settings.percentDiscount;
@@ -1061,6 +1072,13 @@ jQuery.noConflict();
                         if ($.inArray(value.ProductGroup, ['DOP', 'ROP', 'FOP']) != -1 || mmc.settings.isBom) {
                             productPrice = ($.inArray(value.ProductGroup, ['DOP', 'ROP', 'FOP']) != -1) ? (mmc.settings.includeVatInPrice) ? value.PriceWithVAT : value.PriceExVAT : data['product1'].productPrice();
                             mmc.settings.isBom = true;
+                        }
+
+
+                        if (value && value.Price && value.Price.Discounts) {
+                            if (value.Price.HasDiscount) {
+                                data[product].campaignDescription(value.Price.Discounts.Discount.CampaignDescription);
+                            }
                         }
 
                         data[product].productPrice(productPrice);
@@ -1093,6 +1111,9 @@ jQuery.noConflict();
                     var data = mmc.vm.data,
                         config = mmc.vm.config;
 
+                    /* Reset the landing setting to false, removing the message */
+                    mmc.settings.landing = false;
+
                     /* Reset the showing of the second product */
                     mmc.vm.controls.showProduct2(false);
                     mmc.vm.controls.showCombination(false);
@@ -1119,6 +1140,9 @@ jQuery.noConflict();
                 windowsize: function() {
                     var data = mmc.vm.data,
                         config = mmc.vm.config;
+
+                    /* Reset the landing setting to false, removing the message */
+                    mmc.settings.landing = false;
 
                     /* Reset the showing of the second product */
                     mmc.vm.controls.showProduct2(false);
@@ -1469,6 +1493,7 @@ jQuery.noConflict();
             self.finishtype = ko.observable('');
             self.colour = ko.observable('');
             self.deliveryTime = ko.observable('');
+            self.campaignDescription = ko.observable('');
             self.outersurface = ko.observable('');
             self.insectWidth = ko.observable('');
             self.insectHeight = ko.observable('');
@@ -2008,6 +2033,16 @@ jQuery.noConflict();
                 mmc.settings.onButtonDealer();
             }
         }, '.mmc__button.mmc__dealer a');
+
+        /* Trigger for closing landing overview overlay */
+        mmc.dom.base.on({
+            click: function(e) {
+                e.preventDefault();
+
+                e.target.closest('.mmc__landingOverlay').remove();
+                mmc.dom.activeStep().removeClass('mmc__updating');
+            }
+        }, '.mmc__landingOverlay .mmc__button a');
     });
 
 })(window, document, jQuery);
@@ -2282,7 +2317,16 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
     }
 
     /* Function for switching steps */
-    this.switchStep = function(newStep) {
+    this.switchStep = function (newStep) {
+
+        /* Show a message when switching steps when coming from google landing. Allow switching again when triggered a second time */
+        if (mmc.settings.landing) {
+            mmc.settings.landing = false;
+            mmc.dom.activeStep().append(mmc.dom.blocks.landing.clone());
+            mmc.dom.activeStep().addClass('mmc__updating');
+            //alert('Hi, please be aware that you have not changed your window type or size. Check the type and size that are currently selected and ensure that they are what you need.');
+            return false;
+        }
 
         /* Don't allow switching of steps when animating */
         if (mmc.sliding == true) {

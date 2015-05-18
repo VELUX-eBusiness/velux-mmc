@@ -268,7 +268,16 @@ function loadConfiguratorFunctions(mmc, window, document, $) {
     }
 
     /* Function for switching steps */
-    this.switchStep = function(newStep) {
+    this.switchStep = function (newStep) {
+
+        /* Show a message when switching steps when coming from google landing. Allow switching again when triggered a second time */
+        if (mmc.settings.landing) {
+            mmc.settings.landing = false;
+            mmc.dom.activeStep().append(mmc.dom.blocks.landing.clone());
+            mmc.dom.activeStep().addClass('mmc__updating');
+            //alert('Hi, please be aware that you have not changed your window type or size. Check the type and size that are currently selected and ensure that they are what you need.');
+            return false;
+        }
 
         /* Don't allow switching of steps when animating */
         if (mmc.sliding == true) {
