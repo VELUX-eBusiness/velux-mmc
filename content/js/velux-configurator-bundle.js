@@ -82,6 +82,7 @@ jQuery.noConflict();
                 cid: function() { return mmc.settings.cid; },
                 lang: function() { return mmc.settings.language; },
                 format: 'json',
+                isbom: function() { return mmc.settings.isBom; },
                 combi: function() {
 
                     return (mmc.vm.controls.showCombination() == true) ? true : false;
@@ -155,7 +156,9 @@ jQuery.noConflict();
                         // serviceproductid: function () { if (mmc.isBasket()) return mmc.vm.config.product2.serviceProductID(); },
                         productprice: function() { if (mmc.isBasket()) return mmc.vm.addon.productPrice(); },
                         description: function() { if (mmc.isBasket()) return mmc.vm.addon.Name(); },
-                        campaignDescription: function() { return mmc.vm.config.product3.campaignDescription(); }
+                        campaignDescription: function() {
+                            return null; //mmc.vm.config.addon.campaignDescription();
+                        }
                     }
                 }
             },
@@ -210,7 +213,6 @@ jQuery.noConflict();
                 var request = mmc.request,
                     requestUrl = [],
                     requestProducts = [];
-
                 $.each(request, function(index, value) {
                     if (index == 'href') {
                         return;
@@ -826,6 +828,7 @@ jQuery.noConflict();
                         lib.checkFilledSteps(mmc.vm.config[productIndex]);
                     }
 
+
                     /* Add an extra check to see if the required steps are filled. If so, then trigger the updateConfigurator again */
                     if (mmc.dom.base.find('.mmc__configStep.mmc__required.mmc__filled:not(.mmc__complete)').length == mmc.dom.base.find('.mmc__configStep.mmc__required:not(.mmc__complete)').length && !mmc.dom.base.hasClass('mmc__loading')) {
                         mmc.update();
@@ -1042,6 +1045,7 @@ jQuery.noConflict();
                     lib.clearCompleteStep();
 
                     if (options.length) {
+
                         mmc.vm.controls.showProduct2(true);
                     }
 
@@ -1069,13 +1073,13 @@ jQuery.noConflict();
                         }
 
                         /* Hack for German BOMS, reading the individual prices, not combinations prices */
+
                         if ($.inArray(value.ProductGroup, ['DOP', 'ROP', 'FOP']) != -1 || mmc.settings.isBom) {
                             productPrice = ($.inArray(value.ProductGroup, ['DOP', 'ROP', 'FOP']) != -1) ? (mmc.settings.includeVatInPrice) ? value.PriceWithVAT : value.PriceExVAT : data['product1'].productPrice();
                             mmc.settings.isBom = true;
                         }
 
-
-                        if (value && value.Price && value.Price.Discounts) {
+                        if (value && value.Price && value.Price.Discounts && data[product]) {
                             if (value.Price.HasDiscount) {
                                 data[product].campaignDescription(value.Price.Discounts.Discount.CampaignDescription);
                             }
@@ -1174,13 +1178,20 @@ jQuery.noConflict();
 
                     /* Reset the showing of the second product */
                     mmc.vm.controls.showProduct2(false);
+
+
                     if (parentCategory == 'COMBINATION') {
                         mmc.vm.controls.showCombination(true);
+                        var curCategory = mmc.trigger.target.closest('.mmc__option input').val();
+                        mmc.settings.isBom = (curCategory.slice(0, 3) === 'ROP' || curCategory.slice(0, 3) === 'DOP' || curCategory.slice(0, 3) === 'FOP');
+
                     } else {
                         mmc.vm.controls.showCombination(false);
+                        mmc.settings.isBom = false;
                     }
 
-                    /* Trigger custom function */
+
+/* Trigger custom function */
                     mmc.settings.onSelectCategory(config.product1.category());
 
                     /* Reset required steps before updating the configurator */
@@ -1420,7 +1431,6 @@ jQuery.noConflict();
                 mmc.vm.config.product1.productPrice('');
                 mmc.vm.config.product2.productPrice('');
 
-                mmc.settings.isBom = false;
 
                 /* Always set the buyProduct observable to true, and tick the select boxes */
                 mmc.vm.controls.buyProduct1(true);
@@ -1595,6 +1605,7 @@ jQuery.noConflict();
             self.ImageSrc = ko.observable('');
             self.Price = ko.observable('');
             self.Checked = ko.observable(false);
+            self.campaignDescription = ko.observable('');
 
             /* Properties to be sent to the basket */
             self.productPrice = ko.observable('');
@@ -1780,6 +1791,7 @@ jQuery.noConflict();
         mmc.dom.insectSelect.on({
             click: function(e) {
                 e.preventDefault();
+            
                 $(this).closest('.mmc__insectNetTypes').find('.mmc__option').removeClass('mmc__active');
                 $(this).closest('.mmc__option').addClass('mmc__active');
                 $(this).closest('.mmc__configStep').removeClass('mmc__filled');
@@ -1854,7 +1866,6 @@ jQuery.noConflict();
 
                 mmc.trigger.target = $(event.target).closest('.mmc__button');
                 mmc.trigger.type = 'gotobasket';
-
                 var basket = mmc.buildRequest();
                 mmc.dom.complete.find('#mmc__AddToBasket input').attr('name', 'productsinfo').val(basket);
 
@@ -2046,6 +2057,7 @@ jQuery.noConflict();
     });
 
 })(window, document, jQuery);
+is
 ///#source 1 1 /media/com_configurator/mmc/content/js/velux-configurator-lib.js
 function loadConfiguratorFunctions(mmc, window, document, $) {
 
