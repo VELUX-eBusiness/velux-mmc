@@ -333,6 +333,7 @@ jQuery.noConflict();
                     EnergyAwning: ['Energy', 'Awning'],
                     DOPAwning: ['DOP', 'Awning'],
                     ROPAwning: ['ROP', 'Awning'],
+                    ROFAwning: ['ROF', 'Awning'],
                     FOPAwning: ['FOP', 'Awning'],
                     BlackoutBudgetAwning: ['BlackoutBudget', 'Awning']
                 },
@@ -1533,7 +1534,7 @@ jQuery.noConflict();
                                 compareVal = 'Blackout';
                             } else if (compareVal === 'FOP') {
                                 compareVal = 'Energy';
-                            } else if (compareVal === 'ROP') {
+                            } else if (compareVal === 'ROP' || compareVal === 'ROF') {
                                 compareVal = 'Roller';
                             }
 
@@ -2057,7 +2058,6 @@ jQuery.noConflict();
     });
 
 })(window, document, jQuery);
-is
 ///#source 1 1 /media/com_configurator/mmc/content/js/velux-configurator-lib.js
 function loadConfiguratorFunctions(mmc, window, document, $) {
 

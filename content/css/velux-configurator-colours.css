@@ -820,6 +820,7 @@
 }
 .mmc__option.mmc__colour.Roller div.mmc__fill,
 .mmc__option.mmc__colour.ROP div.mmc__fill,
+.mmc__option.mmc__colour.ROF div.mmc__fill,
 .mmc__option.mmc__colour.RollerAwningRoller div.mmc__fill {
   background-image: url(images/veluxshop-colour-roller.png);
   background-position: 0 0;
